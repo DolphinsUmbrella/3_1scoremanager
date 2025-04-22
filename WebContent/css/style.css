@@ -214,7 +214,7 @@ nav li:hover a::after {
   text-align: center;
 }
 
-.login-content h1 {
+.login-content h2 {
   /* ���O�C���^�C�g���̃X�^�C���i�K�v�ɉ����āj */
   margin-bottom: 20px;
 }

@@ -3,8 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import = "java.util.Objects" %>
 
+
+
 <h2>ログイン</h2>
 
+<div class="login-content">
 <c:if test="${ message != null}">
 	<p>${ message }</p>
 </c:if>
@@ -13,5 +16,6 @@
 	<p>パスワード: <input type = "text" name = "password"></p>
 	<p><input type = "submit" value = "ログイン"></p>
 </form>
+</div>
 
 <%@include file = "tool/footer.jsp" %>
