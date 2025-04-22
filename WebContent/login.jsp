@@ -4,18 +4,17 @@
 <%@page import = "java.util.Objects" %>
 
 
-
-<h2>ログイン</h2>
+<c:if test="${ message != null}">
+		<p>${ message }</p>
+	</c:if>
 
 <div class="login-content">
-<c:if test="${ message != null}">
-	<p>${ message }</p>
-</c:if>
-<form action = "LoginExecute.action" method = "post">
-	<p>id: <input type = "text" name = "teacher_id"></p>
-	<p>パスワード: <input type = "text" name = "password"></p>
-	<p><input type = "submit" value = "ログイン"></p>
-</form>
+	<form action = "LoginExecute.action" method = "post">
+		<h1>ログイン</h1>
+		<p><input type = "text" name = "teacher_id"><br>
+		<input type = "password" name = "password"></p>
+		<p><input type = "submit" value = "ログイン"></p>
+	</form>
 </div>
 
 <%@include file = "tool/footer.jsp" %>

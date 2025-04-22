@@ -5,7 +5,7 @@
 <html lang = "ja">
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../css/style.css" type="text/css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/tool/css/style.css" type="text/css">
 		<title>学生管理システム</title>
 	</head>
 
@@ -14,6 +14,7 @@
 			<div>
 				<h2>得点管理システム</h2>
 			</div>
+
 			<c:if test="${user != null}">
 				<small>${ user.name }様</small>
 				<small><a href = "Logout.action">ログアウト</a></small>

@@ -34,40 +34,39 @@ footer {
   width: 100%;
   height: 40px;
   text-align: center;
-  padding: 10px 0; /* �㉺�̃p�f�B���O�𒲐� */
+  padding: 10px 0;
   background-color: #c0c0c0;
-  position: fixed; /* �t�b�^�[���Œ� */
+  position: fixed;
   bottom: 0;
   left: 0;
   z-index: 100;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* �e������ƌ��₷�� */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer-text {
-  color: #fff; /* �K�v�ɉ����� */
+  color: #fff;
   font-size: 0.9em;
 }
 
 
 /*-------------------------------------------------------------*/
-/* �c���т̃��j���[ */
+/* ナビゲーションメニューのデザイン */
 body {
   background: #FFAA76;
   background: #ffffff;
-  margin: 0; /* body �̃f�t�H���g�}�[�W�����폜 */
-  padding-top: 80px; /* �w�b�_�[�̍����������㕔�Ƀp�f�B���O��ǉ� */
-  padding-bottom: 40px; /* �t�b�^�[�̍��������������Ƀp�f�B���O��ǉ� */
-  display: flex; /* Flexbox ���C�A�E�g��K�p */
+  margin: 0;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  display: flex;
 }
 
 nav {
   position: fixed;
   top: 80px;
   left: 10px;
-  width: 20%; /* �i�r�Q�[�V�����̕����Œ� (��: 30%) */
-  /*height: calc(100vh - 80px - 50px);  �w�b�_�[�ƃt�b�^�[�̍����A����я㉺�}�[�W�����l���������� */
-  /*overflow-y: auto;  ���j���[�������ꍇ�ɃX�N���[���\�ɂ��� */
-  margin: 20px 0; /* �㉺�̃}�[�W���𒲐� */
+  width: 20%;
+
+  margin: 20px 0;
   word-spacing: -5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -124,48 +123,46 @@ nav li:focus > div {
 }
 
 nav li a {
-  display: block; /* <a> ���u���b�N�v�f�ɂ��� li �S�̂��N���b�N�\�ɂ��� */
+  display: block;
   text-decoration: none;
-  color: inherit; /* �e�v�f�̕����F���p�� */
+  color: inherit;
   font-size: 1.0em;
 }
 
 nav li a::after {
-  content: ""; /* �ŏ��͉����\�����Ȃ� */
+  content: "";
   display: inline-block;
-  margin-left: 5px; /* �����Ƃ̊Ԃɏ����X�y�[�X���󂯂� */
-  opacity: 0; /* �ŏ��͔�\�� */
-  transition: opacity 0.3s ease; /* �t�F�[�h�C���̃A�j���[�V���� */
+  margin-left: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
   font-weight: bold;
 }
 
 nav li:hover a::after {
-  content: "��"; /* �z�o�[���ɖ���\�� */
-  opacity: 1; /* �z�o�[���ɕ\�� */
+  content: "　←";
+  opacity: 1;
 }
 
 
 /*-------------------------------------------------------------*/
-/* ���C����ʂɕK�v��CSS */
+/* メインコンテンツのデザインCSS */
 .main-content {
-  flex-grow: 1; /* �c��̃X�y�[�X�����C���R���e���c����߂� */
-  padding: 20px; /* ���C���R���e���c��padding��ݒ� */
-  margin-left: calc(20% + 20px); /* �i�r�Q�[�V�����̕� + �i�r�Q�[�V�����̍��Emargin + �i�r�Q�[�V������left */
-  padding-top: calc(80px + 20px); /* �w�b�_�[�̍��� + ���C���R���e���c��padding-top */
-  padding-bottom: calc(40px + 20px); /* �t�b�^�[�̍��� + ���C���R���e���c��padding-bottom */
-  box-sizing: border-box; /* padding �� width/height �Ɋ܂߂� */
-  display: flex; /* Flexbox ���C�A�E�g��K�p */
-  flex-direction: column; /* �v�f���c�ɕ��ׂ� */
-  justify-content: flex-start; /* ��[����z�u���J�n */
-  align-items: center; /* ���������������� */
-  /* �K�v�ɉ����Ĕw�i�F�Ȃǂ�ݒ� */
-  /* background-color: #eeffee; */
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: calc(20% + 20px);
+  padding-top: calc(80px + 20px);
+  padding-bottom: calc(40px + 20px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .main-content .header {
-  height: 60px; /* h3��line-height�ƍ��킹�� */
-  display: flex; /* �c�����̒��������ɖ𗧂ꍇ������܂� */
-  align-items: center; /* �c�������������iFlexbox���g�p�j */
+  height: 60px;
+  display: flex;
+  align-items: center;
   width: 100%;
   background-color: #c6e1ea; /* �K�v�ɉ����� */
   align-items: center;
@@ -214,7 +211,7 @@ nav li:hover a::after {
   text-align: center;
 }
 
-.login-content h2 {
+.login-content h1 {
   /* ���O�C���^�C�g���̃X�^�C���i�K�v�ɉ����āj */
   margin-bottom: 20px;
 }

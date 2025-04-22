@@ -4,11 +4,12 @@
 <div style = "display: flex;">
 	<%@include file = "../tool/sidebar.jsp" %>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">メニュー</h2>
+		<div class="header">
+			<h2>メニュー</h2>
+		</div>
 
-		<div id = "menu">
 			<form action = StudentList.action method = "post">
 				<div id = "box-red">
 					<input type = "submit"
@@ -28,7 +29,6 @@
 			<div id = "box-blue">
 				<a href = "SubjectList.action">科目管理</a>
 			</div>
-		</div>
 
 	</div>
 </div>
