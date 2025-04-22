@@ -1,0 +1,361 @@
+@charset "utf-8";
+
+/*-------------------------------------------------------------*/
+/*ヘッダーの処理（共通）*/
+header {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  background-color: #94c9c9;
+  align-items: center;
+  position: fixed; /*画面にヘッダー部分の固定化*/
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  margin-right: auto;
+  padding-left: 10px;
+  font-size: 1.6em;
+}
+
+.title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/*-------------------------------------------------------------*/
+/*フッターの処理（共通）*/
+footer {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  padding: 10px 0; /* �㉺�̃p�f�B���O�𒲐� */
+  background-color: #c0c0c0;
+  position: fixed; /* �t�b�^�[���Œ� */
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* �e������ƌ��₷�� */
+}
+
+.footer-text {
+  color: #fff; /* �K�v�ɉ����� */
+  font-size: 0.9em;
+}
+
+
+/*-------------------------------------------------------------*/
+/* �c���т̃��j���[ */
+body {
+  background: #FFAA76;
+  background: #ffffff;
+  margin: 0; /* body �̃f�t�H���g�}�[�W�����폜 */
+  padding-top: 80px; /* �w�b�_�[�̍����������㕔�Ƀp�f�B���O��ǉ� */
+  padding-bottom: 40px; /* �t�b�^�[�̍��������������Ƀp�f�B���O��ǉ� */
+  display: flex; /* Flexbox ���C�A�E�g��K�p */
+}
+
+nav {
+  position: fixed;
+  top: 80px;
+  left: 10px;
+  width: 20%; /* �i�r�Q�[�V�����̕����Œ� (��: 30%) */
+  /*height: calc(100vh - 80px - 50px);  �w�b�_�[�ƃt�b�^�[�̍����A����я㉺�}�[�W�����l���������� */
+  /*overflow-y: auto;  ���j���[�������ꍇ�ɃX�N���[���\�ɂ��� */
+  margin: 20px 0; /* �㉺�̃}�[�W���𒲐� */
+  word-spacing: -5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+nav li {
+  background: white;
+  word-spacing: 0;
+  width: auto;
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: calibri light;
+  letter-spacing: 1px;
+  box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+nav li:hover {
+  box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.1);
+}
+
+nav li:active {
+  background: rgba(255, 170, 118, .5);
+}
+
+nav li span {
+  float: right;
+  font-weight: bold;
+  display: none;
+}
+
+nav li:hover span {
+  display: block;
+}
+
+nav li:focus {
+  outline: none;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+}
+
+nav li:focus > div {
+  display: block;
+}
+
+nav li a {
+  display: block; /* <a> ���u���b�N�v�f�ɂ��� li �S�̂��N���b�N�\�ɂ��� */
+  text-decoration: none;
+  color: inherit; /* �e�v�f�̕����F���p�� */
+  font-size: 1.0em;
+}
+
+nav li a::after {
+  content: ""; /* �ŏ��͉����\�����Ȃ� */
+  display: inline-block;
+  margin-left: 5px; /* �����Ƃ̊Ԃɏ����X�y�[�X���󂯂� */
+  opacity: 0; /* �ŏ��͔�\�� */
+  transition: opacity 0.3s ease; /* �t�F�[�h�C���̃A�j���[�V���� */
+  font-weight: bold;
+}
+
+nav li:hover a::after {
+  content: "��"; /* �z�o�[���ɖ���\�� */
+  opacity: 1; /* �z�o�[���ɕ\�� */
+}
+
+
+/*-------------------------------------------------------------*/
+/* ���C����ʂɕK�v��CSS */
+.main-content {
+  flex-grow: 1; /* �c��̃X�y�[�X�����C���R���e���c����߂� */
+  padding: 20px; /* ���C���R���e���c��padding��ݒ� */
+  margin-left: calc(20% + 20px); /* �i�r�Q�[�V�����̕� + �i�r�Q�[�V�����̍��Emargin + �i�r�Q�[�V������left */
+  padding-top: calc(80px + 20px); /* �w�b�_�[�̍��� + ���C���R���e���c��padding-top */
+  padding-bottom: calc(40px + 20px); /* �t�b�^�[�̍��� + ���C���R���e���c��padding-bottom */
+  box-sizing: border-box; /* padding �� width/height �Ɋ܂߂� */
+  display: flex; /* Flexbox ���C�A�E�g��K�p */
+  flex-direction: column; /* �v�f���c�ɕ��ׂ� */
+  justify-content: flex-start; /* ��[����z�u���J�n */
+  align-items: center; /* ���������������� */
+  /* �K�v�ɉ����Ĕw�i�F�Ȃǂ�ݒ� */
+  /* background-color: #eeffee; */
+}
+
+.main-content .header {
+  height: 60px; /* h3��line-height�ƍ��킹�� */
+  display: flex; /* �c�����̒��������ɖ𗧂ꍇ������܂� */
+  align-items: center; /* �c�������������iFlexbox���g�p�j */
+  width: 100%;
+  background-color: #c6e1ea; /* �K�v�ɉ����� */
+  align-items: center;
+  position: fixed; /* �w�b�_�[���Œ� */
+  top: 100px; /* �w�b�_�[�̉��ɕ\�� */
+  left: calc(20% + 20px); /* �i�r�Q�[�V�����̉E���ɔz�u */
+  z-index: 99; /* �w�b�_�[����O�ɕ\�� */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* �e������ƌ��₷�� */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.main-content .header h3 {
+  text-align: left;
+  line-height: 60px;
+  margin: 0;
+}
+
+.main-content > *:not(.header) {
+  margin-top: 0px;
+}
+
+.main-content .error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+
+/*-------------------------------------------------------------*/
+/* ログイン画面のデザインCSS */
+.login-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px - 60px);
+  /* background-color: #f0f0f0; */
+  width: 100%;
+}
+
+.login-content form {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-content h1 {
+  /* ���O�C���^�C�g���̃X�^�C���i�K�v�ɉ����āj */
+  margin-bottom: 20px;
+}
+
+.login-content input[type="text"],
+.login-content input[type="password"],
+.login-content input[type="submit"] {
+  /* ���͗v�f�̃X�^�C���i�K�v�ɉ����āj */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 250px; /* ���𒲐� */
+  box-sizing: border-box; /* padding��border��width�Ɋ܂߂� */
+}
+
+.login-content .error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+
+/*-------------------------------------------------------------*/
+/*�{�^���f�U�C��*/
+/*https://saruwakakun.com/html-css/reference/buttons*/
+
+.btn-circle-border-simple {
+  display: inline-block;
+  text-decoration: none;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  border: solid 2px; /* �F�͌ʂ̃N���X�Ŏw�� */
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  transition: .4s;
+}
+
+.btn-circle-border-simple:hover {
+  background: #b3e1ff; /* �����̃z�o�[���ʂ��ێ� */
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* �O���[�v�Ԃ̉������̊Ԋu */
+  margin-bottom: 20px; /* �O���[�v�Ԃ̏c�����̊Ԋu */
+  padding: 15px; /* �O���[�v���̗]�� */
+  border: 1px solid #ccc; /* �g���̐F */
+  border-radius: 10px; /* �p�̊ۂ� */
+  background-color: #f9f9f9; /* �O���[�v�̔w�i�F (�K�v�ɉ�����) */
+  width: 80%; /* ���C���R���e���c�̕��ɍ��킹�Ē��� */
+  box-sizing: border-box; /* padding, border �� width �Ɋ܂߂� */
+}
+
+.button-group h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* �O���[�v���Ƃ̃{�^���̐F */
+.student-btn {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.student-btn:hover {
+  background: #c3e6cb;
+}
+
+.grade-btn {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.grade-btn:hover {
+  background: #b8daff;
+}
+
+/* ���ѓo�^�Ɛ��юQ�Ƃ������тɂ��邽�߂̃R���e�i */
+.grade-buttons-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* �{�^���Ԃ̏c�̊Ԋu */
+}
+
+.grade-buttons-container .btn-circle-border-simple {
+  margin-right: 10px; /* �{�^���Ԃ̊Ԋu */
+}
+
+.subject-btn {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.subject-btn:hover {
+  background: #f5c6cb;
+}
+
+/* ��ʕ��ɉ����ă{�^���̃O���[�v�������тɂ��� */
+@media screen and (min-width: 769px) {
+  .main-content {
+    flex-direction: row; /* �����тɂ��� */
+    justify-content: center; /* ���������������� */
+    align-items: flex-start; /* ��[�ő����� */
+    flex-wrap: wrap; /* �K�v�ɉ����Đ܂�Ԃ� */
+  }
+
+  .button-group {
+    align-items: center; /* �O���[�v���̗v�f�𒆉����� */
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: calc(33% - 40px); /* 3���ׂ�ꍇ�̕� (���E�}�[�W���l��) */
+    box-sizing: border-box;
+  }
+}
+
+/* ��ʕ��������ꍇ�͏c���тɖ߂� */
+@media screen and (max-width: 768px) {
+  .main-content {
+    flex-direction: column; /* �c���тɂ��� */
+    align-items: center; /* ���������������� */
+  }
+
+  .button-group {
+    margin-right: 0;
+    margin-bottom: 20px;
+    align-items: center;
+    width: 80%; /* ������ʂł̃O���[�v�̕��𒲐� */
+  }
+
+  .grade-buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .grade-buttons-container .btn-circle-border-simple {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}

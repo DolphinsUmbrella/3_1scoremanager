@@ -5,7 +5,7 @@
 <html lang = "ja">
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../css/stylesheet.css" type="text/css">
+		<link rel="stylesheet" href="../css/style.css" type="text/css">
 		<title>学生管理システム</title>
 	</head>
 
