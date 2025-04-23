@@ -4,8 +4,9 @@
 
 <div style = "display: flex;">
 	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content">
 		<%-- 見出し --%>
 		<h2 id = "headline">科目情報変更</h2>
 		<p>変更が完了しました
@@ -17,6 +18,5 @@
 		<a href = "SubjectList.action">科目一覧</a>
 
 	</div>
-</div>
 
 <%@include file = "../tool/footer.jsp" %>
