@@ -2,15 +2,17 @@
 <%@include file = "../tool/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div style = "display: flex;">
+<div>
 	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">学生管理</h2>
+		<div class="header">
+			<h2>学生管理</h2>
+		</div>
 
-		<a href = "StudentCreate.action"
-		   style = "float: right;">新規追加</a>
+		<a href = "StudentCreate.action" style = "float: right;">新規追加</a>
 
 		<div id = "menu"
 			 style = "height: 100px">
@@ -27,12 +29,6 @@
 					</select>
 				</div>
 
-				<style>
-					.filter-select {
-						float: left;
-						width: 100px
-					}
-				</style>
 				<div class = "filter-select">
 					<%-- クラス --%>
 					<p>クラス</p>
@@ -64,33 +60,8 @@
 		</div>
 
 		<div>
-			<table style = "width: 800px">
-				<%-- ボタンをリンクの見た目に変えるやつ --%>
-				<%-- Gemini産。ホンマありがとう --%>
-				<style>
-					.link-button {
-						background: none;
-						color: blue; /* リンクのテキスト色 */
-						border: none;
-						padding: 0;
-						font: inherit;
-						cursor: pointer;
-						text-decoration: underline; /* 下線 */
-					}
+			<table>
 
-					.link-button:hover {
-						text-decoration: none; /* ホバー時の下線削除 */
-					}
-
-					.link-button:focus {
-						outline: none; /* フォーカス時のデフォルトの枠線を削除 */
-						/* 必要であれば、独自のフォーカススタイルを追加 */
-						text-decoration: none;
-					}
-					th, td {
-						text-align: center;
-					}
-				</style>
 
 				<tr>
 					<th>入学年度</th>
@@ -101,7 +72,7 @@
 					<th></th>
 				</tr>
 				<c:forEach var="s" items="${ sList }">
-					<form action = "StudentUpdate.action" method = "post">
+
 						<input type = "hidden" name = "no" value = "${ s.getNo() }">
 						<tr>
 							<td>${ s.getNo() }</td>
@@ -109,14 +80,18 @@
 							<td>${ s.getEntYear() }</td>
 							<td>${ s.getClassNum() }</td>
 							<td>${ s.getIsAttend() }</td>
-							<td><input type = "submit" class = "link-button" value = "変更"></td>
+							<td>
+							<form action = "StudentUpdate.action" method = "post">
+							<input type = "submit" class = "link-button" value = "変更">
+							</form>
+							</td>
 						</tr>
-					</form>
+
 				</c:forEach>
 			</table>
 		</div>
 
 	</div>
-</div>
+
 
 <%@include file = "../tool/footer.jsp" %>

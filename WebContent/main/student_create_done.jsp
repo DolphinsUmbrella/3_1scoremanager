@@ -4,19 +4,23 @@
 
 <div style = "display: flex;">
 	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content">
+
 		<%-- 見出し --%>
-		<h2 id = "headline">学生情報追加</h2>
-
-		<div id = "menu">
-			<p>登録が完了しました
+		<div class="header">
+			<h2>学生情報追加</h2>
 		</div>
+
+
+			<p>登録が完了しました
+
 
 		<a href = "StudentCreate.action">戻る</a>
 		<a href = "StudentList.action">学生一覧</a>
 
 	</div>
-</div>
+
 
 <%@include file = "../tool/footer.jsp" %>
