@@ -3,6 +3,6 @@
 	</body>
 
 	<footer>
-		<p>フッターです</p>
+		<p>3_1　得点管理</p>
 	</footer>
 </html>
