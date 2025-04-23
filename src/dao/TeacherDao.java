@@ -8,6 +8,7 @@ import bean.Teacher;
 
 public class TeacherDao extends Dao{
 
+	//教員検索
 	public Teacher get(String id) throws Exception{
 		Connection con = getConnection();
 
@@ -29,6 +30,8 @@ public class TeacherDao extends Dao{
 		return t;
 	}
 
+	//ログイン処理用？
+	//4/23小柿：現状これの使用用途は不明です
 	public Teacher login(String id, String password) throws Exception{
 		Connection con = getConnection();
 
@@ -50,6 +53,8 @@ public class TeacherDao extends Dao{
 		return t;
 	}
 
+	//教員追加
+	//4/23小柿：どこで使うか把握してません。使用することがあるならメソッド名は設計書通りで
 	public int insertTeacher(Teacher t) throws Exception{
 		Connection con = getConnection();
 
@@ -86,6 +91,7 @@ public class TeacherDao extends Dao{
 		return line;
 	}
 
+	//教員削除
 	public int deleteTeacher(String id) throws Exception{
 		Connection con = getConnection();
 

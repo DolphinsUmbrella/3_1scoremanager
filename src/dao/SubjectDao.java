@@ -9,6 +9,8 @@ import java.util.List;
 import bean.Subject;
 
 public class SubjectDao extends Dao{
+	//4/23小柿：join使ってますがいらないと思うので、
+	//	sql文の修正をお願いしたいのと、while内のschool_nameは削除してもらえると…
 
 	//科目コードでselect検索　引数が空でselect *を実行
 	public List<Subject> searchSubject(String subjectCd) throws Exception{
@@ -37,6 +39,7 @@ public class SubjectDao extends Dao{
 	}
 
 	//科目追加
+	//4/23小柿：設計書通りにメソッド名の変更をお願いします
 	public int insertSubject(String subjectCd, String subjectName, String schoolCd) throws Exception{
 		Connection con = getConnection();
 
@@ -71,6 +74,7 @@ public class SubjectDao extends Dao{
 		return line;
 	}
 
+	//科目削除
 	public int deleteSubject(String schoolCd, String subjectCd) throws Exception{
 		Connection con = getConnection();
 
