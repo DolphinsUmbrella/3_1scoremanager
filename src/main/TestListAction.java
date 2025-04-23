@@ -19,6 +19,8 @@ public class TestListAction extends Action{
 			response.sendRedirect("../Login.action");
 			return "null";
 		}
+		
+		//
 
 		return "test_list.jsp";
 	}

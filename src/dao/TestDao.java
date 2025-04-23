@@ -10,6 +10,9 @@ import bean.Test;
 
 public class TestDao extends Dao{
 
+	//4/23小柿：joinいらないです！！！select *で良いです！！
+	//	PrepareStatementの上のコメントがTestテーブルのカラムです、
+	//	これ以外はwhile文から削除していただけると……
 	public List<Test> searchTest(Test test) throws Exception{
 		List<Test> testList = new ArrayList<>();
 
@@ -32,7 +35,7 @@ public class TestDao extends Dao{
 		st.setString(3, test.getSchoolCd());
 		st.setInt(4, test.getNo());
 		ResultSet rs = st.executeQuery();
-		
+
 		while (rs.next()){
 			Test t = new Test();
 			t.setStudentNo(rs.getString("student_no"));
@@ -48,15 +51,17 @@ public class TestDao extends Dao{
 		}
 		st.close();
 		con.close();
-		
+
 		return testList;
 	}
-	
+
 	//試験結果追加、一度に複数insertも考えられるため配列で受け取れるように
 	public int insertTest(List<Test> test) throws Exception{
 		Connection con = getConnection();
-		
+
 		PreparedStatement st = con.prepareStatement("select * from test");
+
+		//lineは更新された行になります、初期値は0
 		int line = 0;
 		for (Test t : test){
 			st = con.prepareStatement(
@@ -67,15 +72,19 @@ public class TestDao extends Dao{
 			st.setInt(4, t.getNo());
 			st.setInt(5, t.getPoint());
 			st.setString(6, t.getClassNum());
+
+			//insertに成功した場合+1、できなければ+0になるはず
 			line += st.executeUpdate();
 		}
 		st.close();
 		con.close();
-		
+
+		//更新された行数を返します。insertに失敗したかはこのlineとinsert件数の比較で検知できます
 		return line;
 	}
-	
+
+	//更新　作ってないです
 	public int updateTest(Test test) throws Exception{
-		
+
 	}
 }

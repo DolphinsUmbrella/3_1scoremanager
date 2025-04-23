@@ -10,6 +10,7 @@ import bean.ClassNum;
 
 public class ClassNumDao extends Dao{
 
+	//クラス取得
 	public List<ClassNum> get(String classNum, String schoolCd) throws Exception{
 		List<ClassNum> list = new ArrayList<>();
 
