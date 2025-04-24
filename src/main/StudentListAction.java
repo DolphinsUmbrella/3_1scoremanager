@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.ClassNum;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
@@ -86,7 +85,7 @@ public class StudentListAction extends Action{
 
 		//クラス選択用
 		ClassNumDao cDao = new ClassNumDao();
-		List<ClassNum> cList = cDao.get("", user.getSchool());
+		List<String> cList = cDao.filter(user.getSchool());
 
 		request.setAttribute("sList", sList);
 		request.setAttribute("cList", cList);
