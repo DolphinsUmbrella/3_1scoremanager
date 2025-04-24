@@ -13,10 +13,12 @@
 		<header>
 			<h2>得点管理システム</h2>
 
-			<div style="display: flex; align-items: center;">
+
+			<div class="header-right">
 				<c:if test="${user != null}">
-					<small>${ user.name }様</small>
-      				<small><a href = "Logout.action">ログアウト</a></small>
-				</c:if>
-			</div>
+					${ user.name }様
+           			<a href = "Logout.action">ログアウト</a>
+       			</c:if>
+   			</div>
+
 		</header>

@@ -2,9 +2,8 @@
 <%@include file = "../tool/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div>
-	<%@include file = "../tool/sidebar.jsp" %>
-</div>
+
+<%@include file = "../tool/sidebar.jsp" %>
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class="header">
