@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,27 @@ public class StudentDao extends Dao{
 		return sList;
 	}
 
+	//フィルター後のリストへの格納処理のメソッド
+			public List<Student> postFilter(ResultSet rSet,String school) throws Exception{
+				List<Student> list = new ArrayList<>();
+				try{
+					while(rSet.next()){
+					Student s = new Student();
+					s.setNo(rSet.getString("no"));
+					s.setName(rSet.getString("name"));
+					s.setEntYear(rSet.getInt("ent_year"));
+					s.setClassNum(rSet.getString("class_num"));
+					s.setIsAttend(rSet.getBoolean("is_attend"));
+					s.setSchoolCd(school);
+					list.add(s);
+					}
+				}
+				catch(SQLException | NullPointerException e){
+					e.printStackTrace();
+				}
+
+				return list;
+			}
 	//filterは渡される引数によって適切なメソッドを実行します
 
 	//学校のみ指定、初回遷移時のみ使用
