@@ -24,18 +24,22 @@ public class LoginExecuteAction extends Action{
 		//idが存在しない
 		if (Objects.isNull(t.getId())){
 			String message = "ログインに失敗しました。存在しないIDです。";
+			request.setAttribute("teacher_id", id);
+			request.setAttribute("password", password);
 			request.setAttribute("message", message);
 			System.out.println(message);
-			response.sendRedirect("/scoremanager/login.jsp");
+			response.sendRedirect("/scoremanager/Login.action");
 			return null;
 		}
 
 		//パスワードが違う
 		if (!t.getPassword().equals(password)){
 			String message = "ログインに失敗しました。IDまたはパスワードが正しくありません。";
+			request.setAttribute("teacher_id", id);
+			request.setAttribute("password", password);
 			request.setAttribute("message", message);
 			System.out.println(message);
-			response.sendRedirect("/scoremanager/login.jsp");
+			response.sendRedirect("/scoremanager/Login.action");
 			return null;
 		}
 
