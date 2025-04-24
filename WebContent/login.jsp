@@ -11,13 +11,13 @@
 
 		<div class="error-message">
 			<c:if test="${ message != null}">
-				<p>IDまたはパスワードが違います</p>
-				<!-- <p>${ message }</p> -->
+
+				<p>${ message }</p>
 			</c:if>
 		</div>
 
 
-		<p><input type = "text" name = "teacher_id" placeholder="ID"><br>
+		<p><input type = "text" name = "teacher_id" placeholder="ID" value="${teacher_id}"><br>
 		<input type = "password" name = "password" placeholder="Password"></p>
 		<p><input type = "submit" value = "ログイン"></p>
 	</form>
