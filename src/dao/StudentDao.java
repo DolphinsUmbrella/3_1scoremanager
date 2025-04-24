@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class StudentDao extends Dao{
 		Connection con = getConnection();
 
 		//NO	NAME  	ENT_YEAR  	CLASS_NUM  	IS_ATTEND  	SCHOOL_CD
+		//テーブル情報を全取得したい場合は引数に空文字を指定してください
 		PreparedStatement st = con.prepareStatement(
 			"select * from student where no like ?");
 		st.setString(1, "%"+no+"%");
@@ -37,7 +39,30 @@ public class StudentDao extends Dao{
 		return sList;
 	}
 
+	//フィルター後のリストへの格納処理のメソッド
+			public List<Student> postFilter(ResultSet rSet,String school) throws Exception{
+				List<Student> list = new ArrayList<>();
+				try{
+					while(rSet.next()){
+					Student s = new Student();
+					s.setNo(rSet.getString("no"));
+					s.setName(rSet.getString("name"));
+					s.setEntYear(rSet.getInt("ent_year"));
+					s.setClassNum(rSet.getString("class_num"));
+					s.setIsAttend(rSet.getBoolean("is_attend"));
+					s.setSchoolCd(school);
+					list.add(s);
+					}
+				}
+				catch(SQLException | NullPointerException e){
+					e.printStackTrace();
+				}
+
+				return list;
+			}
 	//filterは渡される引数によって適切なメソッドを実行します
+
+	//学校のみ指定、初回遷移時のみ使用
 	public List<Student> filter(String school) throws Exception{
 		List<Student> list = new ArrayList<>();
 
@@ -66,6 +91,7 @@ public class StudentDao extends Dao{
 		return list;
 	}
 
+	//すべて指定あり
 	public List<Student> filter
 		(String school, int entYear, String classNum, boolean isAttend
 				) throws Exception{
@@ -102,6 +128,7 @@ public class StudentDao extends Dao{
 		return list;
 	}
 
+	//学校コード、入学年度を指定。在学フラグは必ず入ります
 	public List<Student> filter
 		(String school, int entYear, boolean isAttend
 				) throws Exception{
@@ -136,6 +163,7 @@ public class StudentDao extends Dao{
 		return list;
 	}
 
+	//学校コード、クラスを指定。在学フラグは必ず入ります
 	public List<Student> filter
 		(String school, String classNum, boolean isAttend
 				) throws Exception{
@@ -170,6 +198,7 @@ public class StudentDao extends Dao{
 		return list;
 	}
 
+	//初回遷移時ではなく、在学フラグ以外の指定がない場合
 	public List<Student> filter
 		(String school, boolean isAttend
 				) throws Exception{
@@ -202,6 +231,8 @@ public class StudentDao extends Dao{
 		return list;
 	}
 
+	//学生追加
+	//4/23小柿：メソッド名は設計書通りのものに変更してください
 	public int insertStudent(Student s) throws Exception{
 		Connection con = getConnection();
 
@@ -222,6 +253,8 @@ public class StudentDao extends Dao{
 		return line;
 	}
 
+	//学生更新
+	//4/23小柿：メソッド名は設計書通りのものに変更してください
 	public int updateStudent(Student s) throws Exception{
 		Connection con = getConnection();
 
@@ -243,6 +276,8 @@ public class StudentDao extends Dao{
 		return line;
 	}
 
+	//学生削除
+	//4/23小柿：使用することがなさそう
 	public int deleteStudent(String no) throws Exception{
 		Connection con = getConnection();
 

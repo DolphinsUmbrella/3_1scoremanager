@@ -4,8 +4,9 @@
 
 <div style = "display: flex;">
 	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content">
 		<%-- 見出し --%>
 		<h2 id = "headline">科目管理</h2>
 
@@ -18,6 +19,5 @@
 		<a href = "SubjectDelete.action">ダミー科目削除</a>
 
 	</div>
-</div>
 
 <%@include file = "../tool/footer.jsp" %>

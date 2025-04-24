@@ -2,10 +2,11 @@
 <%@include file = "../tool/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div style = "display: flex;">
+<div>
 	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 
-	<div id = "main-content" style = "margin: 0 30px;">
+	<div class = "main-content" style = "margin: 0 30px;">
 		<%-- 見出し --%>
 		<h2 id = "headline">科目情報削除</h2>
 		<p>削除が完了しました
@@ -17,6 +18,5 @@
 		<a href = "SubjectList.action">科目一覧</a>
 
 	</div>
-</div>
 
 <%@include file = "../tool/footer.jsp" %>

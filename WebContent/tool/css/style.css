@@ -161,6 +161,8 @@ nav li:hover a::after {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background-color: red;
+
 }
 
 .main-content .header {
@@ -179,7 +181,7 @@ nav li:hover a::after {
   box-sizing: border-box;
 }
 
-.main-content .header h3 {
+.main-content .header h2 {
   text-align: left;
   line-height: 60px;
   margin: 0;
@@ -193,6 +195,31 @@ nav li:hover a::after {
 .main-content .error-message {
   color: red;
   margin-bottom: 10px;
+}
+
+
+.link-button {
+	background: none;
+	color: blue; /* リンクのテキスト色 */
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	text-decoration: underline; /* 下線 */
+}
+
+.link-button:hover {
+	text-decoration: none; /* ホバー時の下線削除 */
+}
+
+.link-button:focus {
+	outline: none; /* フォーカス時のデフォルトの枠線を削除 */
+	/* 必要であれば、独自のフォーカススタイルを追加 */
+	text-decoration: none;
+}
+
+th, td {
+	text-align: center;
 }
 
 

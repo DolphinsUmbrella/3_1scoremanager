@@ -2,12 +2,14 @@
 <%@include file = "../tool/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div style = "display: flex;">
+<div>
 	<%@include file = "../tool/sidebar.jsp" %>
-
-	<div id = "main-content" style = "margin: 0 30px;">
+</div>
+	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">学生情報変更</h2>
+		<div class="header">
+			<h2>学生情報変更</h2>
+		</div>
 
 		<div id = "menu">
 			<p>ここにいろいろ
@@ -17,6 +19,6 @@
 		<a href = "StudentList.action">戻る</a>
 
 	</div>
-</div>
+
 
 <%@include file = "../tool/footer.jsp" %>
