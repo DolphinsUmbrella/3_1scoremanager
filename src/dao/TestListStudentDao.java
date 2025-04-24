@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.Student;
 import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao{
@@ -21,8 +20,7 @@ public class TestListStudentDao extends Dao{
 			"select subject.name,test.subjectcd,test.no,test.point from subject,test"
 			+ "inner join subject "
 			+ "on subject.subject_cd=test.subject_cd"
-			+ "inner join student "
-			+ "on test.student_no=student.no where student_no like ?");
+			+ "where student_no like ?");
 		st.setString(1, "%"+student_no+"%");
 		ResultSet rs = st.executeQuery();
 
@@ -60,34 +58,34 @@ public class TestListStudentDao extends Dao{
 	}
 
 	public List<TestListStudent> filter
-	(String subjectName, String subjectCd, int num, int point
+	(String subjectName, String subjectCd, int no, int point
 			) throws Exception{
 	List<TestListStudent> list = new ArrayList<>();
 
 	Connection con = getConnection();
 
 	PreparedStatement st = con.prepareStatement(
-		"select * from student "+
-		"where school_cd = ? "+
-		"and ent_year = ? "+
-		"and class_num = ? "+
-		"and is_attend = ?");
-	st.setString(1, school);
-	st.setInt(2, entYear);
-	st.setString(3, classNum);
-	st.setBoolean(4, isAttend);
+		"select subject.name,test.subjectcd,test.no,test.point from subject,test"
+		+"inner join subject "
+		+"on subject.subject_cd=test.subject_cd"
+		+"where subjectname = ? "
+		+"and subjectcd = ? "
+		+"and no = ? "
+		+"and point = ?");
+	st.setString(1, subjectName);
+	st.setString(2, subjectCd);
+	st.setInt(3, no);
+	st.setInt(4, point);
 
 	ResultSet rs = st.executeQuery();
 
 	while (rs.next()){
-		Student s = new Student();
-		s.setNo(rs.getString("no"));
-		s.setName(rs.getString("name"));
-		s.setEntYear(rs.getInt("ent_year"));
-		s.setClassNum(rs.getString("class_num"));
-		s.setIsAttend(rs.getBoolean("is_attend"));
-		s.setSchoolCd(rs.getString("school_cd"));
-		list.add(s);
+		TestListStudent ts = new TestListStudent();
+		ts.setSubjectName(rs.getString("subjectname"));
+		ts.setSubjectCd(rs.getString("subjectcd"));
+		ts.setNum(rs.getInt("num"));
+		ts.setPoint(rs.getInt("point"));
+		list.add(ts);
 	}
 	st.close();
 	con.close();
