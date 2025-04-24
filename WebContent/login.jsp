@@ -4,15 +4,21 @@
 <%@page import = "java.util.Objects" %>
 
 
-<c:if test="${ message != null}">
-		<p>${ message }</p>
-	</c:if>
 
 <div class="login-content">
 	<form action = "LoginExecute.action" method = "post">
 		<h1>ログイン</h1>
-		<p><input type = "text" name = "teacher_id"><br>
-		<input type = "password" name = "password"></p>
+
+		<div class="error-message">
+			<c:if test="${ message != null}">
+				<p>IDまたはパスワードが違います</p>
+				<!-- <p>${ message }</p> -->
+			</c:if>
+		</div>
+
+
+		<p><input type = "text" name = "teacher_id" placeholder="ID"><br>
+		<input type = "password" name = "password" placeholder="Password"></p>
 		<p><input type = "submit" value = "ログイン"></p>
 	</form>
 </div>
