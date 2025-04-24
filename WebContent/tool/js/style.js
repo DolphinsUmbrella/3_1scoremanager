@@ -22,3 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+	  const header = document.querySelector('.main-content .header');
+	  const mainContent = document.querySelector('.main-content > *:not(.header)'); // ヘッダー以外のメインコンテンツ直下の子要素
+
+	  if (header && mainContent) {
+	    const headerHeight = header.offsetHeight;
+
+	    // 常にヘッダーの高さ分のパディングを維持
+	    mainContent.style.paddingTop = headerHeight + 'px';
+	  }
+	});
