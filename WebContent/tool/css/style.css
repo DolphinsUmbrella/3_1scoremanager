@@ -174,7 +174,7 @@ nav li:hover a::after {
   width: 100%;
   background-color: #c6e1ea;
   position: fixed;
-  top: 80px;
+  top: 100px;
   left: calc(20% + 20px);
   z-index: 100;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -189,7 +189,7 @@ nav li:hover a::after {
 }
 
 .main-content > *:not(.header) {
-  margin-top: 10px; /* ヘッダーとの間隔を少し狭める */
+  margin-top: 20px; /* ヘッダーとの間隔を少し狭める */
 }
 
 /* ボタンのグループ */
