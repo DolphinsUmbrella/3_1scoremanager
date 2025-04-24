@@ -12,21 +12,25 @@ header {
   top: 0;
   left: 0;
   z-index: 100;
-  padding: 0 20px;
+  padding: 0 20px; /* 上下のpaddingが抜けているようなので修正 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* ← これが重要 */
 }
 
-
-
-.title {
-  margin-right: auto;
+header > h2 { /* タイトル要素を直接指定 */
   padding-left: 10px;
   font-size: 1.6em;
+  margin-right: auto; /* タイトルを左端に寄せる */
 }
 
-.title a {
-  text-decoration: none;
-  color: inherit;
+.header-right { /* 右側の要素をまとめる */
+  text-align: right; /* 必要に応じてテキストを右寄せ */
+  margin-right: 50px; /* ← 右側のスペースを追加 (値は調整可能) */
+}
+
+.header-right a {
+
+  margin-left: 10px; /* ログアウトへのリンクに左マージンを追加 */
 }
 
 
@@ -51,7 +55,6 @@ footer {
 }
 
 
-
 body {
   background: #FFAA76;
   background: #ffffff;
@@ -59,17 +62,17 @@ body {
   padding-top: 80px;
   padding-bottom: 40px;
   display: flex;
+  flex-direction: column;
 }
+
 
 /*-------------------------------------------------------------*/
 /* ナビゲーションメニューのデザイン */
-
 nav {
   position: fixed;
   top: 80px;
   left: 10px;
-  width: 20%;
-
+  width: 20%; /* 幅を固定 */
   margin: 20px 0;
   word-spacing: -5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -154,15 +157,14 @@ nav li:hover a::after {
   flex-grow: 1;
   padding: 20px;
   margin-left: calc(20% + 20px);
-  padding-top: calc(80px + 20px);
+  padding-top: 80px;
   padding-bottom: calc(40px + 20px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: red;
-
+  /*background-color: red;*/
 }
 
 .main-content .header {
@@ -171,11 +173,10 @@ nav li:hover a::after {
   align-items: center;
   width: 100%;
   background-color: #c6e1ea;
-  align-items: center;
   position: fixed;
   top: 100px;
   left: calc(20% + 20px);
-  z-index: 99;
+  z-index: 100;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
   box-sizing: border-box;
@@ -188,7 +189,134 @@ nav li:hover a::after {
 }
 
 .main-content > *:not(.header) {
-  margin-top: 0px;
+  margin-top: 20px; /* ヘッダーとの間隔を少し狭める */
+}
+
+/* ボタンのグループ */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* グループ間の下マージンを少し狭める */
+  padding: 25px; /* グループ内の余白を広げる */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+/* 真ん中のグループ（成績管理）のサイズ調整 */
+.button-group:nth-child(3) { /* 上から3番目のグループを指定 */
+  width: 90%; /* 少し幅を広げる */
+}
+
+.button-group h3 {
+  margin-bottom: 25px; /* タイトルとボタンの間隔を広げる */
+  text-align: center;
+}
+
+/* 学生管理、成績管理、科目管理のボタンコンテナ */
+.main-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px; /* 他の要素との間隔を少し狭める */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 成績管理のボタンを横並びにするコンテナ */
+.grade-buttons-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* ボタン間の下マージン（縦並び時）を広げる */
+}
+
+.grade-buttons-container .btn-circle-border-simple {
+  margin-right: 25px; /* ボタン間の右マージン（横並び時）を広げる */
+  margin-bottom: 15px; /* ボタン間の下マージン（縦並び時）を広げる */
+  width: 140px; /* ボタンの幅を少し大きく */
+  height: 140px; /* ボタンの高さを少し大きく */
+  line-height: 140px; /* 行の高さを調整して中央揃え */
+  font-size: 1.1em; /* フォントサイズを少し大きく */
+}
+
+/* 拡大画面の時の比率を調整 */
+@media screen and (min-width: 769px) {
+  .main-content {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .button-group {
+    width: calc(30% - 40px);
+    margin-right: 15px; /* グループ間の右マージンを少し狭める */
+    margin-bottom: 0;
+    padding: 25px; /* グループ内の余白を広げる */
+  }
+
+  /* 真ん中のグループ（成績管理）のサイズ調整 */
+  .button-group:nth-child(3) { /* 上から3番目のグループを指定 */
+    width: calc(35% - 30px); /* 少し幅を広げる */
+  }
+
+  .main-button-container {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 40px; /* 左右のパディングを少し狭める */
+  }
+
+  .grade-buttons-container {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .grade-buttons-container .btn-circle-border-simple {
+    margin-right: 30px; /* ボタン間の右マージンを広げる */
+    margin-bottom: 0;
+    width: 140px; /* ボタンの幅を少し大きく */
+    height: 140px; /* ボタンの高さを少し大きく */
+    line-height: 140px; /* 行の高さを調整して中央揃え */
+    font-size: 1.1em; /* フォントサイズを少し大きく */
+  }
+}
+
+/* 縮小画面の時の比率を調整 */
+@media screen and (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-group {
+    margin-right: 0;
+    margin-bottom: 20px; /* グループ間の下マージンを少し狭める */
+    align-items: center;
+    width: 90%; /* 少し幅を広げる */
+    padding: 25px; /* グループ内の余白を広げる */
+  }
+
+  .grade-buttons-container {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px; /* ボタン間の下マージンを広げる */
+  }
+
+  .grade-buttons-container .btn-circle-border-simple {
+    margin-right: 0;
+    margin-bottom: 20px; /* ボタン間の下マージンを広げる */
+    width: 140px; /* ボタンの幅を少し大きく */
+    height: 140px; /* ボタンの高さを少し大きく */
+    line-height: 140px; /* 行の高さを調整して中央揃え */
+    font-size: 1.1em; /* フォントサイズを少し大きく */
+  }
 }
 
 /*エラーメッセージ(赤文字として表示)*/
@@ -199,31 +327,29 @@ nav li:hover a::after {
 
 
 .link-button {
-	background: none;
-	color: blue; /* リンクのテキスト色 */
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	text-decoration: underline; /* 下線 */
+  background: none;
+  color: blue; /* リンクのテキスト色 */
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline; /* 下線 */
 }
 
 .link-button:hover {
-	text-decoration: none; /* ホバー時の下線削除 */
+  text-decoration: none; /* ホバー時の下線削除 */
 }
 
 .link-button:focus {
-	outline: none; /* フォーカス時のデフォルトの枠線を削除 */
-	/* 必要であれば、独自のフォーカススタイルを追加 */
-	text-decoration: none;
+  outline: none; /* フォーカス時のデフォルトの枠線を削除 */
+  /* 必要であれば、独自のフォーカススタイルを追加 */
+  text-decoration: none;
 }
 
 th, td {
-	text-align: center;
+  text-align: center;
 }
 
-
-/*-------------------------------------------------------------*/
 /* ログイン画面のデザインCSS */
 .login-content {
   display: flex;
@@ -263,8 +389,6 @@ th, td {
   margin-bottom: 10px;
 }
 
-
-/*-------------------------------------------------------------*/
 /* ボタンのデザイン */
 /*https://saruwakakun.com/html-css/reference/buttons*/
 
@@ -286,25 +410,6 @@ th, td {
   background: #b3e1ff;
 }
 
-.button-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  width: 80%;
-  box-sizing: border-box;
-}
-
-.button-group h3 {
-  margin-bottom: 10px;
-  text-align: center;
-}
-
 /* 学生管理のボタン */
 .student-btn {
   color: #28a745;
@@ -324,17 +429,6 @@ th, td {
   background: #b8daff;
 }
 
-/*  */
-.grade-buttons-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.grade-buttons-container .btn-circle-border-simple {
-  margin-right: 10px;
-}
-
 .subject-btn {
   color: #dc3545;
   border-color: #dc3545;
@@ -342,47 +436,4 @@ th, td {
 
 .subject-btn:hover {
   background: #f5c6cb;
-}
-
-/* 拡大画面の時の比率を調整 */
-@media screen and (min-width: 769px) {
-  .main-content {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .button-group {
-    align-items: center;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    width: calc(33% - 40px);
-    box-sizing: border-box;
-  }
-}
-
-/* 縮小画面の時の比率を調整 */
-@media screen and (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .button-group {
-    margin-right: 0;
-    margin-bottom: 20px;
-    align-items: center;
-    width: 80%;
-  }
-
-  .grade-buttons-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .grade-buttons-container .btn-circle-border-simple {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
 }
