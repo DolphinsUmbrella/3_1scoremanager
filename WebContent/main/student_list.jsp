@@ -35,7 +35,7 @@
 					<select name = "classNum">
 						<option value = "000" selected>--------</option>
 						<c:forEach var="c" items="${ cList }">
-							<option value = "${ c.getClassNum() }">${ c.getClassNum() }</option>
+							<option value = "${ c }">${ c }</option>
 						</c:forEach>
 					</select>
 				</div>
