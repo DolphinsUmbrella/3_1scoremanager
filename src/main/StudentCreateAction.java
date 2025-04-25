@@ -21,7 +21,7 @@ public class StudentCreateAction extends Action{
 			return "null";
 		}
 
-		//	学生登録画面を表示
+		//学生登録画面を表示
 
 		return "student_create.jsp";
 	}
