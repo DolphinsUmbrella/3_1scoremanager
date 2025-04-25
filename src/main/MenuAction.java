@@ -20,8 +20,6 @@ public class MenuAction extends Action{
 			return "null";
 		}
 
-
-
 		return "menu.jsp";
 	}
 }
