@@ -10,6 +10,7 @@
 		<h2>学生管理</h2>
 	</div>
 
+	<div>
 		<div class="filter-group">
 		<a href = "StudentCreate.action">新規追加</a>
 		<form action = "StudentList.action">
@@ -45,8 +46,10 @@
 		</form>
 		</div>
 
+
 		<div>
 			<small>検索結果：${ sList.size() }件</small>
+		</div>
 			<table>
 				<tr>
 					<th>入学年度</th>
@@ -72,8 +75,9 @@
 						</tr>
 				</c:forEach>
 			</table>
-			</div>
-		</div>
+
+	</div>
+</div>
 
 
 
