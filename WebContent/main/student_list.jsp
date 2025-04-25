@@ -10,9 +10,8 @@
 		<h2>学生管理</h2>
 	</div>
 
-	<a href = "StudentCreate.action" style = "float: right;">新規追加</a>
-
-	<div>
+		<div class="filter-group">
+		<a href = "StudentCreate.action">新規追加</a>
 		<form action = "StudentList.action">
 
 			<%-- 入学年度 --%>
@@ -42,7 +41,9 @@
 			<input type = "hidden" value = "false" name = "isAttend">
 			<input type = "submit" value = "絞込み">
 			</p>
+
 		</form>
+		</div>
 
 		<div>
 			<small>検索結果：${ sList.size() }件</small>
@@ -73,7 +74,6 @@
 			</table>
 			</div>
 		</div>
-	</div>
 
 
 

@@ -188,10 +188,13 @@ nav li:hover a::after {
   margin: 0;
 }
 
+
+
 .main-content > *:not(.header) {
   margin-top: 20px; /* ヘッダーとの間隔を少し狭める */
 }
 
+/*-------------------------------------------------------------*/
 /* ボタンのグループ */
 .button-group {
   display: flex;
@@ -237,12 +240,13 @@ nav li:hover a::after {
 .grade-buttons-container .btn-circle-border-simple {
   margin-right: 25px; /* ボタン間の右マージン（横並び時）を広げる */
   margin-bottom: 15px; /* ボタン間の下マージン（縦並び時）を広げる */
-  width: 140px; /* ボタンの幅を少し大きく */
+  width: 140px; /* ボタンの幅 */
   height: 140px; /* ボタンの高さを少し大きく */
   line-height: 140px; /* 行の高さを調整して中央揃え */
   font-size: 1.1em; /* フォントサイズを少し大きく */
 }
 
+/*-------------------------------------------------------------*/
 /* 拡大画面の時の比率を調整 */
 @media screen and (min-width: 769px) {
   .main-content {
@@ -288,6 +292,7 @@ nav li:hover a::after {
   }
 }
 
+/*-------------------------------------------------------------*/
 /* 縮小画面の時の比率を調整 */
 @media screen and (max-width: 768px) {
   .main-content {
@@ -317,6 +322,12 @@ nav li:hover a::after {
     line-height: 140px; /* 行の高さを調整して中央揃え */
     font-size: 1.1em; /* フォントサイズを少し大きく */
   }
+
+  @media screen and (min-width: 769px) {
+  .filter-group {
+    /* 拡大画面でのスタイル調整が必要であればここに記述 */
+  }
+}
 }
 
 /*エラーメッセージ(赤文字として表示)*/
@@ -349,6 +360,23 @@ nav li:hover a::after {
 th, td {
   text-align: center;
 }
+
+/* 学生管理の検索ボタンのグループ */
+
+.filter-group {
+  display: inline-block; /* グループをインラインブロック要素にする */
+  padding: 15px; /* 内側の余白 */
+  margin-bottom: 10px; /* 下側の余白（必要に応じて調整） */
+  border: 1px solid #ccc; /* 枠線（色や太さは調整可能） */
+  border-radius: 10px; /* 角の丸み具合（数値が大きいほど丸くなる） */
+  background-color: #f9f9f9; /* 背景色（必要に応じて） */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 影（必要に応じて） */
+}
+
+.filter-group p {
+  margin-bottom: 0; /* p要素の下マージンをリセット */
+}
+
 
 /* ログイン画面のデザインCSS */
 .login-content {
@@ -420,6 +448,7 @@ th, td {
   background: #c3e6cb;
 }
 
+/* 成績管理のボタン */
 .grade-btn {
   color: #007bff;
   border-color: #007bff;
@@ -429,6 +458,7 @@ th, td {
   background: #b8daff;
 }
 
+/* 科目管理のボタン */
 .subject-btn {
   color: #dc3545;
   border-color: #dc3545;
