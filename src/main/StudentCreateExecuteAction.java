@@ -89,6 +89,7 @@ public class StudentCreateExecuteAction extends Action{
 			//エラー画面
 
 
+			//学生登録完了画面を表示
 
 		return "student_create_done.jsp";
 	}
