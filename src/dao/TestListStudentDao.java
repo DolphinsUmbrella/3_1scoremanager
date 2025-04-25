@@ -17,9 +17,9 @@ public class TestListStudentDao extends Dao{
 		Connection con = getConnection();
 		//テーブル情報を全取得したい場合は引数に空文字を指定してください
 		PreparedStatement st = con.prepareStatement(
-			"select subject.name,test.subjectcd,test.no,test.point from subject,test"
+			"select subject.name,test.subjectcd,test.no,test.point from test"
 			+ "inner join subject "
-			+ "on subject.subject_cd=test.subject_cd"
+			+ "on subject.cd=test.subject_cd"
 			+ "where student_no like ?");
 		st.setString(1, "%"+student_no+"%");
 		ResultSet rs = st.executeQuery();
@@ -65,11 +65,11 @@ public class TestListStudentDao extends Dao{
 	Connection con = getConnection();
 
 	PreparedStatement st = con.prepareStatement(
-		"select subject.name,test.subjectcd,test.no,test.point from subject,test"
+		"select subject.name,test.subjectcd,test.no,test.point from test"
 		+"inner join subject "
-		+"on subject.subject_cd=test.subject_cd"
-		+"where subjectname = ? "
-		+"and subjectcd = ? "
+		+"on subject.cd=test.subject_cd"
+		+"where subject.name = ? "
+		+"and test.subject_cd = ? "
 		+"and no = ? "
 		+"and point = ?");
 	st.setString(1, subjectName);
