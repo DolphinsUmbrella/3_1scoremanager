@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.School;
 import bean.Student;
 
 public class StudentDao extends Dao{
@@ -31,7 +32,10 @@ public class StudentDao extends Dao{
 			s.setEntYear(rs.getInt("ent_year"));
 			s.setClassNum(rs.getString("class_num"));
 			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
+			School school = new School();
+			school.setCd(rs.getString("school_cd"));
+			school.setName(rs.getString("school_name"));
+			s.setSchool(school);
 		}
 		st.close();
 		con.close();
@@ -40,7 +44,7 @@ public class StudentDao extends Dao{
 	}
 
 	//フィルター後のリストへの格納処理のメソッド
-	public List<Student> postFilter(ResultSet rSet,String school) throws Exception{
+	public List<Student> postFilter(ResultSet rSet,School school) throws Exception{
 		List<Student> list = new ArrayList<>();
 		try{
 			while(rSet.next()){
@@ -50,7 +54,7 @@ public class StudentDao extends Dao{
 				s.setEntYear(rSet.getInt("ent_year"));
 				s.setClassNum(rSet.getString("class_num"));
 				s.setIsAttend(rSet.getBoolean("is_attend"));
-				s.setSchoolCd(school);
+				s.setSchool(school);
 				list.add(s);
 			}
 		}
@@ -63,14 +67,14 @@ public class StudentDao extends Dao{
 	//filterは渡される引数によって適切なメソッドを実行します
 
 	//学校のみ指定、初回遷移時のみ使用
-	public List<Student> filter(String school) throws Exception{
+	public List<Student> filter(School school) throws Exception{
 
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"select * from student "+
 			"where school_cd = ?");
-		st.setString(1, school);
+		st.setString(1, school.getCd());
 		ResultSet rs = st.executeQuery();
 
 		List<Student> list = postFilter(rs, school);
@@ -83,7 +87,7 @@ public class StudentDao extends Dao{
 
 	//すべて指定あり
 	public List<Student> filter
-		(String school, int entYear, String classNum, boolean isAttend
+		(School school, int entYear, String classNum, boolean isAttend
 				) throws Exception{
 
 		Connection con = getConnection();
@@ -94,7 +98,7 @@ public class StudentDao extends Dao{
 			"and ent_year = ? "+
 			"and class_num = ? "+
 			"and is_attend = ?");
-		st.setString(1, school);
+		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setString(3, classNum);
 		st.setBoolean(4, isAttend);
@@ -111,7 +115,7 @@ public class StudentDao extends Dao{
 
 	//学校コード、入学年度を指定。在学フラグは必ず入ります
 	public List<Student> filter
-		(String school, int entYear, boolean isAttend
+		(School school, int entYear, boolean isAttend
 				) throws Exception{
 
 		Connection con = getConnection();
@@ -121,7 +125,7 @@ public class StudentDao extends Dao{
 			"where school_cd = ? "+
 			"and ent_year = ? "+
 			"and is_attend = ?");
-		st.setString(1, school);
+		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setBoolean(3, isAttend);
 
@@ -137,7 +141,7 @@ public class StudentDao extends Dao{
 
 	//学校コード、クラスを指定。在学フラグは必ず入ります
 	public List<Student> filter
-		(String school, String classNum, boolean isAttend
+		(School school, String classNum, boolean isAttend
 				) throws Exception{
 
 		Connection con = getConnection();
@@ -147,7 +151,7 @@ public class StudentDao extends Dao{
 			"where school_cd = ? "+
 			"and class_num = ? "+
 			"and is_attend = ?");
-		st.setString(1, school);
+		st.setString(1, school.getCd());
 		st.setString(2, classNum);
 		st.setBoolean(3, isAttend);
 
@@ -163,7 +167,7 @@ public class StudentDao extends Dao{
 
 	//初回遷移時ではなく、在学フラグ以外の指定がない場合
 	public List<Student> filter
-		(String school, boolean isAttend
+		(School school, boolean isAttend
 				) throws Exception{
 
 		Connection con = getConnection();
@@ -172,7 +176,7 @@ public class StudentDao extends Dao{
 			"select * from student "+
 			"where school_cd = ? "+
 			"and is_attend = ?");
-		st.setString(1, school);
+		st.setString(1, school.getCd());
 		st.setBoolean(2, isAttend);
 
 		ResultSet rs = st.executeQuery();
@@ -197,8 +201,7 @@ public class StudentDao extends Dao{
 		st.setInt(3, s.getEntYear());
 		st.setString(4, s.getClassNum());
 		st.setBoolean(5, s.getIsAttend());
-		st.setString(6, s.getSchoolCd());
-
+		st.setString(6, s.getSchool().getCd()); // Schoolオブジェクトから学校コードを取得
 		int line = st.executeUpdate();
 
 		st.close();
@@ -210,6 +213,48 @@ public class StudentDao extends Dao{
 			return false;
 		}
 	}
+
+	//年度のみを重複なしで指定する。
+	public List<Integer> selectInt_Year() throws Exception{
+
+		List<Integer> list = new ArrayList<>();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct ent_year from student");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getInt("ent_year"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
+	//クラスのみを重複なしで指定する。
+	public List<String> selectClass_Num() throws Exception{
+
+		List<String> list = new ArrayList<>();
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct class_num from student");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getString("class_num"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
 
 	//学生更新
 	//使用想定なし
@@ -224,7 +269,7 @@ public class StudentDao extends Dao{
 		st.setInt(2, s.getEntYear());
 		st.setString(3, s.getClassNum());
 		st.setBoolean(4, s.getIsAttend());
-		st.setString(5, s.getSchoolCd());
+		st.setString(5, s.getSchool().getCd()); // Schoolオブジェクトから学校コードを取得
 		st.setString(6, s.getNo());
 		int line = st.executeUpdate();
 
