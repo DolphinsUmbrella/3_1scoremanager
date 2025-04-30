@@ -25,7 +25,7 @@ public class ClassNumDao extends Dao{
 
 		ClassNum c = new ClassNum();
 		while (rs.next()){
-			c.setClassNum(rs.getString("class_num"));
+			c.setClass_num(rs.getString("class_num"));
 			c.setSchoolCd(rs.getString("school_cd"));
 		}
 		st.close();
