@@ -27,9 +27,10 @@ public class StudentCreateExecuteAction extends Action{
 			return "null";
 		}
 
-		//学生登録完了画面の処理
+			//学生登録完了画面の処理
 
 			StudentDao sDao = new StudentDao();
+			sDao.insert(student);//学生登録
 
 			//値の格納
 
@@ -47,34 +48,41 @@ public class StudentCreateExecuteAction extends Action{
 
 
 
+			//登録処理
+			Student student = new Student();
+			student.setNo(no);
+			student.setName(name);
+			student.setEntYear(Integer.parseInt(entYearStr));
+			student.setClassNum(classNum);
+			student.setSchool(user.getSchool());
+
+
+
 			List<Student> sList = new ArrayList<>();
 
-			if (Objects.isNull(entYearStr) && Objects.isNull(classNum)){
-				//何も値が入っていない(初回遷移時)
-				sList = sDao.filter(user.getSchool());
+			//入力情報をチェック
+			if (no == null || no.isEmpty()|| name== null || name.isEmpty()
+					|| entYearStr == null|| entYearStr.isEmpty()
+					|| classNum == null || classNum.isEmpty()){
 
-			}else if (entYearStr.equals("0") && classNum.equals("000")){
-				//入学年度クラス指定なし
-				sList = sDao.filter(user.getSchool());
-
-			}else if (entYearStr.equals("0")){
-				//入学年度のみ指定なし
-				sList = sDao.filter(user.getSchool(), classNum);
-
-			}else if (classNum.equals("000")){
-				//クラスのみ指定なし
-				sList = sDao.filter(user.getSchool(), Integer.parseInt(entYearStr));
-
-			}else{
-				//すべて指定あり
-				sList = sDao.filter(user.getSchool(), Integer.parseInt(entYearStr), classNum);
-
+				//エラー画面
+				request.setAttribute("error","このフィールドを入力してください。");
 			}
 
 			//入学年度選択用
 			List<Integer> year = new ArrayList<>();
 			LocalDate now = LocalDate.now();
 			int nowYear = now.getYear();
+
+			//今が1～3月なら今の年-1、年度を取得したいため
+			if (now.getMonthValue() <= 3){
+				nowYear--;
+			}
+
+			for (int y = nowYear+1; y > nowYear-10; y--){
+				year.add(y);
+			}
+
 
 
 			//クラス選択用
@@ -84,9 +92,6 @@ public class StudentCreateExecuteAction extends Action{
 			request.setAttribute("sList", sList);
 			request.setAttribute("cList", cList);
 			request.setAttribute("year", year);
-
-
-			//エラー画面
 
 
 		// 学生登録完了画面を表示
