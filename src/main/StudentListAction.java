@@ -70,25 +70,10 @@ public class StudentListAction extends Action{
 		//入学年度選択用
 		List<Integer> year = sDao.selectInt_Year();
 
-		//List<Integer> year = new ArrayList<>();
-
-		//LocalDate now = LocalDate.now();
-		//int nowYear = now.getYear();
-
-		//今が1～3月なら今の年-1、年度を取得したいため
-		//if (now.getMonthValue() <= 3){
-		//	nowYear--;
-		//}
-
-		//for (int y = nowYear+1; y > nowYear-10; y--){
-		//	year.add(y);
-		//}
 
 		//クラス選択用
 		List<String> cList = sDao.selectClass_Num();
 
-		//ClassNumDao cDao = new ClassNumDao();
-		//List<String> cList = cDao.filter(user.getSchool());
 
 		request.setAttribute("sList", sList);
 		request.setAttribute("cList", cList);
