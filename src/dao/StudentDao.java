@@ -211,6 +211,48 @@ public class StudentDao extends Dao{
 		}
 	}
 
+	//年度のみを重複なしで指定する。
+	public List<Integer> selectInt_Year() throws Exception{
+
+		List<Integer> list = new ArrayList<>();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct ent_year from student");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getInt("ent_year"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
+	//クラスのみを重複なしで指定する。
+	public List<String> selectClass_Num() throws Exception{
+
+		List<String> list = new ArrayList<>();
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct class_num from student");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getString("class_num"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
+
 	//学生更新
 	//使用想定なし
 	public int updateStudent(Student s) throws Exception{
