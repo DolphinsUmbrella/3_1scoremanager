@@ -10,12 +10,15 @@ import bean.School;
 
 public class SchoolDao extends Dao{
 
-	//学校コードでselect検索　引数が空でselect *を実行
+	//クラス図情報：
+	//	get(cd:String): School
 	public List<School> searchSchool(String schoolCd) throws Exception{
+
 		List<School> scList = new ArrayList<>();
 
 		Connection con = getConnection();
 
+		//SQL文も必要に応じて修正お願いします
 		PreparedStatement st = con.prepareStatement(
 			"select * from school where cd like ?");
 		st.setString(1, "%"+schoolCd+"%");
@@ -35,6 +38,7 @@ public class SchoolDao extends Dao{
 	}
 
 	//学校追加(開校！)
+	//悲しいかな  使用想定なし
 	public int insertSchool(String schoolCd, String schoolName) throws Exception{
 		Connection con = getConnection();
 
@@ -52,6 +56,7 @@ public class SchoolDao extends Dao{
 	}
 
 	//学校情報更新
+	//使用想定なし
 	public int updateSchool(String schoolCd, String schoolName) throws Exception{
 		Connection con = getConnection();
 
@@ -69,6 +74,7 @@ public class SchoolDao extends Dao{
 	}
 
 	//学校情報削除
+	//使用想定なし
 	public int deleteSchool(String schoolCd) throws Exception{
 		Connection con = getConnection();
 

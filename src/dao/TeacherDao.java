@@ -36,7 +36,7 @@ public class TeacherDao extends Dao{
 			Connection con = getConnection();
 
 			PreparedStatement st = con.prepareStatement(
-				"select * from teacher where id = ? and password=?");
+				"select * from teacher where id = ? and password = ?");
 			st.setString(1, id);
 			st.setString(2, password);
 			ResultSet rs = st.executeQuery();
@@ -75,6 +75,7 @@ public class TeacherDao extends Dao{
 	}
 
 	//教員情報の更新
+	//使用想定なし
 	public int updateTeacher(Teacher t) throws Exception{
 		Connection con = getConnection();
 
@@ -94,6 +95,7 @@ public class TeacherDao extends Dao{
 	}
 
 	//教員削除
+	//使用想定なし
 	public int deleteTeacher(String id) throws Exception{
 		Connection con = getConnection();
 
