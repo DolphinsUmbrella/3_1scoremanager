@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.Student;
 import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao{
@@ -38,7 +39,7 @@ public class TestListStudentDao extends Dao{
 		return TestsList;
 	}
 
-	public List<TestListStudent> postFilter(ResultSet rSet,String school) throws Exception{
+	public List<TestListStudent> postFilter(ResultSet rSet,Student student) throws Exception{
 		List<TestListStudent> list = new ArrayList<>();
 		try{
 			while(rSet.next()){
@@ -58,35 +59,17 @@ public class TestListStudentDao extends Dao{
 	}
 
 	public List<TestListStudent> filter
-	(String subjectName, String subjectCd, int no, int point
-			) throws Exception{
-	List<TestListStudent> list = new ArrayList<>();
+	(Student student) throws Exception{
 
 	Connection con = getConnection();
 
 	PreparedStatement st = con.prepareStatement(
-		"select subject.name,test.subjectcd,test.no,test.point from test"
-		+"inner join subject "
-		+"on subject.cd=test.subject_cd"
-		+"where subject.name = ? "
-		+"and test.subject_cd = ? "
-		+"and no = ? "
-		+"and point = ?");
-	st.setString(1, subjectName);
-	st.setString(2, subjectCd);
-	st.setInt(3, no);
-	st.setInt(4, point);
-
+		"select * from student "+
+		"where no = ? ");
+	st.setString(1, student.getNo());
 	ResultSet rs = st.executeQuery();
 
-	while (rs.next()){
-		TestListStudent ts = new TestListStudent();
-		ts.setSubjectName(rs.getString("subjectname"));
-		ts.setSubjectCd(rs.getString("subjectcd"));
-		ts.setNum(rs.getInt("num"));
-		ts.setPoint(rs.getInt("point"));
-		list.add(ts);
-	}
+	List<TestListStudent> list = postFilter(rs, student);
 	st.close();
 	con.close();
 
