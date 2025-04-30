@@ -1,22 +1,22 @@
 package bean;
 
 public class ClassNum implements java.io.Serializable{
-	private String schoolCd;
-	private String classNum;
+	private School school;
+	private String class_num;
 
 	//ゲッター
-	public String getSchoolCd() {
-		return this.schoolCd;
+	public School getSchool() {
+		return this.school;
 	}
-	public String getClassNum() {
-		return this.classNum;
+	public String getClass_num() {
+		return this.class_num;
 	}
 
 	//セッター
-	public void setSchoolCd(String schoolCd) {
-		this.schoolCd = schoolCd;
+	public void setSchool(School school) {
+		this.school = school;
 	}
-	public void setClassNum(String classNum) {
-		this.classNum = classNum;
+	public void setClass_num(String class_num) {
+		this.class_num = class_num;
 	}
 }
