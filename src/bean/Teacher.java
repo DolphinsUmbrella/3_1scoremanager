@@ -4,7 +4,7 @@ public class Teacher extends User{
 	private String id;
 	private String password;
 	private String name;
-	private String school;
+	private School school;
 
 	//ゲッター
 	public String getId() {
@@ -16,7 +16,7 @@ public class Teacher extends User{
 	public String getName() {
 		return this.name;
 	}
-	public String getSchool() {
+	public School getSchool() {
 		return this.school;
 	}
 
@@ -30,7 +30,7 @@ public class Teacher extends User{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setSchoolCd(String school) {
+	public void setSchool(School school) {
 		this.school = school;
 	}
 }

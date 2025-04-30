@@ -14,7 +14,7 @@
 		</div>
 
 
-			<p>登録が完了しました
+			<p>登録が完了しました</p>
 
 
 		<a href = "StudentCreate.action">戻る</a>
