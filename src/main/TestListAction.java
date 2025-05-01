@@ -26,13 +26,27 @@ public class TestListAction extends Action{
 			return "null";
 		}
 
-		String school = user.getSchool();
+		String school = user.getSchool().getCd();
 
 		ClassNumDao cDao = new ClassNumDao();
 		SubjectDao subDao = new SubjectDao();
 
 		List<String> cList = cDao.filter(school);
-		List<Subject> subList = subDao.filter(school);
+
+		//5/1小柿：動作確認のため一時的にコメントアウトしてます、こっちのが正しいです
+		//List<Subject> subList = subDao.filter(school);
+
+		//ここから入学年度選択用までの間のやつは後で消してください
+		List<Subject> subList = new ArrayList<>();
+		Subject s1 = new Subject();
+		s1.setCd("101");
+		Subject s2 = new Subject();
+		s1.setCd("102");
+		Subject s3 = new Subject();
+		s1.setCd("103");
+		subList.add(s1);
+		subList.add(s2);
+		subList.add(s3);
 
 		//入学年度選択用
 		List<Integer> year = new ArrayList<>();
