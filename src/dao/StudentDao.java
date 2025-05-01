@@ -35,7 +35,6 @@ public class StudentDao extends Dao{
 
 			School school = new School();
 			school.setCd(rs.getString("school_cd"));
-			school.setName(rs.getString("school_name"));
 			s.setSchool(school);
 		}
 		st.close();
@@ -257,8 +256,7 @@ public class StudentDao extends Dao{
 	}
 
 
-	//学生更新
-	//使用想定なし
+	//学生更新 (StudentUpdateExecuteAction.javaで利用)
 	public int updateStudent(Student s) throws Exception{
 		Connection con = getConnection();
 
@@ -270,7 +268,7 @@ public class StudentDao extends Dao{
 		st.setInt(2, s.getEntYear());
 		st.setString(3, s.getClassNum());
 		st.setBoolean(4, s.getIsAttend());
-		st.setString(5, s.getSchool().getCd()); // Schoolオブジェクトから学校コードを取得
+		st.setString(5, s.getSchool().getCd());
 		st.setString(6, s.getNo());
 		int line = st.executeUpdate();
 

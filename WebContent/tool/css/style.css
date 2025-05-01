@@ -163,7 +163,8 @@ nav li:hover a::after {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+
+  /*align-items: center;/*
   /*background-color: red;*/
 }
 
@@ -192,6 +193,13 @@ nav li:hover a::after {
 
 .main-content > *:not(.header) {
   margin-top: 20px; /* ヘッダーとの間隔を少し狭める */
+}
+
+/* 左寄せにするためのクラス */
+.align-left {
+  text-align: left !important; /* !important で優先度を高める */
+  width: 100%; /* 親要素の幅いっぱいに広げることで左寄せを効果的にする */
+  box-sizing: border-box; /* paddingやborderを含めて幅を計算 */
 }
 
 /* テーブルのCSS */

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import bean.Teacher;
 import tool.Action;
 
+//入力した変更の値に更新するアクション
 public class StudentUpdateExecuteAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response
 			)throws Exception{
