@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import bean.School;
 import bean.Subject;
@@ -24,9 +22,13 @@ public class TestListSubjectDao extends Dao{
 			ts.setStudentNo(rSet.getString("student_no"));
 			ts.setStudentName(rSet.getString("name"));
 
+			ts.putPoint(rSet.getInt("no"), rSet.getInt("point"));
+
+			/*
 			Map<Integer, Integer> points = new HashMap<>();
 			points.put(rSet.getInt("no"), rSet.getInt("point"));
 			ts.setPoints(points);
+			*/
 		}
 
 		return list;
