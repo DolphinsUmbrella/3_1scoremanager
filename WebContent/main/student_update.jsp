@@ -14,23 +14,20 @@
 	<div class="align-left">
 	<form action = "StudentUpdateExecute.action">
 		<p>
-		入学年度：
-			${ student.getEntYear() }
+		入学年度：${ student.getEntYear() }
 		</p>
 
 		<p>
-		学生番号：
-			${ student.getNo() }
+		学生番号：${ student.getNo() }
 		</p>
 
 		<p>
-		氏名　　：
+		　　氏名：
 			<input type = "text" name = "name" placeholder="変更前：${ student.getName() }" value="${ student.getName() }">
-
 		</p>
 
 		<p>
-		クラス　：
+		　クラス：
 		<select name = "classNum">
 			<option value = "000" selected>-------</option>
 			<c:forEach var="c" items="${ cList }">
@@ -40,7 +37,7 @@
 		</p>
 
 		<p>
-		<label for = "isAttend">在学中</label>
+		<label for = "isAttend">　在学中：</label>
 		<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
 		<input type = "hidden" value = "false" name = "isAttend">
 		</p>

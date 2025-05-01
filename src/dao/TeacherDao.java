@@ -23,9 +23,16 @@ public class TeacherDao extends Dao{
 			t.setId(rs.getString("id"));
 			t.setPassword(rs.getString("password"));
 			t.setName(rs.getString("name"));
+<<<<<<< HEAD
 			School school = new School();
 			school.setCd(rs.getString("school_cd"));
 			t.setSchool(school);
+=======
+
+			School sch = new School();
+			sch.setCd(rs.getString("school_cd"));
+			t.setSchool(sch);
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 		}
 		st.close();
 		con.close();

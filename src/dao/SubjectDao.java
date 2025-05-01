@@ -20,10 +20,6 @@ public class SubjectDao extends Dao{
 	//22行目、メソッド内処理の修正をお願いします。不明な点は質問してください！
 	public List<Subject> get(String subjectCd, String schoolCd) throws Exception{
 
-		//リスト型でreturnしたい場合はこのようにListを先に作成します
-		//今回の返り値はListではなくSubjectです。不必要であれば削除してください
-		List<Subject> subList = new ArrayList<>();
-
 		//DB接続
 		Connection con = getConnection();
 
@@ -60,7 +56,7 @@ public class SubjectDao extends Dao{
 
 		//return時はデータ型に注意
 		//仕様書の返り値の型はListではなく  Subject  です
-		return subList;
+		return Subject;
 	}
 
 	//科目追加
