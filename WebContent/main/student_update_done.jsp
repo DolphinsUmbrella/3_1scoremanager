@@ -9,7 +9,7 @@
 	<div class = "main-content">
 		<%-- 見出し --%>
 		<div class="header">
-			<h2>学生情報追加</h2>
+			<h2>学生情報変更</h2>
 		</div>
 
 		<div id = "menu">

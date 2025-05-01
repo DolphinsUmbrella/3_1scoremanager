@@ -23,10 +23,16 @@ public class TeacherDao extends Dao{
 			t.setId(rs.getString("id"));
 			t.setPassword(rs.getString("password"));
 			t.setName(rs.getString("name"));
+<<<<<<< HEAD
+			School school = new School();
+			school.setCd(rs.getString("school_cd"));
+			t.setSchool(school);
+=======
 
 			School sch = new School();
 			sch.setCd(rs.getString("school_cd"));
 			t.setSchool(sch);
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 		}
 		st.close();
 		con.close();
@@ -50,7 +56,9 @@ public class TeacherDao extends Dao{
 				t.setId(rs.getString("id"));
 				t.setPassword(rs.getString("password"));
 				t.setName(rs.getString("name"));
-				t.setSchoolCd(rs.getString("school_cd"));
+				School school = new School();
+				school.setCd(rs.getString("school_cd"));
+				t.setSchool(school);
 			}
 			st.close();
 			con.close();
@@ -69,7 +77,7 @@ public class TeacherDao extends Dao{
 		st.setString(1, t.getId());
 		st.setString(2, t.getPassword());
 		st.setString(3, t.getName());
-		st.setString(4, t.getSchool());
+		st.setString(4, t.getSchool().getCd());
 		int line = st.executeUpdate();
 
 		st.close();
@@ -88,7 +96,7 @@ public class TeacherDao extends Dao{
 			"where id = ?");
 		st.setString(1, t.getPassword());
 		st.setString(2, t.getName());
-		st.setString(3, t.getSchool());
+		st.setString(3, t.getSchool().getCd()); // Teacherオブジェクトから School オブジェクト経由で学校コードを取得
 		st.setString(4, t.getId());
 		int line = st.executeUpdate();
 

@@ -20,7 +20,7 @@
 			<p>
 			入学年度
 			<select name = "entYear">
-				<option value = "0" selected>--------</option>
+				<option value = "0" selected>-------</option>
 				<c:forEach var="y" items="${ year }">
 					<option value = "${ y }">${ y }</option>
 				</c:forEach>
@@ -29,7 +29,7 @@
 			<%-- クラス --%>
 			クラス
 			<select name = "classNum">
-				<option value = "000" selected>--------</option>
+				<option value = "000" selected>-------</option>
 				<c:forEach var="c" items="${ cList }">
 					<option value = "${ c }">${ c }</option>
 				</c:forEach>
@@ -60,7 +60,7 @@
 					<th></th>
 				</tr>
 				<c:forEach var="s" items="${ sList }">
-						<input type = "hidden" name = "no" value = "${ s.getNo() }">
+
 						<tr>
 							<td>${ s.getEntYear() }</td>
 							<td>${ s.getNo() }</td>
@@ -69,7 +69,8 @@
 							<td>${ s.getIsAttend() }</td>
 							<td>
 							<form action = "StudentUpdate.action" method = "post">
-							<input type = "submit" class = "link-button" value = "変更">
+								<input type = "submit" class = "link-button" name="" value = "変更">
+								<input type = "hidden" name = "no" value = "${ s.getNo() }">
 							</form>
 							</td>
 						</tr>
