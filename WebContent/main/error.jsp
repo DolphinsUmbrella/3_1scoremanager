@@ -7,7 +7,7 @@
 
 	<div id = "main-content" style = "margin: 0 30px;">
 		<div id = "menu">
-			<p>エラーが発生しました</p>
+			<p>${ errorMessage }</p>
 		</div>
 	</div>
 </div>

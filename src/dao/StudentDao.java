@@ -22,7 +22,7 @@ public class StudentDao extends Dao{
 
 		//NO	NAME  	ENT_YEAR  	CLASS_NUM  	IS_ATTEND  	SCHOOL_CD
 		PreparedStatement st = con.prepareStatement(
-			"select * from student where no = ?");
+			"select * from student where no = ? order by no");
 		st.setString(1, no);
 		ResultSet rs = st.executeQuery();
 
@@ -73,7 +73,7 @@ public class StudentDao extends Dao{
 
 		PreparedStatement st = con.prepareStatement(
 			"select * from student "+
-			"where school_cd = ?");
+			"where school_cd = ? order by no");
 		st.setString(1, school.getCd());
 		ResultSet rs = st.executeQuery();
 
@@ -97,7 +97,7 @@ public class StudentDao extends Dao{
 			"where school_cd = ? "+
 			"and ent_year = ? "+
 			"and class_num = ? "+
-			"and is_attend = ?");
+			"and is_attend = ? order by no");
 		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setString(3, classNum);
@@ -124,7 +124,7 @@ public class StudentDao extends Dao{
 			"select * from student "+
 			"where school_cd = ? "+
 			"and ent_year = ? "+
-			"and is_attend = ?");
+			"and is_attend = ? order by no");
 		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setBoolean(3, isAttend);
@@ -150,7 +150,7 @@ public class StudentDao extends Dao{
 			"select * from student "+
 			"where school_cd = ? "+
 			"and class_num = ? "+
-			"and is_attend = ?");
+			"and is_attend = ? order by no");
 		st.setString(1, school.getCd());
 		st.setString(2, classNum);
 		st.setBoolean(3, isAttend);
@@ -175,7 +175,7 @@ public class StudentDao extends Dao{
 		PreparedStatement st = con.prepareStatement(
 			"select * from student "+
 			"where school_cd = ? "+
-			"and is_attend = ?");
+			"and is_attend = ? order by no");
 		st.setString(1, school.getCd());
 		st.setBoolean(2, isAttend);
 
@@ -261,7 +261,7 @@ public class StudentDao extends Dao{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
-			"update student"+
+			"update student "+
 			"set name = ?, ent_year = ?, class_num = ?, is_attend = ?, school_cd = ?"+
 			"where no = ?");
 		st.setString(1, s.getName());
