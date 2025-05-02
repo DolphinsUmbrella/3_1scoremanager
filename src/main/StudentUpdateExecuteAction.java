@@ -71,11 +71,11 @@ public class StudentUpdateExecuteAction extends Action{
 			} else {
 				// 更新に失敗した場合のエラー処理
 				request.setAttribute("errorMessage", "学生情報の更新に失敗しました。");
-				return "student_update.jsp"; //エラーページ
+				return "student_update.jsp";
 
 			}
 		} else {
-			// セッションに Student オブジェクトが存在しない場合のエラー処理
+			// セッションに Student オブジェクトが見つからない場合のエラー処理
 			request.setAttribute("errorMessage", "更新対象の学生情報が見つかりませんでした。");
 			return "../error.jsp"; // またはエラーメッセージを表示するページ
 		}
