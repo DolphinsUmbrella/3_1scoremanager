@@ -38,6 +38,11 @@ public class TestListSubjectExecuteAction extends Action{
 		subject.setCd(request.getParameter("subject"));
 		subject.setName("仮科目名");
 
+		//動作確認用出力
+		System.out.println("入学年度　："+entYear);
+		System.out.println("クラス番号："+classNum);
+		System.out.println("科目コード："+subject.getCd());
+
 		TestListSubjectDao tsubDao = new TestListSubjectDao();
 		//入学年度、クラス番号、学生番号、氏名、点数を取得
 		List<TestListSubject> tsubList = tsubDao.filter(entYear, classNum, subject, user.getSchool());
