@@ -77,6 +77,7 @@ public class StudentListAction extends Action{
 
 		request.setAttribute("sList", sList);
 		request.setAttribute("cList", cList);
+		session.setAttribute("cList", cList);
 		request.setAttribute("year", year);
 
 		return "student_list.jsp";

@@ -1,6 +1,5 @@
 package main;
 
-import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +37,12 @@ public class StudentUpdateAction extends Action{
 		Student student = sDao.get(no);
 
 
-		//クラス選択用(処理が重複してるので修正予定)
-		List<String> cList = sDao.selectClass_Num();
 
 
 		//遷移してもデータを保持できるようにする
 		request.setAttribute("student", student);
 		session.setAttribute("student", student);
-		request.setAttribute("cList", cList);
+
 
 		return "student_update.jsp";
 	}
