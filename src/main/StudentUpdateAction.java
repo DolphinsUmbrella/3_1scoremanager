@@ -44,6 +44,7 @@ public class StudentUpdateAction extends Action{
 
 		//遷移してもデータを保持できるようにする
 		request.setAttribute("student", student);
+		session.setAttribute("student", student);
 		request.setAttribute("cList", cList);
 
 		return "student_update.jsp";
