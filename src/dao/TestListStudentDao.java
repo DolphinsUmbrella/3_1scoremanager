@@ -44,9 +44,9 @@ public class TestListStudentDao extends Dao{
 		try{
 			while(rSet.next()){
 				TestListStudent ts = new TestListStudent();
-				ts.setSubjectName(rSet.getString("subjectname"));
-				ts.setSubjectCd(rSet.getString("subjectcd"));
-				ts.setNum(rSet.getInt("num"));
+				ts.setSubjectName(rSet.getString("name"));
+				ts.setSubjectCd(rSet.getString("subject_cd"));
+				ts.setNum(rSet.getInt("no"));
 				ts.setPoint(rSet.getInt("point"));
 				list.add(ts);
 			}
@@ -64,8 +64,11 @@ public class TestListStudentDao extends Dao{
 	Connection con = getConnection();
 
 	PreparedStatement st = con.prepareStatement(
-		"select * from student "+
-		"where no = ? ");
+		"select b.name, a.subject_cd, a.no, a.point "+
+		"from test as a "+
+		"join subject as b "+
+		"on a.subject_cd = b.cd "+
+		"where a.student_no = ?");
 	st.setString(1, student.getNo());
 	ResultSet rs = st.executeQuery();
 
