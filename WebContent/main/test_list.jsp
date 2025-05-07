@@ -52,6 +52,17 @@
 		</div>
 		</div>
 
+<<<<<<< HEAD
+		<form action = "TestListStudentExecute.action" method = "post">
+			<p>
+				学生番号：
+				<input type = "text" name = "no">
+			</p>
+
+			<p><input type = "submit" value = "学生別検索">
+		</form>
+=======
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 
 	</div>
 
