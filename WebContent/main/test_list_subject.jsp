@@ -8,16 +8,13 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">成績参照</h2>
-		<p>科目別検索結果
-
-		<div id = "menu">
-
+		<div class="header">
+			<h2>成績参照</h2>
 		</div>
 
-		<div>
-			<small>科目：${ subjectName }</small>
-		</div>
+		<p>科目別検索結果</p>
+		<small>科目：${ subjectName }</small>
+
 		<table>
 			<tr>
 				<th>入学年度</th>

@@ -21,6 +21,9 @@
 		<p>　　氏名：
 			<input type = "text" name = "name" placeholder="変更前：${ student.getName() }" value="${ student.getName() }">
 		</p>
+		<c:if test="${ not empty errorMessage }">
+			<p style="color:red;">　　　　　[${ errorMessage }]</p>
+		</c:if>
 
 		<p>　クラス：
 			<select name = "classNum">

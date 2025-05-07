@@ -25,6 +25,7 @@ public class LoginExecuteAction extends Action{
 		if (Objects.isNull(id) || id.isEmpty() && (Objects.isNull(password) || password.isEmpty())){
 		    String message = "IDとパスワードを入力してください。";
 		    request.setAttribute("message", message);
+
 		    //エラーメッセージを送る時はフォワードのほうがいいっぽい
 			//response.sendRedirect("/scoremanager/Login.action");
 
@@ -36,7 +37,6 @@ public class LoginExecuteAction extends Action{
 		if (Objects.isNull(t.getId())){
 			String message = "ログインに失敗しました。存在しないIDです。";
 			request.setAttribute("teacher_id", id);
-			//request.setAttribute("password", password);←秘密保持的な意味でここいる？
 			request.setAttribute("message", message);
 			System.out.println(message);
 
