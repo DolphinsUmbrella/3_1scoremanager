@@ -9,11 +9,9 @@
 	<div class="header">
 		<h2>学生管理</h2>
 	</div>
-
-	<div>
 		<div class="filter-group">
-		<a href = "StudentCreate.action">新規追加</a>
-		<form action = "StudentList.action">
+			<a href = "StudentCreate.action">新規追加</a>
+			<form action = "StudentList.action">
 
 			<%-- 入学年度 --%>
 			<%-- 次の年度から10年間 --%>
@@ -43,41 +41,37 @@
 			<input type = "submit" value = "絞込み">
 			</p>
 
-		</form>
+			</form>
 		</div>
 
 
 		<div>
 			<small>検索結果：${ sList.size() }件</small>
 		</div>
-			<table>
-				<tr>
-					<th>入学年度</th>
-					<th>学生番号</th>
-					<th>氏名</th>
-					<th>クラス</th>
-					<th>在学中</th>
-					<th></th>
-				</tr>
-				<c:forEach var="s" items="${ sList }">
-
-						<tr>
-							<td>${ s.getEntYear() }</td>
-							<td>${ s.getNo() }</td>
-							<td>${ s.getName() }</td>
-							<td>${ s.getClassNum() }</td>
-							<td>${ s.getIsAttend() }</td>
-							<td>
-							<form action = "StudentUpdate.action" method = "post">
-								<input type = "submit" class = "link-button" name="" value = "変更">
-								<input type = "hidden" name = "no" value = "${ s.getNo() }">
-							</form>
-							</td>
-						</tr>
-				</c:forEach>
-			</table>
-
-	</div>
+		<table>
+			<tr>
+				<th>入学年度</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>クラス</th>
+				<th>在学中</th>
+			</tr>
+			<c:forEach var="s" items="${ sList }">
+					<tr>
+						<td>${ s.getEntYear() }</td>
+						<td>${ s.getNo() }</td>
+						<td>${ s.getName() }</td>
+						<td>${ s.getClassNum() }</td>
+						<td>${ s.getIsAttend() }</td>
+						<td>
+						<form action = "StudentUpdate.action" method = "post">
+							<input type = "submit" class = "link-button" name="" value = "変更">
+							<input type = "hidden" name = "no" value = "${ s.getNo() }">
+						</form>
+						</td>
+					</tr>
+			</c:forEach>
+		</table>
 </div>
 
 

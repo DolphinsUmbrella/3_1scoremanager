@@ -12,6 +12,7 @@
 			<h2>成績参照</h2>
 		</div>
 
+		<div class="align-left">
 		<form action = "TestListSubjectExecute.action" method = "post">
 			<p>
 				入学年度：
@@ -40,8 +41,11 @@
 
 			<p><input type = "submit" value = "科目別検索">
 		</form>
+		<div>
+			<a href = "TestListStudentExecute.action">学生別検索</a>
+		</div>
+		</div>
 
-		<a href = "TestListStudentExecute.action">学生別検索</a>
 
 	</div>
 

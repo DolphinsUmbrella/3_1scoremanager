@@ -15,11 +15,11 @@
 		<div class="align-left">
 	<form action = "StudentCreateExecute.action">
 
-		<p>入学年度：<input type = "text" name = "entYear" value="none"></p>
+		<p>入学年度：<input type = "text" name = "entYear" placeholder="入学年度を入力"></p>
 
-		<p>学生番号：<input type = "text" name = "classNum" value="none"></p>
+		<p>学生番号：<input type = "text" name = "classNum" placeholder="学生番号を入力"></p>
 
-		<p>　　氏名：<input type = "text" name = "name" value="none" placeholder="">
+		<p>　　氏名：<input type = "text" name = "name" placeholder="氏名を入力">
 		</p>
 
 		<p>　クラス：

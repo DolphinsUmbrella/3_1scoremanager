@@ -12,11 +12,13 @@
 			<h2>学生情報変更</h2>
 		</div>
 
-		<div id = "menu">
-			<p>変更が完了しました
+		<div>
+			<p>変更が完了しました</p>
 		</div>
 
-		<a href = "StudentList.action">学生一覧</a>
+		<div>
+			<a href = "StudentList.action">学生一覧</a>
+		</div>
 
 	</div>
 

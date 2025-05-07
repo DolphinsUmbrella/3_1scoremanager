@@ -8,8 +8,11 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">成績参照</h2>
-		<p>科目別検索結果
+		<div class="header">
+			<h2>成績参照</h2>
+		</div>
+
+		<div>科目別検索結果</div>
 
 		<div id = "menu">
 
