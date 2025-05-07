@@ -222,7 +222,7 @@ public class StudentDao extends Dao{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
-			"select distinct ent_year from student");
+			"select distinct ent_year from student order by ent_year desc");
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()){

@@ -17,21 +17,27 @@
 			<p>
 				入学年度：
 				<select name = "ent_year">
-					<option value = "2024">2024</option>
-					<option value = "2025">2025</option>
-				</select>
+				<!-- <select name = "entYear"> -->
+				<option value = "0" selected>-------</option>
+				<c:forEach var="y" items="${ year }">
+					<option value = "${ y }">${ y }</option>
+				</c:forEach>
+			</select>
 			</p>
 
 			<p>
-				クラス：
+				　クラス：
 				<select name = "class_num">
-					<option value = "102">102</option>
-					<option value = "201">201</option>
+				<!-- <select name = "classNum">? -->
+				<option value = "000" selected>-------</option>
+				<c:forEach var="c" items="${ cList }">
+					<option value = "${ c }">${ c }</option>
+				</c:forEach>
 				</select>
 			</p>
 
 			<p>
-				科目：
+				　　科目：
 				<select name = "subject">
 					<option value = "101">python</option>
 					<option value = "102">java</option>

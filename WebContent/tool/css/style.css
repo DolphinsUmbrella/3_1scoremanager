@@ -173,7 +173,7 @@ nav li:hover a::after {
 	justify-content: flex-start;
 
 	/*align-items: center;*/
-	/*background-color: red;*/
+	background-color: red;
 }
 
 .main-content .header {

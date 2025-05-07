@@ -1,6 +1,5 @@
 package main;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -27,6 +27,7 @@ public class TestListAction extends Action{
 		}
 
 		String school = user.getSchool().getCd();
+		StudentDao sDao = new StudentDao();
 
 		ClassNumDao cDao = new ClassNumDao();
 		SubjectDao subDao = new SubjectDao();
@@ -48,23 +49,9 @@ public class TestListAction extends Action{
 		subList.add(s2);
 		subList.add(s3);
 
-		//入学年度選択用
-		List<Integer> year = new ArrayList<>();
-		LocalDate now = LocalDate.now();
-		int nowYear = now.getYear();
-
-		//今が1～3月なら今の年-1、年度を取得したいため
-		if (now.getMonthValue() <= 3){
-			nowYear--;
-		}
-
-		for (int y = nowYear+1; y > nowYear-10; y--){
-			year.add(y);
-		}
 
 		request.setAttribute("cList", cList);
 		request.setAttribute("subList", subList);
-		request.setAttribute("year", year);
 
 		return "test_list.jsp";
 	}

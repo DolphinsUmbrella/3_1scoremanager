@@ -12,15 +12,9 @@
 			<h2>成績参照</h2>
 		</div>
 
-		<div>科目別検索結果</div>
+		<p>科目別検索結果</p>
+		<small>科目：${ subjectName }</small>
 
-		<div id = "menu">
-
-		</div>
-
-		<div>
-			<small>科目：${ subjectName }</small>
-		</div>
 		<table>
 			<tr>
 				<th>入学年度</th>
