@@ -31,12 +31,14 @@ public class TestListSubjectExecuteAction extends Action{
 		SubjectDao subDao = new SubjectDao();
 
 		//本来はこれが正しいです、subjectDaoが完成次第こっちに
-		//Subject subject = subDao.get(request.getParameter("subject"), user.getSchool());
+		Subject subject = subDao.get(request.getParameter("subject"), user.getSchool());
 
 		//仮実装部分
+		/*
 		Subject subject = new Subject();
 		subject.setCd(request.getParameter("subject"));
 		subject.setName("仮科目名");
+		*/
 
 		//動作確認用出力
 		System.out.println("入学年度　："+entYear);
