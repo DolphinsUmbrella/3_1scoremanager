@@ -41,7 +41,14 @@
 			<p><input type = "submit" value = "科目別検索">
 		</form>
 
-		<a href = "TestListStudentExecute.action">学生別検索</a>
+		<form action = "TestListStudentExecute.action" method = "post">
+			<p>
+				学生番号：
+				<input type = "text" name = "no">
+			</p>
+
+			<p><input type = "submit" value = "学生別検索">
+		</form>
 
 	</div>
 
