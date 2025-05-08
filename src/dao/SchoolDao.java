@@ -10,7 +10,7 @@ public class SchoolDao extends Dao{
 
 	//クラス図情報：
 	//	get(cd:String): School
-	public School searchSchool(String cd) throws Exception{
+	public School get(String cd) throws Exception{
 
 		School sc = new School();
 
@@ -18,8 +18,8 @@ public class SchoolDao extends Dao{
 
 		//SQL文も必要に応じて修正お願いします
 		PreparedStatement st = con.prepareStatement(
-			"select * from school where cd like ?");
-		st.setString(1, "%"+cd+"%");
+			"select * from school where cd = ?");
+		st.setString(1, cd);
 
 		ResultSet rs = st.executeQuery();
 
