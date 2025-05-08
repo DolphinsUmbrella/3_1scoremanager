@@ -10,9 +10,7 @@
 		<%-- 見出し --%>
 		<h2 id = "headline">科目情報登録</h2>
 
-		<div id = "menu">
 
-		</div>
 
 		<a href = "SubjectCreateExecute.action">登録</a>
 		<a href = "SubjectList.action">戻る</a>
