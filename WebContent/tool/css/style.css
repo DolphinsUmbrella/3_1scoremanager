@@ -61,7 +61,6 @@ footer {
 	font-size: 0.9em;
 }
 
-
 body {
 	background: #FFAA76;
 	background: #ffffff;
@@ -210,13 +209,6 @@ nav li:hover a::after {
     /* margin-bottom: 0; */
 }
 
-
-/* Remove the general top margin for non-header children */
-/* ヘッダー以外の直下の子要素に一律適用されていた上マージンを削除 */
-/* .main-content > *:not(.header) {
-	margin-top: 20px;
-} */
-
 /* 左寄せにするためのクラス */
 .align-left {
 	text-align: left !important;
@@ -361,12 +353,14 @@ nav li:hover a::after {
 
 }
 
+/*-------------------------------------------------------------*/
 /*エラーメッセージ(赤文字として表示)*/
 .main-content .error-message {
 	color: red;
 	margin-bottom: 10px;
 }
 
+/*-------------------------------------------------------------*/
 
 .link-button {
 	background: none;
@@ -392,6 +386,7 @@ td {
 	text-align: center;
 }
 
+/*-------------------------------------------------------------*/
 /* 学生管理の検索ボタンのグループ */
 
 .filter-group {
@@ -419,6 +414,7 @@ td {
     margin-top: 10px; /* 必要に応じて調整 */
 }
 
+/*-------------------------------------------------------------*/
 /* ログイン画面のデザインCSS */
 .login-content {
 	display: flex;
@@ -458,6 +454,7 @@ td {
 	margin-bottom: 10px;
 }
 
+/*-------------------------------------------------------------*/
 /* ボタンのデザイン */
 /*https://saruwakakun.com/html-css/reference/buttons*/
 
@@ -509,11 +506,11 @@ td {
 	background: #f5c6cb;
 }
 
-
+/*-------------------------------------------------------------*/
 /* 検索ボックスの位置調整 */
-/*.filter-controls-grid:*/
 
-.serach-box {
+/* 学生一覧での検索ボックス配置 */
+.student-serach-box {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr auto;
     grid-template-rows: auto auto;
@@ -522,36 +519,65 @@ td {
     margin-bottom: 1em;
 }
 
-.serach-box .label-entyear {
+/* 科目一覧での検索ボックス配置 */
+.subject-serach-box {
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5em 1em;
+    align-items: start;
+    margin-bottom: 1em;
+}
+
+/* 行/列 */
+.student-serach-box .label-1 ,
+.subject-serach-box .label-1{
     grid-area: 1 / 1;
 }
-.serach-box .label-classnum {
+
+.student-serach-box .label-2 ,
+.subject-serach-box .label-2{
     grid-area: 1 / 2;
 }
-.serach-box .label-isattend {
+
+
+.student-serach-box .label-3 {
     grid-area: 1 / 3;
     text-align: center;
 }
+.subject-serach-box .label-3 {
+	grid-area: 1 / 3;
+}
 
-.serach-box .input-entyear {
+.student-serach-box .input-1 ,
+.subject-serach-box .input-1{
     grid-area: 2 / 1;
 }
-.serach-box .input-classnum {
+
+.student-serach-box .input-2 ,
+.subject-serach-box .input-2{
     grid-area: 2 / 2;
 }
-.serach-box .input-isattend {
+
+.student-serach-box .input-3 {
     grid-area: 2 / 3;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.serach-box .input-submit {
-    grid-area: 2 / 4;
-
+.subject-serach-box .input-3{
+	grid-area: 2 / 3;
 }
 
-.serach-box select,
-.serach-box input[type="submit"] {
+.student-serach-box .input-submit ,
+.subject-serach-box .input-submit{
+    grid-area: 2 / 4;
+}
+
+.student-serach-box select,
+.student-serach-box input[type="submit"],
+.subject-serach-box select,
+.subject-serach-box input[type="submit"] {
     width: 100%;
     box-sizing: border-box;
 }

@@ -13,13 +13,15 @@
 	</div>
 
 	<div class="filter-group">
+
 		<form action = "TestListSubjectExecute.action" method = "post">
 			<div class="subject-serach-box">
-				<span class="grid-item label-1">入学年度</span>
-				<span class="grid-item label-2">クラス</span>
-				<span class="grid-item label-3">科目</span>
 
-			<span class="grid-item input-1">
+				<span class="label-1">入学年度</span>
+				<span class="label-2">クラス</span>
+				<span class="label-3">科目</span>
+
+			<span class="input-1">
 				<select name = "ent_year">
 					<!-- <select name = "entYear"> -->
 					<option value = "0" selected>-------</option>
@@ -30,7 +32,7 @@
 			</span>
 
 
-			<span class="grid-item input-2">
+			<span class="input-2">
 				<select name = "class_num">
 					<!-- <select name = "classNum">? -->
 					<option value = "000" selected>-------</option>
@@ -41,7 +43,7 @@
 			</span>
 
 
-			<span class="grid-item input-3">
+			<span class="input-3">
 				<select name = "subject">
 					<option value = "101">python</option>
 					<option value = "102">java</option>
@@ -49,20 +51,27 @@
 				</select>
 			</span>
 
-			<input type = "submit" value = "科目別検索">
-
+			<span class="input-submit">
+				<input type = "submit" value = "科目別検索">
+			</span>
 			</div>
-		</form>
 
-		<form action = "TestListStudentExecute.action" method = "post">
-			<p>
-				学生番号：
-				<input type = "text" name = "no">
-			</p>
-
-			<input type = "submit" value = "学生別検索">
 		</form>
 	</div>
-</div>
+	<div class="filter-group">
+	<div class="subject-serach-box">
+		<form action = "TestListStudentExecute.action" method = "post">
+
+			<span class="label-1">学生番号</span>
+			<span class="input-1">
+				<input type = "text" name = "no">
+			</span>
+			<span class="input-submit">
+				<input type = "submit" value = "学生別検索">
+			</span>
+		</form>
+	</div>
+	</div>
+
 
 <%@include file = "../tool/footer.jsp" %>
