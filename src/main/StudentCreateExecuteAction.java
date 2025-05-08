@@ -27,7 +27,7 @@ public class StudentCreateExecuteAction extends Action{
 			return "null";
 		}
 
-			//学生登録完了画面の処理
+			///学生登録完了画面の処理
 
 			StudentDao sDao = new StudentDao();
 
