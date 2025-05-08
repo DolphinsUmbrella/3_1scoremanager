@@ -1,18 +1,13 @@
 package main;
 
-import java.time.LocalDate;
 import java.util.Objects;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.ClassNum;
 import bean.Student;
 import bean.Teacher;
-import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
@@ -51,15 +46,6 @@ public class StudentCreateExecuteAction extends Action{
 			if(entYearStr.equals("none")){
 				request.setAttribute("入学年度を選択してください。");
 			}
-
-			if(no.equals("null")){
-				request.setAttribute("学生番号が重複しています。");
-			}
-
-			//学生番号、氏名が未入力の場合
-
-			if(no.equals())
-
 
 
 
