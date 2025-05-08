@@ -520,7 +520,7 @@ td {
 }
 
 /* 科目一覧での検索ボックス配置 */
-.subject-serch-box {
+.subject-serach-box {
 	display: grid;
     grid-template-columns: 1fr 1fr 1fr auto;
     grid-template-rows: auto auto;

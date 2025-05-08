@@ -72,6 +72,7 @@
 		</form>
 	</div>
 	</div>
+</div>
 
 
 <%@include file = "../tool/footer.jsp" %>
