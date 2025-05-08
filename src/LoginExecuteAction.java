@@ -57,6 +57,7 @@ public class LoginExecuteAction extends Action{
 		}
 
 		System.out.println("認証成功");
+		t.setAuthenticated(true);
 
 		session.setAttribute("user", t);
 

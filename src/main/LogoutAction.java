@@ -20,6 +20,7 @@ public class LogoutAction extends Action{
 			return "null";
 		}
 
+		user.setAuthenticated(false);
 		session.removeAttribute("user");
 
 		return "logout.jsp";
