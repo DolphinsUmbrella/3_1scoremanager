@@ -3,45 +3,45 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import bean.School;
 
 public class SchoolDao extends Dao{
 
-	//学校コードでselect検索　引数が空でselect *を実行
-	public List<School> searchSchool(String schoolCd) throws Exception{
-		List<School> scList = new ArrayList<>();
+	//クラス図情報：
+	//	get(cd:String): School
+	public School searchSchool(String cd) throws Exception{
+
+		School sc = new School();
 
 		Connection con = getConnection();
 
+		//SQL文も必要に応じて修正お願いします
 		PreparedStatement st = con.prepareStatement(
 			"select * from school where cd like ?");
-		st.setString(1, "%"+schoolCd+"%");
+		st.setString(1, "%"+cd+"%");
 
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()){
-			School sc = new School();
 			sc.setCd(rs.getString("cd"));
 			sc.setName(rs.getString("name"));
-			scList.add(sc);
 		}
 		st.close();
 		con.close();
 
-		return scList;
+		return sc;
 	}
 
 	//学校追加(開校！)
-	public int insertSchool(String schoolCd, String schoolName) throws Exception{
+	//悲しいかな  使用想定なし
+	public int insertSchool(String cd, String name) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"insert into values(?, ?)");
-		st.setString(1, schoolCd);
-		st.setString(2, schoolName);
+		st.setString(1, cd);
+		st.setString(2, name);
 
 		int line = st.executeUpdate();
 
@@ -52,13 +52,14 @@ public class SchoolDao extends Dao{
 	}
 
 	//学校情報更新
-	public int updateSchool(String schoolCd, String schoolName) throws Exception{
+	//使用想定なし
+	public int updateSchool(String cd, String name) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"update school set name = ? where cd = ?");
-		st.setString(1, schoolName);
-		st.setString(2, schoolCd);
+		st.setString(1, name);
+		st.setString(2, cd);
 
 		int line = st.executeUpdate();
 
@@ -69,12 +70,13 @@ public class SchoolDao extends Dao{
 	}
 
 	//学校情報削除
-	public int deleteSchool(String schoolCd) throws Exception{
+	//使用想定なし
+	public int deleteSchool(String cd) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"delete from school where cd = ?");
-		st.setString(1, schoolCd);
+		st.setString(1, cd);
 
 		int line = st.executeUpdate();
 
@@ -83,4 +85,5 @@ public class SchoolDao extends Dao{
 
 		return line;
 	}
+
 }

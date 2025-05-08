@@ -28,7 +28,7 @@ public class TestRegistAction extends Action{
 		//フィルター処理もやる
 
 		//userの所属する学校取得
-		String school = user.getSchool();
+		String school = user.getSchool().getCd();
 
 		//userの所属する学校のクラス情報を取得
 		ClassNumDao cDao = new ClassNumDao();

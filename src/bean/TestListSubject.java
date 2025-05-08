@@ -1,12 +1,13 @@
 package bean;
 
+import java.util.HashMap;
 import java.util.Map;
 public class TestListSubject implements java.io.Serializable{
 	private int entYear;
 	private String studentNo;
 	private String studentName;
 	private String classNum;
-	private Map<Integer,Integer> points;
+	private Map<Integer,Integer> points = new HashMap<>();
 
 	//ゲッター
 	public int getEntYear() {
@@ -23,6 +24,10 @@ public class TestListSubject implements java.io.Serializable{
 	}
 	public Map<Integer, Integer> getPoints() {
 		return points;
+	}
+	public String getPoint(int Key){
+		Integer Value = points.get(Key);
+		return Value != null? Value.toString():null;
 	}
 
 	//セッター
@@ -41,5 +46,9 @@ public class TestListSubject implements java.io.Serializable{
 	public void setPoints(Map<Integer, Integer> points) {
 		this.points = points;
 	}
+	public void putPoint(int Key,int Value){
+		points.put( Key, Value );
+	}
+
 
 }

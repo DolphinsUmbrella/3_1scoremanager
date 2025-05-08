@@ -1,34 +1,22 @@
 package bean;
 
 public class Test implements java.io.Serializable{
-	private String studentNo;
-	private String studentName;
-	private String subjectCd;
-	private String subjectName;
-	private String schoolCd;
-	private String schoolName;
+	private Student student;
+	private Subject subject;
+	private School school;
 	private int no;
 	private int point;
 	private String classNum;
 
 	//ゲッター
-	public String getStudentNo() {
-		return this.studentNo;
+	public Student getStudent() {
+		return this.student;
 	}
-	public String getStudentName() {
-		return this.studentName;
+	public Subject getSubject() {
+		return this.subject;
 	}
-	public String getSubjectCd() {
-		return this.subjectCd;
-	}
-	public String getSubjectName() {
-		return this.subjectName;
-	}
-	public String getSchoolCd() {
-		return this.schoolCd;
-	}
-	public String getSchoolName() {
-		return this.schoolName;
+	public School getSchool() {
+		return this.school;
 	}
 	public int getNo() {
 		return this.no;
@@ -41,23 +29,14 @@ public class Test implements java.io.Serializable{
 	}
 
 	//セッター
-	public void setStudentNo(String studentNo) {
-		this.studentNo = studentNo;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
-	public void setStudetntName(String studentName) {
-		this.studentName = studentName;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
-	public void setSubjectCd(String subjectCd) {
-		this.subjectCd = subjectCd;
-	}
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
-	public void setSchoolCd(String schoolCd) {
-		this.schoolCd = schoolCd;
-	}
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 	public void setNo(int no) {
 		this.no = no;

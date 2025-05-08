@@ -2,13 +2,13 @@ package bean;
 
 public class Subject implements java.io.Serializable{
 	//科目のbean
-	private String schoolCd;
+	private School school;
 	private String cd;
 	private String name;
 
 	//ゲッター
-	public String getSchoolCd() {
-		return this.schoolCd;
+	public School getSchool() {
+		return this.school;
 	}
 	public String getCd() {
 		return this.cd;
@@ -18,8 +18,8 @@ public class Subject implements java.io.Serializable{
 	}
 
 	//セッター
-	public void setSchoolCd(String schoolCd) {
-		this.schoolCd = schoolCd;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 	public void setCd(String cd) {
 		this.cd = cd;

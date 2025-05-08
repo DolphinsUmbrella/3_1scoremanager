@@ -5,12 +5,15 @@
 
 
 <div class = "login-content">
-	<p>ログアウトしました　</p>
-
-	<a href = "../Login.action">ログイン</a>
+	<div>
+		<h1>ログアウトしました　</h1>
+	</div>
+	<div>
+		<h2><a href = "../Login.action">ログイン</a></h2>
 	</div>
 
 </div>
+
 
 
 

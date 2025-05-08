@@ -6,85 +6,170 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.School;
+import bean.Student;
+import bean.Subject;
 import bean.Test;
 
 public class TestDao extends Dao{
 
-	//4/23小柿：joinいらないです！！！select *で良いです！！
-	//	PrepareStatementの上のコメントがTestテーブルのカラムです、
-	//	これ以外はwhile文から削除していただけると……
-	public List<Test> searchTest(Test test) throws Exception{
-		List<Test> testList = new ArrayList<>();
+	public Test get(Test test) throws Exception{
 
 		Connection con = getConnection();
 
 		//STUDENT_NO  	SUBJECT_CD  	SCHOOL_CD  	NO  	POINT  	CLASS_NUM
 		PreparedStatement st = con.prepareStatement(
-			"select a.student_no, b.name as student_name, a.subject_cd, c.name as subject_name,"+
-			"a.school_cd, d.name as school_name, a.no, a.point, a.class_num"+
-			"from test as a"+
-			"join student as b on a.student_no = b.no"+
-			"join subject as c on a.subject_cd = c.cd"+
-			"join school as d on a.school_cd = d.cd"+
-			"where a.student_no like ?"+
-			"and a.subject_cd like ?"+
-			"and a.school_cd like ?"+
-			"and a.no like ?");
-		st.setString(1, test.getStudentNo());
-		st.setString(2, test.getSubjectCd());
-		st.setString(3, test.getSchoolCd());
+			"select * from test "+
+			"where student_no = ? "+
+			"and subject_cd = ? "+
+			"and school_cd = ? "+
+			"and no = ?");
+		st.setString(1, test.getStudent().getNo());
+		st.setString(2, test.getSubject().getCd());
+		st.setString(3, test.getSchool().getCd());
 		st.setInt(4, test.getNo());
+		ResultSet rs = st.executeQuery();
+
+		//楽したい！
+		List<Test> tList = postFilter(rs, test.getSchool());
+
+		st.close();
+		con.close();
+
+		//1行しかとってこないはずなので
+		return tList.get(0);
+	}
+
+	private List<Test> postFilter(ResultSet rs, School school) throws Exception{
+		List<Test> list = new ArrayList<>();
+
+		while (rs.next()){
+			Test t = new Test();
+
+			//こんなんしないといかんの？？
+			Student stu = new Student();
+			stu.setNo(rs.getString("student_no"));
+			t.setStudent(stu);
+
+			Subject sub = new Subject();
+			sub.setCd(rs.getString("subject_cd"));
+			t.setSubject(sub);
+
+			School sch = new School();
+			sch.setCd(rs.getString("school_cd"));
+			t.setSchool(sch);
+
+			t.setNo(rs.getInt("no"));
+			t.setPoint(rs.getInt("point"));
+			t.setClassNum(rs.getString("class_num"));
+			list.add(t);
+		}
+
+		return list;
+	}
+
+	//試験結果追加、一度に複数回insertするため配列で受け取ります
+	public boolean save(List<Test> test) throws Exception{
+		Connection con = getConnection();
+
+		//これの処理わからん
+		int line = 0;
+
+		for (Test t : test){
+			boolean result = save(t, con);
+			if (result){
+				line++;
+			}
+		}
+		con.close();
+
+		//仕様書が何をしてほしいのか何もわからん
+		//全部正常にinsertできたらtrue
+		//1行でも異常があればfalse、たぶん正解はこれではない
+		if (test.size() == line){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	//おそらく1行ずつinsertするためのもの
+	private boolean save(Test t, Connection con) throws Exception{
+		PreparedStatement st = con.prepareStatement(
+			"insert into test values(?, ?, ?, ?, ?, ?)");
+		st.setString(1, t.getStudent().getNo());
+		st.setString(2, t.getSubject().getCd());
+		st.setString(3, t.getSchool().getCd());
+		st.setInt(4, t.getNo());
+		st.setInt(5, t.getPoint());
+		st.setString(6, t.getClassNum());
+
+		int line = st.executeUpdate();
+
+		st.close();
+
+		if (line > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	//
+	public List<Test> filter(
+			int entYear, String classNum, Subject subject, int num, School school
+		)throws Exception{
+		List<Test> list = new ArrayList<>();
+
+		Connection con = getConnection();
+
+		/*
+			select a.ent_year, a.class_num, a.no as student_no, a.name, b.point
+			from student as a
+			join test as b
+			on a.no = b.student_no
+			where a.ent_year = 2024
+			and b.subject_cd = '101'
+			and b.school_cd = 'tes'
+			and b.no = 1
+		 */
+		PreparedStatement st = con.prepareStatement(
+			"select a.ent_year, a.class_num, a.no as student_no, a.name, b.point "+
+			"from student as a "+
+			"join test as b "+
+			"on a.no = b.student_no "+
+			"where a.ent_year = ? "+
+			"and b.subject_cd = ? "+
+			"and b.class_num = ? "+
+			"and b.school_cd = ? "+
+			"and b.no = ?");
+		st.setInt(1, entYear);
+		st.setString(2, subject.getCd());
+		st.setString(3, classNum);
+		st.setString(4, school.getCd());
+		st.setInt(5, num);
+
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()){
 			Test t = new Test();
-			t.setStudentNo(rs.getString("student_no"));
-			t.setStudetntName(rs.getString("student_name"));
-			t.setSubjectCd(rs.getString("subject_cd"));
-			t.setSubjectName(rs.getString("subject_name"));
-			t.setSchoolCd(rs.getString("school_cd"));
-			t.setSchoolName(rs.getString("school_name"));
-			t.setNo(rs.getInt("no"));
+			//学生情報
+			Student s = new Student();
+			s.setClassNum(rs.getString("class_num"));
+			s.setEntYear(rs.getInt("ent_year"));
+			s.setName(rs.getString("name"));
+			s.setNo(rs.getString("student_no"));
+			//beanを改変する必要があります、影響範囲が広くてやばい
+			t.setStudent(s);
+
+			t.setSchool(school);
 			t.setPoint(rs.getInt("point"));
-			t.setClassNum(rs.getString("class_num"));
-			testList.add(t);
+
+			list.add(t);
 		}
 		st.close();
 		con.close();
 
-		return testList;
-	}
-
-	//試験結果追加、一度に複数insertも考えられるため配列で受け取れるように
-	public int insertTest(List<Test> test) throws Exception{
-		Connection con = getConnection();
-
-		PreparedStatement st = con.prepareStatement("select * from test");
-
-		//lineは更新された行になります、初期値は0
-		int line = 0;
-		for (Test t : test){
-			st = con.prepareStatement(
-				"insert into test values(?, ?, ?, ?, ?, ?)");
-			st.setString(1, t.getStudentNo());
-			st.setString(2, t.getSubjectCd());
-			st.setString(3, t.getSchoolCd());
-			st.setInt(4, t.getNo());
-			st.setInt(5, t.getPoint());
-			st.setString(6, t.getClassNum());
-
-			//insertに成功した場合+1、できなければ+0になるはず
-			line += st.executeUpdate();
-		}
-		st.close();
-		con.close();
-
-		//更新された行数を返します。insertに失敗したかはこのlineとinsert件数の比較で検知できます
-		return line;
-	}
-
-	//更新　作ってないです
-	public int updateTest(Test test) throws Exception{
-
+		return list;
 	}
 }

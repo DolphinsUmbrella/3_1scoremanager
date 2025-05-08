@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.Student;
 import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao{
@@ -17,9 +18,9 @@ public class TestListStudentDao extends Dao{
 		Connection con = getConnection();
 		//テーブル情報を全取得したい場合は引数に空文字を指定してください
 		PreparedStatement st = con.prepareStatement(
-			"select subject.name,test.subjectcd,test.no,test.point from subject,test"
+			"select subject.name,test.subjectcd,test.no,test.point from test"
 			+ "inner join subject "
-			+ "on subject.subject_cd=test.subject_cd"
+			+ "on subject.cd=test.subject_cd"
 			+ "where student_no like ?");
 		st.setString(1, "%"+student_no+"%");
 		ResultSet rs = st.executeQuery();
@@ -38,14 +39,14 @@ public class TestListStudentDao extends Dao{
 		return TestsList;
 	}
 
-	public List<TestListStudent> postFilter(ResultSet rSet,String school) throws Exception{
+	public List<TestListStudent> postFilter(ResultSet rSet,Student student) throws Exception{
 		List<TestListStudent> list = new ArrayList<>();
 		try{
 			while(rSet.next()){
 				TestListStudent ts = new TestListStudent();
-				ts.setSubjectName(rSet.getString("subjectname"));
-				ts.setSubjectCd(rSet.getString("subjectcd"));
-				ts.setNum(rSet.getInt("num"));
+				ts.setSubjectName(rSet.getString("name"));
+				ts.setSubjectCd(rSet.getString("subject_cd"));
+				ts.setNum(rSet.getInt("no"));
 				ts.setPoint(rSet.getInt("point"));
 				list.add(ts);
 			}
@@ -58,35 +59,20 @@ public class TestListStudentDao extends Dao{
 	}
 
 	public List<TestListStudent> filter
-	(String subjectName, String subjectCd, int no, int point
-			) throws Exception{
-	List<TestListStudent> list = new ArrayList<>();
+	(Student student) throws Exception{
 
 	Connection con = getConnection();
 
 	PreparedStatement st = con.prepareStatement(
-		"select subject.name,test.subjectcd,test.no,test.point from subject,test"
-		+"inner join subject "
-		+"on subject.subject_cd=test.subject_cd"
-		+"where subjectname = ? "
-		+"and subjectcd = ? "
-		+"and no = ? "
-		+"and point = ?");
-	st.setString(1, subjectName);
-	st.setString(2, subjectCd);
-	st.setInt(3, no);
-	st.setInt(4, point);
-
+		"select b.name, a.subject_cd, a.no, a.point "+
+		"from test as a "+
+		"join subject as b "+
+		"on a.subject_cd = b.cd "+
+		"where a.student_no = ?");
+	st.setString(1, student.getNo());
 	ResultSet rs = st.executeQuery();
 
-	while (rs.next()){
-		TestListStudent ts = new TestListStudent();
-		ts.setSubjectName(rs.getString("subjectname"));
-		ts.setSubjectCd(rs.getString("subjectcd"));
-		ts.setNum(rs.getInt("num"));
-		ts.setPoint(rs.getInt("point"));
-		list.add(ts);
-	}
+	List<TestListStudent> list = postFilter(rs, student);
 	st.close();
 	con.close();
 

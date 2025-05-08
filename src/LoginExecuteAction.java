@@ -21,25 +21,38 @@ public class LoginExecuteAction extends Action{
 
 		Teacher t = tDao.get(id);
 
+		//idとパスワードがどちらも存在しない場合
+		if (Objects.isNull(id) || id.isEmpty() && (Objects.isNull(password) || password.isEmpty())){
+		    String message = "IDとパスワードを入力してください。";
+		    request.setAttribute("message", message);
+
+		    //エラーメッセージを送る時はフォワードのほうがいいっぽい
+			//response.sendRedirect("/scoremanager/Login.action");
+
+		    request.getRequestDispatcher("/Login.action").forward(request, response);
+		    return null;
+		}
+
 		//idが存在しない
 		if (Objects.isNull(t.getId())){
 			String message = "ログインに失敗しました。存在しないIDです。";
 			request.setAttribute("teacher_id", id);
-			request.setAttribute("password", password);
 			request.setAttribute("message", message);
 			System.out.println(message);
-			response.sendRedirect("/scoremanager/Login.action");
+
+			request.getRequestDispatcher("/Login.action").forward(request, response);
 			return null;
 		}
 
 		//パスワードが違う
 		if (!t.getPassword().equals(password)){
-			String message = "ログインに失敗しました。IDまたはパスワードが正しくありません。";
+			String message = "ログインに失敗しました。パスワードが正しくありません。";
 			request.setAttribute("teacher_id", id);
 			request.setAttribute("password", password);
 			request.setAttribute("message", message);
 			System.out.println(message);
-			response.sendRedirect("/scoremanager/Login.action");
+
+			request.getRequestDispatcher("/Login.action").forward(request, response);
 			return null;
 		}
 

@@ -7,84 +7,78 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.School;
 import bean.Student;
 
 public class StudentDao extends Dao{
 
-	public List<Student> get(String no) throws Exception{
-		List<Student> sList = new ArrayList<>();
+	//クラス図情報：
+	//	get(cd:String): Student
+	//引数noじゃないんだ　たぶんnoで良いと思います
+	public Student get(String no) throws Exception{
+		Student s = new Student();
 
 		Connection con = getConnection();
 
 		//NO	NAME  	ENT_YEAR  	CLASS_NUM  	IS_ATTEND  	SCHOOL_CD
-		//テーブル情報を全取得したい場合は引数に空文字を指定してください
 		PreparedStatement st = con.prepareStatement(
-			"select * from student where no like ?");
-		st.setString(1, "%"+no+"%");
+			"select * from student where no = ? order by no");
+		st.setString(1, no);
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()){
-			Student s = new Student();
 			s.setNo(rs.getString("no"));
 			s.setName(rs.getString("name"));
 			s.setEntYear(rs.getInt("ent_year"));
 			s.setClassNum(rs.getString("class_num"));
 			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			sList.add(s);
+
+			School school = new School();
+			school.setCd(rs.getString("school_cd"));
+			s.setSchool(school);
 		}
 		st.close();
 		con.close();
 
-		return sList;
+		return s;
 	}
 
 	//フィルター後のリストへの格納処理のメソッド
-			public List<Student> postFilter(ResultSet rSet,String school) throws Exception{
-				List<Student> list = new ArrayList<>();
-				try{
-					while(rSet.next()){
-					Student s = new Student();
-					s.setNo(rSet.getString("no"));
-					s.setName(rSet.getString("name"));
-					s.setEntYear(rSet.getInt("ent_year"));
-					s.setClassNum(rSet.getString("class_num"));
-					s.setIsAttend(rSet.getBoolean("is_attend"));
-					s.setSchoolCd(school);
-					list.add(s);
-					}
-				}
-				catch(SQLException | NullPointerException e){
-					e.printStackTrace();
-				}
-
-				return list;
+	public List<Student> postFilter(ResultSet rSet,School school) throws Exception{
+		List<Student> list = new ArrayList<>();
+		try{
+			while(rSet.next()){
+				Student s = new Student();
+				s.setNo(rSet.getString("no"));
+				s.setName(rSet.getString("name"));
+				s.setEntYear(rSet.getInt("ent_year"));
+				s.setClassNum(rSet.getString("class_num"));
+				s.setIsAttend(rSet.getBoolean("is_attend"));
+				s.setSchool(school);
+				list.add(s);
 			}
+		}
+		catch(SQLException | NullPointerException e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 	//filterは渡される引数によって適切なメソッドを実行します
 
 	//学校のみ指定、初回遷移時のみ使用
-	public List<Student> filter(String school) throws Exception{
-		List<Student> list = new ArrayList<>();
+	public List<Student> filter(School school) throws Exception{
 
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"select * from student "+
-			"where school_cd = ?");
-		st.setString(1, school);
-
+			"where school_cd = ? order by no");
+		st.setString(1, school.getCd());
 		ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Student s = new Student();
-			s.setNo(rs.getString("no"));
-			s.setName(rs.getString("name"));
-			s.setEntYear(rs.getInt("ent_year"));
-			s.setClassNum(rs.getString("class_num"));
-			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			list.add(s);
-		}
+		List<Student> list = postFilter(rs, school);
+
 		st.close();
 		con.close();
 
@@ -93,9 +87,8 @@ public class StudentDao extends Dao{
 
 	//すべて指定あり
 	public List<Student> filter
-		(String school, int entYear, String classNum, boolean isAttend
+		(School school, int entYear, String classNum, boolean isAttend
 				) throws Exception{
-		List<Student> list = new ArrayList<>();
 
 		Connection con = getConnection();
 
@@ -104,24 +97,16 @@ public class StudentDao extends Dao{
 			"where school_cd = ? "+
 			"and ent_year = ? "+
 			"and class_num = ? "+
-			"and is_attend = ?");
-		st.setString(1, school);
+			"and is_attend = ? order by no");
+		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setString(3, classNum);
 		st.setBoolean(4, isAttend);
 
 		ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Student s = new Student();
-			s.setNo(rs.getString("no"));
-			s.setName(rs.getString("name"));
-			s.setEntYear(rs.getInt("ent_year"));
-			s.setClassNum(rs.getString("class_num"));
-			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			list.add(s);
-		}
+		List<Student> list = postFilter(rs, school);
+
 		st.close();
 		con.close();
 
@@ -130,9 +115,8 @@ public class StudentDao extends Dao{
 
 	//学校コード、入学年度を指定。在学フラグは必ず入ります
 	public List<Student> filter
-		(String school, int entYear, boolean isAttend
+		(School school, int entYear, boolean isAttend
 				) throws Exception{
-		List<Student> list = new ArrayList<>();
 
 		Connection con = getConnection();
 
@@ -140,23 +124,15 @@ public class StudentDao extends Dao{
 			"select * from student "+
 			"where school_cd = ? "+
 			"and ent_year = ? "+
-			"and is_attend = ?");
-		st.setString(1, school);
+			"and is_attend = ? order by no");
+		st.setString(1, school.getCd());
 		st.setInt(2, entYear);
 		st.setBoolean(3, isAttend);
 
 		ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Student s = new Student();
-			s.setNo(rs.getString("no"));
-			s.setName(rs.getString("name"));
-			s.setEntYear(rs.getInt("ent_year"));
-			s.setClassNum(rs.getString("class_num"));
-			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			list.add(s);
-		}
+		List<Student> list = postFilter(rs, school);
+
 		st.close();
 		con.close();
 
@@ -165,9 +141,8 @@ public class StudentDao extends Dao{
 
 	//学校コード、クラスを指定。在学フラグは必ず入ります
 	public List<Student> filter
-		(String school, String classNum, boolean isAttend
+		(School school, String classNum, boolean isAttend
 				) throws Exception{
-		List<Student> list = new ArrayList<>();
 
 		Connection con = getConnection();
 
@@ -175,23 +150,15 @@ public class StudentDao extends Dao{
 			"select * from student "+
 			"where school_cd = ? "+
 			"and class_num = ? "+
-			"and is_attend = ?");
-		st.setString(1, school);
+			"and is_attend = ? order by no");
+		st.setString(1, school.getCd());
 		st.setString(2, classNum);
 		st.setBoolean(3, isAttend);
 
 		ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Student s = new Student();
-			s.setNo(rs.getString("no"));
-			s.setName(rs.getString("name"));
-			s.setEntYear(rs.getInt("ent_year"));
-			s.setClassNum(rs.getString("class_num"));
-			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			list.add(s);
-		}
+		List<Student> list = postFilter(rs, school);
+
 		st.close();
 		con.close();
 
@@ -200,31 +167,22 @@ public class StudentDao extends Dao{
 
 	//初回遷移時ではなく、在学フラグ以外の指定がない場合
 	public List<Student> filter
-		(String school, boolean isAttend
+		(School school, boolean isAttend
 				) throws Exception{
-		List<Student> list = new ArrayList<>();
 
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"select * from student "+
 			"where school_cd = ? "+
-			"and is_attend = ?");
-		st.setString(1, school);
+			"and is_attend = ? order by no");
+		st.setString(1, school.getCd());
 		st.setBoolean(2, isAttend);
 
 		ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Student s = new Student();
-			s.setNo(rs.getString("no"));
-			s.setName(rs.getString("name"));
-			s.setEntYear(rs.getInt("ent_year"));
-			s.setClassNum(rs.getString("class_num"));
-			s.setIsAttend(rs.getBoolean("is_attend"));
-			s.setSchoolCd(rs.getString("school_cd"));
-			list.add(s);
-		}
+		List<Student> list = postFilter(rs, school);
+
 		st.close();
 		con.close();
 
@@ -233,7 +191,7 @@ public class StudentDao extends Dao{
 
 	//学生追加
 	//4/23小柿：メソッド名は設計書通りのものに変更してください
-	public int insertStudent(Student s) throws Exception{
+	public boolean save(Student s) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
@@ -243,30 +201,74 @@ public class StudentDao extends Dao{
 		st.setInt(3, s.getEntYear());
 		st.setString(4, s.getClassNum());
 		st.setBoolean(5, s.getIsAttend());
-		st.setString(6, s.getSchoolCd());
-
+		st.setString(6, s.getSchool().getCd()); // Schoolオブジェクトから学校コードを取得
 		int line = st.executeUpdate();
 
 		st.close();
 		con.close();
 
-		return line;
+		if (line > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
-	//学生更新
-	//4/23小柿：メソッド名は設計書通りのものに変更してください
+	//年度のみを重複なしで指定する。
+	public List<Integer> selectInt_Year() throws Exception{
+
+		List<Integer> list = new ArrayList<>();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct ent_year from student order by ent_year desc");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getInt("ent_year"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
+	//クラスのみを重複なしで指定する。
+	public List<String> selectClass_Num() throws Exception{
+
+		List<String> list = new ArrayList<>();
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select distinct class_num from student");
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			list.add(rs.getString("class_num"));
+		}
+
+		st.close();
+		con.close();
+
+		return list;
+	}
+
+
+	//学生更新 (StudentUpdateExecuteAction.javaで利用)
 	public int updateStudent(Student s) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
-			"update student"+
+			"update student "+
 			"set name = ?, ent_year = ?, class_num = ?, is_attend = ?, school_cd = ?"+
 			"where no = ?");
 		st.setString(1, s.getName());
 		st.setInt(2, s.getEntYear());
 		st.setString(3, s.getClassNum());
 		st.setBoolean(4, s.getIsAttend());
-		st.setString(5, s.getSchoolCd());
+		st.setString(5, s.getSchool().getCd());
 		st.setString(6, s.getNo());
 		int line = st.executeUpdate();
 
@@ -277,7 +279,7 @@ public class StudentDao extends Dao{
 	}
 
 	//学生削除
-	//4/23小柿：使用することがなさそう
+	//使用想定なし
 	public int deleteStudent(String no) throws Exception{
 		Connection con = getConnection();
 

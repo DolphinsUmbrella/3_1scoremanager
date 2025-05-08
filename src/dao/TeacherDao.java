@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.School;
 import bean.Teacher;
 
 public class TeacherDao extends Dao{
@@ -22,7 +23,14 @@ public class TeacherDao extends Dao{
 			t.setId(rs.getString("id"));
 			t.setPassword(rs.getString("password"));
 			t.setName(rs.getString("name"));
-			t.setSchoolCd(rs.getString("school_cd"));
+
+			School school = new School();
+			school.setCd(rs.getString("school_cd"));
+			t.setSchool(school);
+			School sch = new School();
+			sch.setCd(rs.getString("school_cd"));
+			t.setSchool(sch);
+
 		}
 		st.close();
 		con.close();
@@ -36,7 +44,7 @@ public class TeacherDao extends Dao{
 			Connection con = getConnection();
 
 			PreparedStatement st = con.prepareStatement(
-				"select * from teacher where id = ? and password=?");
+				"select * from teacher where id = ? and password = ?");
 			st.setString(1, id);
 			st.setString(2, password);
 			ResultSet rs = st.executeQuery();
@@ -46,7 +54,9 @@ public class TeacherDao extends Dao{
 				t.setId(rs.getString("id"));
 				t.setPassword(rs.getString("password"));
 				t.setName(rs.getString("name"));
-				t.setSchoolCd(rs.getString("school_cd"));
+				School school = new School();
+				school.setCd(rs.getString("school_cd"));
+				t.setSchool(school);
 			}
 			st.close();
 			con.close();
@@ -65,7 +75,7 @@ public class TeacherDao extends Dao{
 		st.setString(1, t.getId());
 		st.setString(2, t.getPassword());
 		st.setString(3, t.getName());
-		st.setString(4, t.getSchool());
+		st.setString(4, t.getSchool().getCd());
 		int line = st.executeUpdate();
 
 		st.close();
@@ -75,6 +85,7 @@ public class TeacherDao extends Dao{
 	}
 
 	//教員情報の更新
+	//使用想定なし
 	public int updateTeacher(Teacher t) throws Exception{
 		Connection con = getConnection();
 
@@ -83,7 +94,7 @@ public class TeacherDao extends Dao{
 			"where id = ?");
 		st.setString(1, t.getPassword());
 		st.setString(2, t.getName());
-		st.setString(3, t.getSchool());
+		st.setString(3, t.getSchool().getCd()); // Teacherオブジェクトから School オブジェクト経由で学校コードを取得
 		st.setString(4, t.getId());
 		int line = st.executeUpdate();
 
@@ -94,6 +105,7 @@ public class TeacherDao extends Dao{
 	}
 
 	//教員削除
+	//使用想定なし
 	public int deleteTeacher(String id) throws Exception{
 		Connection con = getConnection();
 
