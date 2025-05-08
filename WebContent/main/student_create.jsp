@@ -13,6 +13,9 @@
 		</div>
 
 		<div>
+		<p>データを更新する学生を選択してください</p>
+			<select name="count">
+			<option value="1">----------------</option>
 			<p>ここにいろいろ
 		</div>
 

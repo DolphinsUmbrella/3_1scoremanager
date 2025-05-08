@@ -12,6 +12,10 @@
 		</div>
 
 		<div id = "menu">
+			<p>氏名</p>
+<form action="Product.action" method="post">
+  <input type="text" name="keyword">
+</form>
 			<p>ここにいろいろ
 		</div>
 

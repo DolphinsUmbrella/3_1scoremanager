@@ -8,11 +8,10 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">成績参照</h2>
-
-		<div id = "menu">
-
+		<div class="header">
+			<h2>成績参照</h2>
 		</div>
+
 
 		<a href = "TestListSubjectExecute.action">科目別検索</a>
 		<a href = "TestListStudentExecute.action">学生別検索</a>

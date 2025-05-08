@@ -11,12 +11,14 @@
 
 	<body>
 		<header>
-			<div>
-				<h2>得点管理システム</h2>
-			</div>
+			<h2>得点管理システム</h2>
 
-			<c:if test="${user != null}">
-				<small>${ user.name }様</small>
-				<small><a href = "Logout.action">ログアウト</a></small>
-			</c:if>
+
+			<div class="header-right">
+				<c:if test="${user != null}">
+					${ user.name }様
+           			<a href = "Logout.action">ログアウト</a>
+       			</c:if>
+   			</div>
+
 		</header>
