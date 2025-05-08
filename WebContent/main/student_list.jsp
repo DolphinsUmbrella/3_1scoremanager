@@ -34,6 +34,31 @@
 						</select>
 					</span>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+				<div class = "filter-select">
+					<%-- クラス --%>
+					<p>クラス</p>
+					<select name = "classNum">
+						<option value = "000" selected>--------</option>
+						<c:forEach var="c" items="${ cList }">
+							<option value = "${ c }">${ c }</option>
+						</c:forEach>
+					</select>
+				</div>
+=======
+			<%-- 入学年度 --%>
+			<%-- 次の年度から10年間 --%>
+			<p>
+			入学年度
+			<select name = "entYear">
+				<option value = "0" selected>--------</option>
+				<c:forEach var="y" items="${ year }">
+					<option value = "${ y }">${ y }</option>
+				</c:forEach>
+			</select>
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
+=======
 					<span class="grid-item input-classnum">
 						<%-- クラスのセレクトボックス --%>
 						<select name = "classNum">
@@ -43,6 +68,7 @@
 							</c:forEach>
 						</select>
 					</span>
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 
 					<%-- 在学中チェックボックスと非表示フィールド --%>
 					<span class="grid-item input-isattend">
