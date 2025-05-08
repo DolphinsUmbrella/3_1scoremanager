@@ -20,9 +20,6 @@ public class SubjectCreateAction extends Action{
 			return "null";
 		}
 
-		SubjectDao SubDao = new SubjectDao();
-
-
 		return "subject_create.jsp";
 	}
 }

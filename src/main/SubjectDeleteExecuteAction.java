@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Subject;
 import bean.Teacher;
+import dao.SubjectDao;
 import tool.Action;
 
 public class SubjectDeleteExecuteAction extends Action{
@@ -20,6 +22,21 @@ public class SubjectDeleteExecuteAction extends Action{
 			return "null";
 		}
 
-		return "subject_delete_done.jsp";
+		String subjectCd = request.getParameter("cd");
+
+		Subject sub = new Subject();
+		sub.setCd(subjectCd);
+		sub.setSchool(user.getSchool());
+
+		SubjectDao subDao = new SubjectDao();
+		boolean result = subDao.delete(sub);
+
+		if (result){
+			return "subject_delete_done.jsp";
+		}
+		else{
+			//削除に失敗している場合はエラーページへ　これは仮
+			return "subject_delete_done.jsp";
+		}
 	}
 }

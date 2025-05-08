@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Subject;
 import bean.Teacher;
+import dao.SubjectDao;
 import tool.Action;
 
 public class SubjectCreateExecuteAction extends Action{
@@ -20,6 +22,44 @@ public class SubjectCreateExecuteAction extends Action{
 			return "null";
 		}
 
-		return "subject_create_done.jsp";
+		String subjectCd = request.getParameter("cd");
+		String subjectName = request.getParameter("name");
+
+		Subject sub = new Subject();
+		sub.setCd(subjectCd);
+		sub.setName(subjectName);
+		sub.setSchool(user.getSchool());
+
+		SubjectDao subDao = new SubjectDao();
+
+		//入力値チェック
+		//科目コードが3文字でない場合は科目コード、科目名をセットし
+		//メッセージを入力する
+		if (subjectCd.length() != 3){
+			request.setAttribute("cd", subjectCd);
+			request.setAttribute("name", subjectName);
+			request.setAttribute("message", "科目コードは3文字で入力して下さい");
+			return "subject_create.jsp";
+		}
+
+		//科目コードが重複
+		if (Objects.nonNull(subDao.get(subjectCd, user.getSchool()))){
+			request.setAttribute("cd", subjectCd);
+			request.setAttribute("name", subjectName);
+			request.setAttribute("message", "科目コードが重複しています");
+			return "subject_create.jsp";
+		}
+
+		boolean result = subDao.save(sub);
+
+		if (result){
+			return "subject_create_done.jsp";
+		}
+		else{
+			//エラーページへの遷移がしたいです　これは仮
+			return "subject_create_done.jsp";
+		}
+
+
 	}
 }
