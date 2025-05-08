@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @charset "utf-8";
 
 /*-------------------------------------------------------------*/
@@ -61,944 +60,6 @@ footer {
 	color: #fff;
 	font-size: 0.9em;
 }
-
-
-body {
-	background: #FFAA76;
-	background: #ffffff;
-	margin: 0;
-	padding-top: 80px;
-	padding-bottom: 40px;
-	display: flex;
-	flex-direction: column;
-}
-
-
-/*-------------------------------------------------------------*/
-/* ナビゲーションメニューのデザイン */
-nav {
-	position: fixed;
-	top: 80px;
-	left: 10px;
-	width: 20%;
-	/* 幅を固定 */
-	margin: 20px 0;
-	word-spacing: -5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-nav ul {
-	margin: 0;
-	padding: 0;
-	display: block;
-}
-
-nav li {
-	background: white;
-	word-spacing: 0;
-	width: auto;
-	list-style: none;
-	margin: 0;
-	padding: 20px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	font-family: calibri light;
-	letter-spacing: 1px;
-	box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2);
-	cursor: pointer;
-	text-align: left;
-	white-space: nowrap;
-}
-
-nav li:hover {
-	box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.1);
-}
-
-nav li:active {
-	background: rgba(255, 170, 118, .5);
-}
-
-nav li span {
-	float: right;
-	font-weight: bold;
-	display: none;
-}
-
-nav li:hover span {
-	display: block;
-}
-
-nav li:focus {
-	outline: none;
-	background: white;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: none;
-}
-
-nav li:focus>div {
-	display: block;
-}
-
-nav li a {
-	display: block;
-	text-decoration: none;
-	color: inherit;
-	font-size: 1.0em;
-}
-
-nav li a::after {
-	content: "";
-	display: inline-block;
-	margin-left: 5px;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	font-weight: bold;
-}
-
-nav li:hover a::after {
-	content: "　←";
-	opacity: 1;
-}
-
-
-/*-------------------------------------------------------------*/
-/* メインコンテンツのデザインCSS */
-.main-content {
-	flex-grow: 1;
-	padding: 20px;
-	margin-left: calc(20% + 20px);
-	padding-top: 80px;
-	padding-bottom: calc(40px + 20px);
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column; /* ここはcolumnのまま */
-	justify-content: flex-start;
-
-	/*align-items: center;*/
-	background-color: red;
-}
-
-.main-content .header {
-	height: 60px;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	background-color: #c6e1ea;
-	position: fixed;
-	top: 100px;
-	left: calc(20% + 20px);
-	z-index: 100;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	padding: 0 20px;
-	box-sizing: border-box;
-}
-
-.main-content .header h2 {
-	text-align: left;
-	line-height: 60px;
-	margin: 0;
-}
-
-
-/* Remove the general top margin for non-header children */
-/* ヘッダー以外の直下の子要素に一律適用されていた上マージンを削除 */
-/* .main-content > *:not(.header) {
-	margin-top: 20px;
-} */
-
-/* 左寄せにするためのクラス */
-.align-left {
-	text-align: left !important;
-	/* !important で優先度を高める */
-	width: 100%;
-	/* 親要素の幅いっぱいに広げることで左寄せを効果的にする */
-	box-sizing: border-box;
-	/* paddingやborderを含めて幅を計算 */
-}
-
-/* テーブルのCSS */
-.main-content table {
-	width: 100%;
-	margin: 10px auto 0 auto; /* 上マージン10px、左右マージンautoで中央寄せ、下マージン0 */
-	border-collapse: collapse;
-	/* セルのボーダーを重ねて表示 */
-	/* 検索結果件数との間にマージンを追加 */
-	/* margin-top: 10px; */ /* 中央寄せのためにmarginプロパティに含めました */
-}
-
-.main-content th,
-.main-content td {
-	border-left: none;
-	/* 左側の縦線を削除 */
-	border-right: none;
-	/* 右側の縦線を削除 */
-	border-top: 1px solid #ccc;
-	/* 上側の横線 */
-	border-bottom: 1px solid #ccc;
-	/* 下側の横線 */
-	padding: 8px;
-	text-align: center;
-}
-
-/* ヘッダー部分の上側の線は不要な場合があるので削除 */
-.main-content th {
-	border-top: none;
-}
-
-/* テーブルの一番下の線を追加 */
-.main-content tr:last-child td {
-	border-bottom: 1px solid #ccc;
-}
-
-
-
-/*-------------------------------------------------------------*/
-/* 拡大画面の時の比率を調整 */
-@media screen and (min-width: 769px) {
-	.main-content {
-		/* ここからflex-direction: row; を削除しました */
-		justify-content: flex-start; /* 必要に応じて調整 */
-		align-items: flex-start; /* 必要に応じて調整 */
-		flex-wrap: nowrap; /* 必要に応じて調整 */
-	}
-
-	.button-group {
-		width: calc(30% - 40px);
-		margin-right: 15px;
-		/* グループ間の右マージンを少し狭める */
-		margin-bottom: 0;
-		padding: 25px;
-		/* グループ内の余白を広げる */
-	}
-
-	.main-button-container {
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: flex-start;
-		width: 100%;
-		padding: 0 40px;
-		/* 左右のパディングを少し狭める */
-	}
-
-	.grade-buttons-container {
-		flex-direction: row;
-		justify-content: center;
-		margin-bottom: 0;
-	}
-
-	.grade-buttons-container .btn-circle-border-simple {
-		margin-right: 30px;
-		/* ボタン間の右マージンを広げる */
-		margin-bottom: 0;
-		width: 140px;	/* ボタンの幅 */
-		height: 140px;	/* ボタンの高さ*/
-		line-height: 140px;	/* 行の高さ */
-		font-size: 1.1em;/* フォントサイズ */
-	}
-
-	.filter-group {
-		/* 拡大画面でのスタイル調整 */
-		width: calc(100% - 30px); /* 幅を指定 */
-	}
-
-    /* テーブルの幅を指定 */
-    .main-content table {
-        width: 100%;
-        margin: 10px auto 0 auto; /* 上マージン10px、左右マージンautoで中央寄せ、下マージン0 */
-
-    }
-     /* 検索結果件数divの幅を指定 */
-    .filter-group + div {
-        width: 100%;
-    }
-
-}
-
-/*-------------------------------------------------------------*/
-/* 縮小画面の時の比率を調整 */
-@media screen and (max-width: 768px) {
-	.main-content {
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.button-group {
-		margin-right: 0;
-		margin-bottom: 20px;
-		/* グループ間の下マージンを少し狭める */
-		align-items: center;
-		width: 90%;	/* 幅 */
-		padding: 25px;	/* グループ内の余白を広げる */
-
-	}
-
-	.grade-buttons-container {
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 25px;
-		/* ボタン間の下マージンを広げる */
-	}
-
-	.grade-buttons-container .btn-circle-border-simple {
-		margin-right: 0;
-		margin-bottom: 20px;	/* ボタン間の下マージン */
-		width: 140px;	/* ボタンの幅 */
-		height: 140px;	/* ボタンの高さ */
-		line-height: 140px;	/* 行の高さを調整 中央揃え */
-		font-size: 1.1em;	/* フォントサイズ */
-	}
-
-}
-
-/*エラーメッセージ(赤文字として表示)*/
-.main-content .error-message {
-	color: red;
-	margin-bottom: 10px;
-}
-
-
-.link-button {
-	background: none;
-	color: blue;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	text-decoration: underline;	/* 下線 */
-}
-
-.link-button:hover {
-	text-decoration: none;	/* ホバー時の下線削除 */
-}
-
-.link-button:focus {
-	outline: none;
-	text-decoration: none;	/* フォーカス時のデフォルトの枠線を削除 */
-}
-
-th,
-td {
-	text-align: center;
-}
-
-/* 学生管理の検索ボタンのグループ */
-
-.filter-group {
-	/* inline-block から block に変更 */
-	display: block;
-	padding: 15px;	/* 内側の余白 */
-	border: 1px solid #ccc;	/* 枠線（色や太さの調整可能） */
-
-	border-radius: 10px;	/* 角の丸み具合（数値が大きいほど丸くなる） */
-	background-color: #f9f9f9;	/* 背景色 */
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);	/* 影（必要に応じて） */
-
-	/* 固定ヘッダーの下に配置するための上マージンを追加 */
-	margin-top: calc(10px) ;/* 任意の間隔 */
-	width: calc(100% - 30px); /* パディングを考慮した幅 */
-	box-sizing: border-box;
-}
-
-.filter-group p {
-	margin-bottom: 0;	/* p要素の下マージンをリセット */
-}
-
-/* フィルターグループと検索結果件数の間にマージンを追加 */
-.filter-group + div { /* .filter-group の直後にある div 要素を選択 */
-    margin-top: 10px; /* 必要に応じて調整 */
-}
-
-/* ログイン画面のデザインCSS */
-.login-content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 80px - 60px);
-	/* background-color: #f0f0f0; */
-	width: 100%;
-}
-
-.login-content form {
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	text-align: center;
-}
-
-.login-content h1 {
-	margin-bottom: 20px;
-}
-
-.login-content input[type="text"],
-.login-content input[type="password"],
-.login-content input[type="submit"] {
-	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	width: 250px;
-	box-sizing: border-box;
-}
-
-.login-content .error-message {
-	color: red;
-	margin-bottom: 10px;
-}
-
-/* ボタンのデザイン */
-/*https://saruwakakun.com/html-css/reference/buttons*/
-
-.btn-circle-border-simple {
-	display: inline-block;
-	text-decoration: none;
-	width: 120px;
-	height: 120px;
-	line-height: 120px;
-	border-radius: 50%;
-	border: solid 2px;
-	text-align: center;
-	overflow: hidden;
-	font-weight: bold;
-	transition: .4s;
-}
-
-.btn-circle-border-simple:hover {
-	background: #b3e1ff;
-}
-
-/* 学生管理のボタン */
-.student-btn {
-	color: #28a745;
-	border-color: #28a745;
-}
-
-.student-btn:hover {
-	background: #c3e6cb;
-}
-
-/* 成績管理のボタン */
-.grade-btn {
-	color: #007bff;
-	border-color: #007bff;
-}
-
-.grade-btn:hover {
-	background: #b8daff;
-}
-
-/* 科目管理のボタン */
-.subject-btn {
-	color: #dc3545;
-	border-color: #dc3545;
-}
-
-.subject-btn:hover {
-	background: #f5c6cb;
-=======
-<<<<<<< HEAD
-@charset "utf-8";
-
-/*-------------------------------------------------------------*/
-/*ヘッダーの処理（共通）*/
-header {
-  display: flex;
-  width: 100%;
-  height: 80px;
-  background-color: #94c9c9;
-  align-items: center;
-  position: fixed; /*画面にヘッダー部分の固定化*/
-  top: 0;
-  left: 0;
-  z-index: 100;
-  padding: 0 20px; /* 上下のpaddingが抜けているようなので修正 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  justify-content: space-between; /* ← これが重要 */
-}
-
-header > h2 { /* タイトル要素を直接指定 */
-  padding-left: 10px;
-  font-size: 1.6em;
-  margin-right: auto; /* タイトルを左端に寄せる */
-}
-
-.header-right { /* 右側の要素をまとめる */
-  text-align: right; /* 必要に応じてテキストを右寄せ */
-  margin-right: 50px; /* ← 右側のスペースを追加 (値は調整可能) */
-}
-
-.header-right a {
-
-  margin-left: 10px; /* ログアウトへのリンクに左マージンを追加 */
-}
-
-
-/*-------------------------------------------------------------*/
-/*フッターの処理（共通）*/
-footer {
-  width: 100%;
-  height: 40px;
-  text-align: center;
-  padding: 10px 0;
-  background-color: #c0c0c0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.footer-text {
-  color: #fff;
-  font-size: 0.9em;
-}
-
-
-body {
-  background: #FFAA76;
-  background: #ffffff;
-  margin: 0;
-  padding-top: 80px;
-  padding-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-
-/*-------------------------------------------------------------*/
-/* ナビゲーションメニューのデザイン */
-nav {
-  position: fixed;
-  top: 80px;
-  left: 10px;
-  width: 20%; /* 幅を固定 */
-  margin: 20px 0;
-  word-spacing: -5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-
-nav li {
-  background: white;
-  word-spacing: 0;
-  width: auto;
-  list-style: none;
-  margin: 0;
-  padding: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-family: calibri light;
-  letter-spacing: 1px;
-  box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  text-align: left;
-  white-space: nowrap;
-}
-
-nav li:hover {
-  box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.1);
-}
-
-nav li:active {
-  background: rgba(255, 170, 118, .5);
-}
-
-nav li span {
-  float: right;
-  font-weight: bold;
-  display: none;
-}
-
-nav li:hover span {
-  display: block;
-}
-
-nav li:focus {
-  outline: none;
-  background: white;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: none;
-}
-
-nav li:focus > div {
-  display: block;
-}
-
-nav li a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.0em;
-}
-
-nav li a::after {
-  content: "";
-  display: inline-block;
-  margin-left: 5px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  font-weight: bold;
-}
-
-nav li:hover a::after {
-  content: "　←";
-  opacity: 1;
-}
-
-
-/*-------------------------------------------------------------*/
-/* メインコンテンツのデザインCSS */
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-  margin-left: calc(20% + 20px);
-  padding-top: 80px;
-  padding-bottom: calc(40px + 20px);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  /*background-color: red;*/
-}
-
-.main-content .header {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background-color: #c6e1ea;
-  position: fixed;
-  top: 100px;
-  left: calc(20% + 20px);
-  z-index: 100;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.main-content .header h2 {
-  text-align: left;
-  line-height: 60px;
-  margin: 0;
-}
-
-.main-content > *:not(.header) {
-  margin-top: 20px; /* ヘッダーとの間隔を少し狭める */
-}
-
-/* ボタンのグループ */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px; /* グループ間の下マージンを少し狭める */
-  padding: 25px; /* グループ内の余白を広げる */
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  width: 80%;
-  box-sizing: border-box;
-}
-
-/* 真ん中のグループ（成績管理）のサイズ調整 */
-.button-group:nth-child(3) { /* 上から3番目のグループを指定 */
-  width: 90%; /* 少し幅を広げる */
-}
-
-.button-group h3 {
-  margin-bottom: 25px; /* タイトルとボタンの間隔を広げる */
-  text-align: center;
-}
-
-/* 学生管理、成績管理、科目管理のボタンコンテナ */
-.main-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 20px; /* 他の要素との間隔を少し狭める */
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-/* 成績管理のボタンを横並びにするコンテナ */
-.grade-buttons-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px; /* ボタン間の下マージン（縦並び時）を広げる */
-}
-
-.grade-buttons-container .btn-circle-border-simple {
-  margin-right: 25px; /* ボタン間の右マージン（横並び時）を広げる */
-  margin-bottom: 15px; /* ボタン間の下マージン（縦並び時）を広げる */
-  width: 140px; /* ボタンの幅を少し大きく */
-  height: 140px; /* ボタンの高さを少し大きく */
-  line-height: 140px; /* 行の高さを調整して中央揃え */
-  font-size: 1.1em; /* フォントサイズを少し大きく */
-}
-
-/* 拡大画面の時の比率を調整 */
-@media screen and (min-width: 769px) {
-  .main-content {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-  }
-
-  .button-group {
-    width: calc(30% - 40px);
-    margin-right: 15px; /* グループ間の右マージンを少し狭める */
-    margin-bottom: 0;
-    padding: 25px; /* グループ内の余白を広げる */
-  }
-
-  /* 真ん中のグループ（成績管理）のサイズ調整 */
-  .button-group:nth-child(3) { /* 上から3番目のグループを指定 */
-    width: calc(35% - 30px); /* 少し幅を広げる */
-  }
-
-  .main-button-container {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    width: 100%;
-    padding: 0 40px; /* 左右のパディングを少し狭める */
-  }
-
-  .grade-buttons-container {
-    flex-direction: row;
-    justify-content: center;
-    margin-bottom: 0;
-  }
-
-  .grade-buttons-container .btn-circle-border-simple {
-    margin-right: 30px; /* ボタン間の右マージンを広げる */
-    margin-bottom: 0;
-    width: 140px; /* ボタンの幅を少し大きく */
-    height: 140px; /* ボタンの高さを少し大きく */
-    line-height: 140px; /* 行の高さを調整して中央揃え */
-    font-size: 1.1em; /* フォントサイズを少し大きく */
-  }
-}
-
-/* 縮小画面の時の比率を調整 */
-@media screen and (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .button-group {
-    margin-right: 0;
-    margin-bottom: 20px; /* グループ間の下マージンを少し狭める */
-    align-items: center;
-    width: 90%; /* 少し幅を広げる */
-    padding: 25px; /* グループ内の余白を広げる */
-  }
-
-  .grade-buttons-container {
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px; /* ボタン間の下マージンを広げる */
-  }
-
-  .grade-buttons-container .btn-circle-border-simple {
-    margin-right: 0;
-    margin-bottom: 20px; /* ボタン間の下マージンを広げる */
-    width: 140px; /* ボタンの幅を少し大きく */
-    height: 140px; /* ボタンの高さを少し大きく */
-    line-height: 140px; /* 行の高さを調整して中央揃え */
-    font-size: 1.1em; /* フォントサイズを少し大きく */
-  }
-}
-
-/*エラーメッセージ(赤文字として表示)*/
-.main-content .error-message {
-  color: red;
-  margin-bottom: 10px;
-}
-
-
-.link-button {
-  background: none;
-  color: blue; /* リンクのテキスト色 */
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  text-decoration: underline; /* 下線 */
-}
-
-.link-button:hover {
-  text-decoration: none; /* ホバー時の下線削除 */
-}
-
-.link-button:focus {
-  outline: none; /* フォーカス時のデフォルトの枠線を削除 */
-  /* 必要であれば、独自のフォーカススタイルを追加 */
-  text-decoration: none;
-}
-
-th, td {
-  text-align: center;
-}
-
-/* ログイン画面のデザインCSS */
-.login-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px - 60px);
-  /* background-color: #f0f0f0; */
-  width: 100%;
-}
-
-.login-content form {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.login-content h1 {
-  margin-bottom: 20px;
-}
-
-.login-content input[type="text"],
-.login-content input[type="password"],
-.login-content input[type="submit"] {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 250px;
-  box-sizing: border-box;
-}
-
-.login-content .error-message {
-  color: red;
-  margin-bottom: 10px;
-}
-
-/* ボタンのデザイン */
-/*https://saruwakakun.com/html-css/reference/buttons*/
-
-.btn-circle-border-simple {
-  display: inline-block;
-  text-decoration: none;
-  width: 120px;
-  height: 120px;
-  line-height: 120px;
-  border-radius: 50%;
-  border: solid 2px;
-  text-align: center;
-  overflow: hidden;
-  font-weight: bold;
-  transition: .4s;
-}
-
-.btn-circle-border-simple:hover {
-  background: #b3e1ff;
-}
-
-/* 学生管理のボタン */
-.student-btn {
-  color: #28a745;
-  border-color: #28a745;
-}
-
-.student-btn:hover {
-  background: #c3e6cb;
-}
-
-.grade-btn {
-  color: #007bff;
-  border-color: #007bff;
-}
-
-.grade-btn:hover {
-  background: #b8daff;
-}
-
-.subject-btn {
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-.subject-btn:hover {
-  background: #f5c6cb;
-=======
-@charset "utf-8";
-
-/*-------------------------------------------------------------*/
-/*ヘッダーの処理（共通）*/
-header {
-	display: flex;
-	width: 100%;
-	height: 80px;
-	background-color: #94c9c9;
-	align-items: center;
-	position: fixed;
-	/*画面にヘッダー部分の固定化*/
-	top: 0;
-	left: 0;
-	z-index: 100;
-	padding: 0 20px;
-	/* 上下のpadding */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	justify-content: space-between;
-}
-
-header>h2 {
-	/* タイトル要素を直接指定 */
-	padding-left: 10px;
-	font-size: 1.6em;
-	margin-right: auto;
-	/* タイトルを左端に寄せる */
-}
-
-.header-right {
-	/* 右側の要素をまとめる */
-	text-align: right;
-	/* 必要に応じてテキストを右寄せ */
-	margin-right: 50px;
-	/* ← 右側のスペースを追加 (値は調整可能) */
-}
-
-.header-right a {
-	margin-left: 10px;
-	/* ログアウトへのリンクに左マージンを追加 */
-}
-
-
-/*-------------------------------------------------------------*/
-/*フッターの処理（共通）*/
-footer {
-	width: 100%;
-	height: 40px;
-	text-align: center;
-	padding: 10px 0;
-	background-color: #c0c0c0;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	z-index: 100;
-	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.footer-text {
-	color: #fff;
-	font-size: 0.9em;
-}
-
 
 body {
 	background: #FFAA76;
@@ -1148,13 +209,6 @@ nav li:hover a::after {
     /* margin-bottom: 0; */
 }
 
-
-/* Remove the general top margin for non-header children */
-/* ヘッダー以外の直下の子要素に一律適用されていた上マージンを削除 */
-/* .main-content > *:not(.header) {
-	margin-top: 20px;
-} */
-
 /* 左寄せにするためのクラス */
 .align-left {
 	text-align: left !important;
@@ -1299,12 +353,14 @@ nav li:hover a::after {
 
 }
 
+/*-------------------------------------------------------------*/
 /*エラーメッセージ(赤文字として表示)*/
 .main-content .error-message {
 	color: red;
 	margin-bottom: 10px;
 }
 
+/*-------------------------------------------------------------*/
 
 .link-button {
 	background: none;
@@ -1330,6 +386,7 @@ td {
 	text-align: center;
 }
 
+/*-------------------------------------------------------------*/
 /* 学生管理の検索ボタンのグループ */
 
 .filter-group {
@@ -1357,6 +414,7 @@ td {
     margin-top: 10px; /* 必要に応じて調整 */
 }
 
+/*-------------------------------------------------------------*/
 /* ログイン画面のデザインCSS */
 .login-content {
 	display: flex;
@@ -1396,6 +454,7 @@ td {
 	margin-bottom: 10px;
 }
 
+/*-------------------------------------------------------------*/
 /* ボタンのデザイン */
 /*https://saruwakakun.com/html-css/reference/buttons*/
 
@@ -1447,11 +506,11 @@ td {
 	background: #f5c6cb;
 }
 
-
+/*-------------------------------------------------------------*/
 /* 検索ボックスの位置調整 */
-/*.filter-controls-grid:*/
 
-.serach-box {
+/* 学生一覧での検索ボックス配置 */
+.student-serach-box {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr auto;
     grid-template-rows: auto auto;
@@ -1460,38 +519,65 @@ td {
     margin-bottom: 1em;
 }
 
-.serach-box .label-entyear {
+/* 科目一覧での検索ボックス配置 */
+.subject-serch-box{
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5em 1em;
+    align-items: start;
+    margin-bottom: 1em;
+}
+
+/* 行/列 */
+.student-serach-box .label-1 ,
+.subject-serach-box .label-1{
     grid-area: 1 / 1;
 }
-.serach-box .label-classnum {
+
+.student-serach-box .label-2 ,
+.subject-serach-box .label-2{
     grid-area: 1 / 2;
 }
-.serach-box .label-isattend {
+
+
+.student-serach-box .label-3 {
     grid-area: 1 / 3;
     text-align: center;
 }
+.subject-serach-box .label-3 {
+	grid-area: 1 / 3;
+}
 
-.serach-box .input-entyear {
+.student-serach-box .input-1 ,
+.subject-serach-box .input-1{
     grid-area: 2 / 1;
 }
-.serach-box .input-classnum {
+
+.student-serach-box .input-2 ,
+.subject-serach-box .input-2{
     grid-area: 2 / 2;
 }
-.serach-box .input-isattend {
+
+.student-serach-box .input-3 {
     grid-area: 2 / 3;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.serach-box .input-submit {
-    grid-area: 2 / 4;
-
+.subject-serach-box .input-3{
+	grid-area: 2 / 3;
 }
 
-.serach-box select,
-.serach-box input[type="submit"] {
+.student-serach-box .input-submit ,
+.subject-serach-box .input-submit{
+    grid-area: 2 / 4;
+}
+
+.student-serach-box select,
+.student-serach-box input[type="submit"],
+.subject-serach-box select,
+.subject-serach-box input[type="submit"] {
     width: 100%;
     box-sizing: border-box;
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 }

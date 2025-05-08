@@ -14,106 +14,84 @@
 	</div>
 	<div class="filter-group">
 
-			<form action = "StudentList.action">
-				<%-- フィルタリングコントロール全体を囲むGridコンテナ --%>
-				<div class="serach-box">
-					<%-- ラベルの項目 --%>
-					<span class="grid-item label-entyear">入学年度</span>
-					<span class="grid-item label-classnum">クラス</span>
-					<span class="grid-item label-isattend">在学中</span>
-					<%-- 「絞込み」ボタンのラベルは不要 --%>
+		<form action = "StudentList.action">
+			<%-- フィルタリングコントロール全体を囲むGridコンテナ --%>
+			<div class="student-serach-box">
+				<%-- ラベルの項目 --%>
+				<span class="grid-item label-1">入学年度</span>
+				<span class="grid-item label-2">クラス</span>
+				<span class="grid-item label-3">在学中</span>
 
-					<%-- 入力要素の項目 --%>
-					<span class="grid-item input-entyear">
-						<%-- 入学年度のセレクトボックス --%>
-						<select name = "entYear">
-							<option value = "0" selected>-------</option>
-							<c:forEach var="y" items="${ year }">
-								<option value = "${ y }">${ y }</option>
-							</c:forEach>
-						</select>
-					</span>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-				<div class = "filter-select">
-					<%-- クラス --%>
-					<p>クラス</p>
+				<%-- 入力要素の項目 --%>
+				<span class="grid-item input-1">
+					<%-- 入学年度のセレクトボックス --%>
+					<select name = "entYear">
+						<option value = "0" selected>-------</option>
+						<c:forEach var="y" items="${ year }">
+							<option value = "${ y }">${ y }</option>
+						</c:forEach>
+					</select>
+				</span>
+
+				<span class="grid-item input-2">
+					<%-- クラスのセレクトボックス --%>
 					<select name = "classNum">
-						<option value = "000" selected>--------</option>
+						<option value = "000" selected>-------</option>
 						<c:forEach var="c" items="${ cList }">
 							<option value = "${ c }">${ c }</option>
 						</c:forEach>
 					</select>
-				</div>
-=======
-			<%-- 入学年度 --%>
-			<%-- 次の年度から10年間 --%>
-			<p>
-			入学年度
-			<select name = "entYear">
-				<option value = "0" selected>--------</option>
-				<c:forEach var="y" items="${ year }">
-					<option value = "${ y }">${ y }</option>
-				</c:forEach>
-			</select>
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
-=======
-					<span class="grid-item input-classnum">
-						<%-- クラスのセレクトボックス --%>
-						<select name = "classNum">
-							<option value = "000" selected>-------</option>
-							<c:forEach var="c" items="${ cList }">
-								<option value = "${ c }">${ c }</option>
-							</c:forEach>
-						</select>
-					</span>
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
+				</span>
 
-					<%-- 在学中チェックボックスと非表示フィールド --%>
-					<span class="grid-item input-isattend">
-						<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
-						<input type = "hidden" value = "false" name = "isAttend">
-						<%-- ラベルテキストはGridの別のセルに配置 --%>
-					</span>
+				<%-- 在学中チェックボックスと非表示フィールド --%>
+				<span class="grid-item input-3">
+					<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
+					<input type = "hidden" value = "false" name = "isAttend">
+				</span>
 
-					<%-- 絞込みボタン --%>
-					<span class="grid-item input-submit">
-						<input type = "submit" value = "絞込み">
-					</span>
-				</div>
-			</form>
+				<%-- 絞込みボタン --%>
+				<span class="grid-item input-submit">
+					<input type = "submit" value = "絞込み">
+				</span>
+			</div>
+		</form>
+	</div>
 
-		</div>
-
-
-		<div>
-			<small>検索結果：${ sList.size() }件</small>
-		</div>
-		<table>
+	<div>
+		<small>検索結果：${ sList.size() }件</small>
+	</div>
+	<table>
+		<tr>
+			<th>入学年度</th>
+			<th>学生番号</th>
+			<th>氏名</th>
+			<th>クラス</th>
+			<th>在学中</th>
+		</tr>
+		<c:forEach var="s" items="${ sList }">
 			<tr>
-				<th>入学年度</th>
-				<th>学生番号</th>
-				<th>氏名</th>
-				<th>クラス</th>
-				<th>在学中</th>
+				<td>${ s.getEntYear() }</td>
+				<td>${ s.getNo() }</td>
+				<td>${ s.getName() }</td>
+				<td>${ s.getClassNum() }</td>
+				<c:choose>
+					<c:when test="${ s.getIsAttend() != true}">
+						<td>✕</td>
+					</c:when>
+					<c:otherwise>
+						<td>○</td>
+					</c:otherwise>
+				</c:choose>
+					<td>
+					<form action = "StudentUpdate.action" method = "post">
+						<input type = "submit" class = "link-button" name="" value = "変更">
+						<input type = "hidden" name = "no" value = "${ s.getNo() }">
+					</form>
+				</td>
 			</tr>
-			<c:forEach var="s" items="${ sList }">
-					<tr>
-						<td>${ s.getEntYear() }</td>
-						<td>${ s.getNo() }</td>
-						<td>${ s.getName() }</td>
-						<td>${ s.getClassNum() }</td>
-						<td>${ s.getIsAttend() }</td>
-						<td>
-						<form action = "StudentUpdate.action" method = "post">
-							<input type = "submit" class = "link-button" name="" value = "変更">
-							<input type = "hidden" name = "no" value = "${ s.getNo() }">
-						</form>
-						</td>
-					</tr>
-			</c:forEach>
-		</table>
+		</c:forEach>
+	</table>
 </div>
 
 
