@@ -177,24 +177,37 @@ nav li:hover a::after {
 }
 
 .main-content .header {
-	height: 60px;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	background-color: #c6e1ea;
-	position: fixed;
-	top: 100px;
-	left: calc(20% + 20px);
-	z-index: 100;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	padding: 0 20px;
-	box-sizing: border-box;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #c6e1ea;
+    /* width: 100%; /* この行を削除またはコメントアウト */
+    position: fixed;
+    top: 100px;
+    left: calc(20% + 20px); /* メインコンテンツの開始位置に合わせる */
+    right: 0; /* ビューポートの右端まで伸ばす */
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    box-sizing: border-box;
+    /* 必要に応じて flex-wrap: wrap; を追加検討（コンテンツが収まらない場合） */
 }
 
 .main-content .header h2 {
+
 	text-align: left;
 	line-height: 60px;
 	margin: 0;
+}
+
+.main-content .header a {
+    margin-left: auto; /* 左側のマージンを自動にして要素を右端に寄せる */
+    /* margin-right: 20px; /* この行を削除するか、コメントアウトしてみてください */
+    margin-right: 0; /* 明示的に右マージンを0にする */
+
+    /* 必要に応じて、新規追加リンクの他のスタイルもここに記述できます */
+    /* margin-top: 0; */
+    /* margin-bottom: 0; */
 }
 
 
@@ -494,4 +507,51 @@ td {
 
 .subject-btn:hover {
 	background: #f5c6cb;
+}
+
+
+/* 検索ボックスの位置調整 */
+/*.filter-controls-grid:*/
+
+.serach-box {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5em 1em;
+    align-items: start;
+    margin-bottom: 1em;
+}
+
+.serach-box .label-entyear {
+    grid-area: 1 / 1;
+}
+.serach-box .label-classnum {
+    grid-area: 1 / 2;
+}
+.serach-box .label-isattend {
+    grid-area: 1 / 3;
+    text-align: center;
+}
+
+.serach-box .input-entyear {
+    grid-area: 2 / 1;
+}
+.serach-box .input-classnum {
+    grid-area: 2 / 2;
+}
+.serach-box .input-isattend {
+    grid-area: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.serach-box .input-submit {
+    grid-area: 2 / 4;
+
+}
+
+.serach-box select,
+.serach-box input[type="submit"] {
+    width: 100%;
+    box-sizing: border-box;
 }
