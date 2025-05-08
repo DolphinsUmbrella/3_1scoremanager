@@ -11,22 +11,22 @@ import bean.ClassNum;
 public class ClassNumDao extends Dao{
 
 	//クラス取得
-	public ClassNum get(String classNum, String schoolCd) throws Exception{
+	public ClassNum get(String class_num, School school) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"select * from class_num "+
 			"where school_cd = ? "+
 			"and class_num = ?");
-		st.setString(1, schoolCd);
-		st.setString(2, classNum);
+		st.setString(1, school);
+		st.setString(2, class_num);
 
 		ResultSet rs = st.executeQuery();
 
 		ClassNum c = new ClassNum();
 		while (rs.next()){
 			c.setClass_num(rs.getString("class_num"));
-			c.setSchoolCd(rs.getString("school_cd"));
+			c.setSchool(rs.getString("school"));
 		}
 		st.close();
 		con.close();
@@ -35,7 +35,7 @@ public class ClassNumDao extends Dao{
 	}
 
 	//クラス絞込み
-	public List<String> filter(String school) throws Exception{
+	public List<String> filter(School school) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
@@ -61,8 +61,8 @@ public class ClassNumDao extends Dao{
 
 		PreparedStatement st = con.prepareStatement(
 			"insert into class_num values(?, ?)");
-		st.setString(1, classNum.getSchoolCd());
-		st.setString(2, classNum.getClassNum());
+		st.setString(1, classNum.getSchool());
+		st.setString(2, classNum.getClass_num());
 		int line = st.executeUpdate();
 
 		st.close();
@@ -84,8 +84,8 @@ public class ClassNumDao extends Dao{
 		PreparedStatement st = con.prepareStatement(
 			"update class_num set classNum = ? where school_cd = ? and class_num = ?");
 		st.setString(1, newClassNum);
-		st.setString(2, classNum.getSchoolCd());
-		st.setString(3, classNum.getClassNum());
+		st.setString(2, classNum.getSchool());
+		st.setString(3, classNum.getclass_num());
 		int line = st.executeUpdate();
 
 		st.close();
@@ -100,13 +100,13 @@ public class ClassNumDao extends Dao{
 	}
 
 	//クラス情報削除,使用想定なし
-	public int deleteClass(String schoolCd, String classNum) throws Exception{
+	public int deleteClass(School school, String class_num) throws Exception{
 		Connection con = getConnection();
 
 		PreparedStatement st = con.prepareStatement(
 			"delete from class_num where school_cd = ?, class_num = ?");
-		st.setString(1, schoolCd);
-		st.setString(2, classNum);
+		st.setString(1, school);
+		st.setString(2, class_num);
 		int line = st.executeUpdate();
 
 		st.close();
