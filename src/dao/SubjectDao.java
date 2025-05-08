@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.School;
 import bean.Subject;
@@ -27,12 +29,12 @@ public class SubjectDao extends Dao{
 		PreparedStatement st = con.prepareStatement(
 			"select * from subject "+
 			"where school_cd = ? "+
-			"and cd like ?");
+			"and cd = ?");
 
 		//上記SQL文の?部分を格納
 		//setString, setIntなどデータ型によって使い分けてください(実はsetBooleanとかもある)
 		st.setString(1, school.getCd());
-		st.setString(2, "%"+cd+"%");
+		st.setString(2, cd);
 
 		//SQLを実行し、ResultSet型の変数rsに実行結果を格納
 		ResultSet rs = st.executeQuery();
@@ -57,6 +59,33 @@ public class SubjectDao extends Dao{
 		//return時はデータ型に注意
 		//仕様書の返り値の型はListではなく  Subject  です
 		return sub;
+	}
+
+	public List<Subject> filter(School school) throws Exception{
+		List<Subject> list = new ArrayList<Subject>();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+			"select * from subject where school_cd = ?");
+		st.setString(1, school.getCd());
+
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()){
+			Subject sub = new Subject();
+			School sc = new School();
+			sc.setCd(rs.getString("school_cd"));
+			sub.setSchool(school);
+			sub.setCd(rs.getString("cd"));
+			sub.setName(rs.getString("name"));
+			list.add(sub);
+		}
+
+		st.close();
+		con.close();
+
+		return list;
 	}
 
 	//科目追加
