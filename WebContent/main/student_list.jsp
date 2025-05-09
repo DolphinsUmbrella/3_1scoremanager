@@ -29,7 +29,14 @@
 					<select name = "entYear">
 						<option value = "0" selected>-------</option>
 						<c:forEach var="y" items="${ year }">
-							<option value = "${ y }">${ y }</option>
+							<c:choose>
+								<c:when test="${ y == entYear}">
+									<option value = "${ y }" selected>${ y }</option>
+								</c:when>
+								<c:otherwise>
+									<option value = "${ y }">${ y }</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</span>
@@ -39,7 +46,14 @@
 					<select name = "classNum">
 						<option value = "000" selected>-------</option>
 						<c:forEach var="c" items="${ cList }">
-							<option value = "${ c }">${ c }</option>
+							<c:choose>
+								<c:when test="${ c == classNum}">
+									<option value = "${ c }" selected>${ c }</option>
+								</c:when>
+								<c:otherwise>
+									<option value = "${ c }">${ c }</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</span>
