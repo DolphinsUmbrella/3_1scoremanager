@@ -79,7 +79,6 @@ public class StudentCreateExecuteAction extends Action{
 
 
 
-
 		// 学生登録完了画面を表示
 
 		return "student_create_done.jsp";
