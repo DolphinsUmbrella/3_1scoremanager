@@ -30,7 +30,6 @@ public class SubjectListAction extends Action{
 
 		SubjectDao subDao = new SubjectDao();
 
-
 		List<Subject> subList = subDao.filter(user.getSchool());
 
 		request.setAttribute("subList", subList);
