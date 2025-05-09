@@ -301,7 +301,7 @@ nav li:hover a::after {
 
 	.filter-group {
 		/* 拡大画面でのスタイル調整 */
-		width: calc(100% - 30px); /* 幅を指定 */
+		width: calc(100% - 30px);  /*幅を指定 */
 	}
 
     /* テーブルの幅を指定 */
@@ -552,6 +552,7 @@ td {
 .subject-serach-box .label-3 {
 	grid-area: 1 / 4;
 }
+
 
 .student-serach-box .input-1 ,
 .subject-serach-box .input-submit{
