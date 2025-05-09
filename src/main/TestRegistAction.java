@@ -32,7 +32,7 @@ public class TestRegistAction extends Action{
 
 		//userの所属する学校の科目情報を取得
 		SubjectDao subDao = new SubjectDao();
-		Subject subList = subDao.get("", user.getSchool());
+		List<Subject> subList = subDao.filter(user.getSchool());
 
 		request.setAttribute("cList", cList);
 		request.setAttribute("subList", subList);
