@@ -295,7 +295,8 @@ nav li:hover a::after {
 
 	.filter-group {
 		/* 拡大画面でのスタイル調整 */
-		width: calc(100% - 30px);  /*幅を指定 */
+		width: calc(100% - 30px);
+		max-width: 800px; /* 例：最大幅を900pxに設定 */
 	}
 
     /* テーブルの幅を指定 */
@@ -510,7 +511,7 @@ td {
 .student-serach-box {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr 1fr;
     gap: 0.5em 1em;
     align-items: start;
     margin-bottom: 1em;
@@ -520,7 +521,7 @@ td {
 .test-input-serach-box {
 	display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr 1fr;
     gap: 0.5em 1em;
     margin-bottom: 1em;
 }
@@ -529,7 +530,7 @@ td {
 .subject-serach-box {
 	display: grid;
     grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr 1fr;
     gap: 0.5em 1em;
     /*align-items: start;*/
     margin-bottom: 1em;
@@ -554,15 +555,17 @@ td {
 }
 
 
-.student-serach-box .label-3,{
+.student-serach-box .label-3{
     grid-area: 1 / 3;
-    text-align: center;
+    justify-self: center; /* グリッドセル内で要素自体を水平方向中央寄せ */
+    align-self: center; /* グリッドセル内で要素自体を垂直方向中央寄せ */
 }
 
 
 .subject-serach-box .label-3,
 .test-input-serach-box .label-3{
 	grid-area: 1 / 3;
+
 }
 
 .subject-serach-box .label-4,
@@ -588,7 +591,7 @@ td {
 
 .student-serach-box .input-3 {
     grid-area: 2 / 3;
-    display: flex;
+	display: flex;
     justify-content: center;
     align-items: center;
 }
