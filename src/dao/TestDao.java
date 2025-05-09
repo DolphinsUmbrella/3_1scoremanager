@@ -172,4 +172,34 @@ public class TestDao extends Dao{
 
 		return list;
 	}
+
+	// 成績更新 (StudentUpdateExecuteAction.javaで利用)
+		public int updateTest(Test t) throws Exception {
+		    Connection con = null;
+		    PreparedStatement st = null;
+		    int line = 0;
+
+		    try {
+		        con = getConnection();
+
+		        // 正しいSQLクエリ：testテーブルの更新
+		        String sql = "UPDATE test SET subject_cd = ?, point = ?,no =? " +
+		                     "WHERE student_no = ?";
+		        st = con.prepareStatement(sql);
+
+		        // パラメータ設定
+		        st.setString(1, t.getSubject().getCd());      // 科目コード
+		        st.setInt(2, t.getPoint());                    // 点数
+		        st.setInt(3, t.getNo());                       // test回数
+		        st.setString(4, t.getStudent().getNo());        // 学生番号
+		        line = st.executeUpdate();
+		    } catch (Exception e) {
+		        throw new Exception("成績更新中にエラーが発生しました", e);
+		    } finally {
+		        if (st != null) st.close();
+		        if (con != null) con.close();
+		    }
+
+		    return line;
+		}
 }

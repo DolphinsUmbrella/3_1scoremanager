@@ -50,7 +50,7 @@
 
 
 				<span class="input-3">
-					<select name = "subject" selected>
+					<select name = "subject">
 						<option value = "000">----</option>
 						<option value = "101">python</option>
 						<option value = "102">java</option>
