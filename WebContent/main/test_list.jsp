@@ -18,14 +18,14 @@
 			<div class="subject-serach-box">
 
 			<span class="input-submit">
-				<input type = "submit" value = "科目別検索">
+				<input type = "submit" value = "検索">
 			</span>
+				<span class="label-1"><b>科目</b></span>
+				<span class="label-2">入学年度</span>
+				<span class="label-3">クラス</span>
+				<span class="label-4">科目</span>
 
-				<span class="label-1">入学年度</span>
-				<span class="label-2">クラス</span>
-				<span class="label-3">科目</span>
-
-			<span class="input-1">
+			<span class="input-2">
 				<select name = "ent_year">
 					<!-- <select name = "entYear"> -->
 					<option value = "0" selected>-------</option>
@@ -36,7 +36,7 @@
 			</span>
 
 
-			<span class="input-2">
+			<span class="input-3">
 				<select name = "class_num">
 					<!-- <select name = "classNum">? -->
 					<option value = "000" selected>-------</option>
@@ -47,8 +47,9 @@
 			</span>
 
 
-			<span class="input-3">
+			<span class="input-4">
 				<select name = "subject">
+					<option value = "000">----</option>
 					<option value = "101">python</option>
 					<option value = "102">java</option>
 					<option value = "103">js</option>
@@ -67,10 +68,12 @@
 
 			<div class="subject-serach-box">
 				<span class="input-submit">
-					<input type = "submit" value = "学生別検索">
+					<input type = "submit" value = "検索">
 				</span>
-				<span class="label-1">学生番号</span>
-				<span class="input-1">
+
+				<span class="label-1"><b>学生</b></span>
+				<span class="label-2">学生番号</span>
+				<span class="input-2">
 					<input type = "text" name = "no">
 				</span>
 			</div>
