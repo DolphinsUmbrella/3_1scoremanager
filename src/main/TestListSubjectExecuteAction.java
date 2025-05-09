@@ -55,6 +55,10 @@ public class TestListSubjectExecuteAction extends Action{
 		//科目名
 		request.setAttribute("subjectName", subject.getName());
 
+		session.setAttribute("entYear", entYear);
+		session.setAttribute("classNum", classNum);
+		session.setAttribute("subjectCd", subject.getCd());
+
 		return "test_list_subject.jsp";
 	}
 }
