@@ -15,7 +15,7 @@
 	<%-- 成績検索フォーム --%>
 	<div class="filter-group">
 
-		<form action = "" method = "post">
+		<form action = "TestRegist.action" method = "post">
 			<div class="test-input-serach-box">
 
 				<span class="input-submit">
@@ -70,9 +70,9 @@
 	</div>
 
 
-		<div>
+		<!-- <div>
 			<a href = "TestRegistExecute.action">登録して終了</a>
-		</div>
+		</div> -->
 
 	</div>
 
