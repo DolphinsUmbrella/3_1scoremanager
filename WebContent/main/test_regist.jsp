@@ -6,17 +6,17 @@
 	<%@include file = "../tool/sidebar.jsp" %>
 </div>
 
-	<div class = "main-content">
-		<%-- 見出し --%>
-		<div class = "header">
-			<h2>成績登録</h2>
-		</div>
+<div class = "main-content">
+	<%-- 見出し --%>
+	<div class = "header">
+		<h2>成績登録</h2>
+	</div>
 
-		<%-- 科目別検索フォーム --%>
-		<div class="filter-group">
+	<%-- 科目別検索フォーム --%>
+	<div class="filter-group">
 
-			<form action = "TestListSubjectExecute.action" method = "post">
-				<div class="test-input-serach-box">
+		<form action = "" method = "post">
+			<div class="test-input-serach-box">
 
 				<span class="input-submit">
 					<input type = "submit" value = "検索">
@@ -67,9 +67,9 @@
 					</select>
 				</span>
 
-				</div>
-			</form>
-		</div>
+			</div>
+		</form>
+	</div>
 
 
 		<div>
