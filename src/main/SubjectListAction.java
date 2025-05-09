@@ -1,7 +1,5 @@
 package main;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,12 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.ClassNum;
-import bean.Student;
+import bean.Subject;
 import bean.Teacher;
-import bean.School;
-import dao.ClassNumDao;
-import dao.StudentDao;
+import dao.SubjectDao;
 import tool.Action;
 
 public class SubjectListAction extends Action{
