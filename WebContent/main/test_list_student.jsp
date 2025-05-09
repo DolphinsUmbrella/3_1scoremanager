@@ -9,15 +9,7 @@
 	<div class = "main-content">
 		<%-- 見出し --%>
 		<div class = "header">
-			<h2>成績参照</h2>
-		</div>
-
-		<div>
-			<small>学生別検索結果</small>
-		</div>
-
-		<div id = "menu">
-
+			<h2>成績参照（学生別検索結果）</h2>
 		</div>
 
 		<div>

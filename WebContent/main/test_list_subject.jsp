@@ -9,10 +9,9 @@
 	<div class = "main-content">
 		<%-- 見出し --%>
 		<div class="header">
-			<h2>成績参照</h2>
+			<h2>成績参照（科目別検索結果）</h2>
 		</div>
-
-		<p>科目別検索結果</p>
+		<p></p>
 		<small>科目：${ subjectName }</small>
 
 		<table>
@@ -49,6 +48,8 @@
 					</tr>
 			</c:forEach>
 		</table>
+
+
 
 	</div>
 
