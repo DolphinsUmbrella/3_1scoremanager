@@ -11,11 +11,15 @@
 	<div class="header">
 		<h2>成績参照</h2>
 	</div>
-
+	<%-- 科目別検索フォーム --%>
 	<div class="filter-group">
 
 		<form action = "TestListSubjectExecute.action" method = "post">
 			<div class="subject-serach-box">
+
+			<span class="input-submit">
+				<input type = "submit" value = "科目別検索">
+			</span>
 
 				<span class="label-1">入学年度</span>
 				<span class="label-2">クラス</span>
@@ -51,26 +55,26 @@
 				</select>
 			</span>
 
-			<span class="input-submit">
-				<input type = "submit" value = "科目別検索">
-			</span>
+
 			</div>
 
 		</form>
 	</div>
+
+	<%-- 学生別検索フォーム --%>
 	<div class="filter-group">
-	<div class="subject-serach-box">
 		<form action = "TestListStudentExecute.action" method = "post">
 
-			<span class="label-1">学生番号</span>
-			<span class="input-1">
-				<input type = "text" name = "no">
-			</span>
-			<span class="input-submit">
-				<input type = "submit" value = "学生別検索">
-			</span>
+			<div class="subject-serach-box">
+				<span class="input-submit">
+					<input type = "submit" value = "学生別検索">
+				</span>
+				<span class="label-1">学生番号</span>
+				<span class="input-1">
+					<input type = "text" name = "no">
+				</span>
+			</div>
 		</form>
-	</div>
 	</div>
 </div>
 
