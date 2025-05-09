@@ -24,6 +24,8 @@ public class TestRegistAction extends Action{
 			return "null";
 		}
 
+
+
 		//フィルター処理もやる
 
 		//userの所属する学校のクラス情報を取得
