@@ -46,6 +46,7 @@ public class TestListStudentExecuteAction extends Action{
 
 		request.setAttribute("tstuList", list);
 		request.setAttribute("student", stu);
+		request.setAttribute("resultPath", "test_list_student.jsp");
 
 		return "test_list_student.jsp";
 	}
