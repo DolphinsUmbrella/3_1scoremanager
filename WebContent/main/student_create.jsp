@@ -12,17 +12,8 @@
 			<h2>学生情報追加</h2>
 		</div>
 
-<<<<<<< HEAD
-		<div>
-		<p>データを更新する学生を選択してください</p>
-			<select name="count">
-			<option value="1">----------------</option>
-			<p>ここにいろいろ
-		</div>
-=======
 		<div class="align-left">
 	<form action = "StudentCreateExecute.action">
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 
 		<p>入学年度：<input type = "text" name = "entYear" placeholder="入学年度を入力"></p>
 

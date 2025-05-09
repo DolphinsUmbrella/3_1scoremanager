@@ -1,6 +1,5 @@
 package main;
 
-import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,16 +26,13 @@ public class TestRegistAction extends Action{
 
 		//フィルター処理もやる
 
-		//userの所属する学校取得
-		String school = user.getSchool().getCd();
-
 		//userの所属する学校のクラス情報を取得
 		ClassNumDao cDao = new ClassNumDao();
-		List<ClassNum> cList = cDao.get("", school);
+		ClassNum cList = cDao.get("", user.getSchool());
 
 		//userの所属する学校の科目情報を取得
 		SubjectDao subDao = new SubjectDao();
-		List<Subject> subList = subDao.get("", school);
+		Subject subList = subDao.get("", user.getSchool());
 
 		request.setAttribute("cList", cList);
 		request.setAttribute("subList", subList);

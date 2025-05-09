@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -26,8 +25,7 @@ public class TestListAction extends Action{
 			return "null";
 		}
 
-		String school = user.getSchool().getCd();
-		StudentDao sDao = new StudentDao();
+		School school = user.getSchool();
 
 		ClassNumDao cDao = new ClassNumDao();
 		SubjectDao subDao = new SubjectDao();
@@ -35,9 +33,10 @@ public class TestListAction extends Action{
 		List<String> cList = cDao.filter(school);
 
 		//5/1小柿：動作確認のため一時的にコメントアウトしてます、こっちのが正しいです
-		//List<Subject> subList = subDao.filter(school);
+		List<Subject> subList = subDao.filter(school);
 
 		//ここから入学年度選択用までの間のやつは後で消してください
+		/*
 		List<Subject> subList = new ArrayList<>();
 		Subject s1 = new Subject();
 		s1.setCd("101");
@@ -48,6 +47,7 @@ public class TestListAction extends Action{
 		subList.add(s1);
 		subList.add(s2);
 		subList.add(s3);
+		*/
 
 
 		request.setAttribute("cList", cList);

@@ -6,24 +6,10 @@
 	<%@include file = "../tool/sidebar.jsp" %>
 </div>
 
-<<<<<<< HEAD
-		<div id = "menu">
-			<p>氏名</p>
-<form action="Product.action" method="post">
-  <input type="text" name="keyword">
-</form>
-			<p>ここにいろいろ
-		</div>
-
-		<a href = "StudentUpdateExecute.action">変更</a>
-		<a href = "StudentList.action">戻る</a>
-
-=======
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class="header">
 		<h2>学生情報変更</h2>
->>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 	</div>
 	<div class="align-left">
 	<form action = "StudentUpdateExecute.action">
