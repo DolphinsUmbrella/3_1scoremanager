@@ -24,9 +24,6 @@ public class StudentCreateExecuteAction extends Action{
 
 			///学生登録完了画面の処理
 
-			StudentDao sDao = new StudentDao();
-
-
 			//値の格納
 
 			//入学年度
@@ -41,25 +38,43 @@ public class StudentCreateExecuteAction extends Action{
 			//クラス
 			String classNum = request.getParameter("classNum");
 
-			//エラーメッセージを表示(例外処理)
-
-			if(entYearStr.equals("none")){
-				request.setAttribute("入学年度を選択してください。");
-			}
-
-
-
 
 			//登録処理
-			Student student = new Student();
-			student.setNo(no);
-			student.setName(name);
-			student.setEntYear(Integer.parseInt(entYearStr));
+			Student s = new Student();
+			s.setNo(no);
+			s.setName(name);
+			s.setEntYear(Integer.parseInt(entYearStr));
+			s.setClassNum(classNum);
+			s.setSchool(user.getSchool());
 
-			student.setClassNum(classNum);
-			student.setSchool(user.getSchool());
+			StudentDao sDao = new StudentDao(); //学生Dao
 
-			boolean result = sDao.save(student);//学生登録
+			//入力値をチェック エラーメッセージを表示
+
+			//入力年度が選択されてない場合
+			if(entYearStr.equals("none")){
+				request.setAttribute("entYear", entYearStr);
+				request.setAttribute("message","入学年度を選択してください。");
+
+				return "student_create_done.jsp";
+			}
+
+			//入力された学生番号が重複してる場合
+			if(Objects.nonNull(sDao.get(no))){
+				request.setAttribute("no",no);
+				request.setAttribute("name", name);
+				request.setAttribute("classNum", classNum);
+				request.setAttribute("message", "学生番号が重複しています。");
+
+				return "student_create_done.jsp";
+
+			}
+
+			boolean result = sDao.save(s);//学生登録
+
+
+
+
 
 
 
