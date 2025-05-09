@@ -75,12 +75,12 @@ public class StudentListAction extends Action{
 		List<String> cList = sDao.selectClass_Num();
 
 
-		request.setAttribute("sList", sList);
 		session.setAttribute("sList", sList);
-		request.setAttribute("cList", cList);
 		session.setAttribute("cList", cList);
-		request.setAttribute("year", year);
 		session.setAttribute("year", year);
+
+		request.setAttribute("entYear", entYearStr);
+		request.setAttribute("classNum", classNum);
 
 		return "student_list.jsp";
 	}
