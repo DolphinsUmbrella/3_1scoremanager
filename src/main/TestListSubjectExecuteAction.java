@@ -55,8 +55,6 @@ public class TestListSubjectExecuteAction extends Action{
 		//科目名
 		request.setAttribute("subectName", subject.getName());
 
-		request.setAttribute("resultPath", "test_list_subject.jsp");
-
 		return "test_list_subject.jsp";
 	}
 }
