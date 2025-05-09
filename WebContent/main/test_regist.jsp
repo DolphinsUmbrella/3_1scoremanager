@@ -12,7 +12,7 @@
 		<h2>成績登録</h2>
 	</div>
 
-	<%-- 科目別検索フォーム --%>
+	<%-- 成績検索フォーム --%>
 	<div class="filter-group">
 
 		<form action = "" method = "post">
