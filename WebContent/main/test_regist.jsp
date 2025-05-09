@@ -48,7 +48,6 @@
 					</select>
 				</span>
 
-
 				<span class="input-3">
 					<select name = "subject">
 						<option value = "000">----</option>
@@ -63,7 +62,6 @@
 						<option value = "0">----</option>
 						<option value = "1">1</option>
 						<option value = "2">2</option>
-
 					</select>
 				</span>
 

@@ -108,7 +108,4 @@
 	</table>
 </div>
 
-
-
-
 <%@include file = "../tool/footer.jsp" %>
