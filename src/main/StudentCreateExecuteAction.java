@@ -104,6 +104,13 @@ public class StudentCreateExecuteAction extends Action{
 			return "student_create_done.jsp";
 		}else{
 			// 学生登録完了画面を表示
+
+			//5/12追記
+			//形は正しいですが、遷移先がこれならエラーメッセージなりが必要です。
+			//今の状態だと何も変化がなく、きちんと追加がされたかは一覧を見ない限り判断ができません
+
+			//とはいえエラーページがまだなので、完成次第修正しましょう
+
 			return "student_create_done.jsp";
 		}
 

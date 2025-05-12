@@ -13,25 +13,28 @@ import bean.Test;
 
 public class TestDao extends Dao{
 
-	public Test get(Test test) throws Exception{
+	public Test get(Student student, School school, Subject subject,int no) throws Exception{
 
 		Connection con = getConnection();
 
 		//STUDENT_NO  	SUBJECT_CD  	SCHOOL_CD  	NO  	POINT  	CLASS_NUM
 		PreparedStatement st = con.prepareStatement(
-			"select * from test "+
-			"where student_no = ? "+
-			"and subject_cd = ? "+
-			"and school_cd = ? "+
-			"and no = ?");
-		st.setString(1, test.getStudent().getNo());
-		st.setString(2, test.getSubject().getCd());
-		st.setString(3, test.getSchool().getCd());
-		st.setInt(4, test.getNo());
+			"select s.ent_year,t.class_num,t.subject_cd,t.no from test as t"+
+			"inner join student as s"+
+			"on s.no=t.student_no"+
+			"where ent_year = ?"+
+			"and t.class_num = ?"+
+			"and t.subject_cd = ?"+
+			"and t.school_cd = '?'"+
+			"and t.no = 1");
+		st.setInt   (1, student.getEntYear());
+		st.setString(2, student.getClassNum());
+		st.setString(3, subject.getCd());
+		st.setString(4, school.getCd());
+		st.setInt   (5, no);
 		ResultSet rs = st.executeQuery();
 
-		//楽したい！
-		List<Test> tList = postFilter(rs, test.getSchool());
+		List<Test> tList = postFilter(rs, school);
 
 		st.close();
 		con.close();
@@ -45,23 +48,17 @@ public class TestDao extends Dao{
 
 		while (rs.next()){
 			Test t = new Test();
-
-			//こんなんしないといかんの？？
 			Student stu = new Student();
-			stu.setNo(rs.getString("student_no"));
-			t.setStudent(stu);
-
 			Subject sub = new Subject();
+			School sch = new School();
+
+			stu.setEntYear(rs.getInt("ent_year"));
+			t.setClassNum(rs.getString("class_num"));
 			sub.setCd(rs.getString("subject_cd"));
 			t.setSubject(sub);
-
-			School sch = new School();
+			t.setNo(rs.getInt("num"));
 			sch.setCd(rs.getString("school_cd"));
 			t.setSchool(sch);
-
-			t.setNo(rs.getInt("no"));
-			t.setPoint(rs.getInt("point"));
-			t.setClassNum(rs.getString("class_num"));
 			list.add(t);
 		}
 
