@@ -1,22 +1,28 @@
 <%@page contentType = "text/html; charset=UTF-8" %>
 <%@include file = "../tool/header.jsp" %>
 <style>
+
+/* このページ固有のmain-contentスタイル（デフォルト画面幅用） */
+.menu-main-content {
+	align-items: center; /* 縦積みの子要素（ボタングループ）を水平方向の中央に配置 */
+}
+
 /* 画面幅が769px以上のときに適用するスタイル */
 @media screen and (min-width: 769px) {
+
     /* main-content内の直接の子要素（.button-group）を横並びに配置 */
     .main-content {
-        display: flex; /* フレックスコンテナにする */
-        flex-direction: row; /* 子要素を横方向に並べる */
-        gap: 20px; /* 子要素間の隙間（例: 15px） */
+        display: flex;
+
+        flex-direction: row;
+        gap: 15px;
     }
+
 
     /* 各ボタンのグループ (.button-group) のスタイル */
     .button-group {
         flex: 1; /* 利用可能なスペースを均等に分配し、幅を統一する */
-        min-width: 0; /* Flexアイテムの縮小時の問題を回避 */
-        /* 縦並び時の下マージンは不要になるためリセット（外部CSSで定義されている場合） */
-        /* margin-bottom: 0; */
-        /* グループ内の要素を中央揃え（必要に応じて） */
+        min-width: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -26,7 +32,7 @@
     .button-group > div {
         display: flex; /* フレックスコンテナにする */
         flex-direction: row; /* ボタンを横方向に並べる */
-        gap: 20px; /* ボタン間の隙間（例: 20px） */
+        gap: 15px; /* ボタン間の隙間 */
         align-items: center; /* 縦方向の中央揃え */
     }
 }
@@ -94,7 +100,7 @@
   <%@include file = "../tool/sidebar.jsp" %>
 </div>
 
-<div class="main-content">
+<div class="main-content menu-main-content">
 	<div class="header">
 		<h2>メニュー</h2>
 	</div>
@@ -109,8 +115,9 @@
 		<h3>成績管理</h3>
 		<%-- 成績管理のボタンを横並びにするためのdiv --%>
 		<div style="display: flex; align-items: center;">
-		<a href="TestRegist.action" class="btn-circle-border-simple grade-btn">成績登録</a>
-		<a href="TestList.action" class="btn-circle-border-simple grade-btn">成績参照</a>
+
+			<a href="TestRegist.action" class="btn-circle-border-simple grade-btn">成績登録</a>
+			<a href="TestList.action" class="btn-circle-border-simple grade-btn">成績参照</a>
 		</div>
 	</div>
 
