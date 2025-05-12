@@ -47,6 +47,8 @@ public class TestListStudentExecuteAction extends Action{
 		request.setAttribute("tstuList", list);
 		request.setAttribute("student", stu);
 
+		session.setAttribute("studentNo", no);
+
 		return "test_list_student.jsp";
 	}
 }
