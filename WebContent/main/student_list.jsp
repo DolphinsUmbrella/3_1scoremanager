@@ -14,17 +14,14 @@
 	</div>
 	<div class="filter-group">
 		<form action = "StudentList.action">
-			<%-- フィルタリングコントロール全体を囲むGridコンテナ --%>
 			<div class="student-serach-box">
-				<%-- ラベルの項目 --%>
 				<span class="label-1">入学年度</span>
 				<span class="label-2">クラス</span>
 				<span class="label-3">在学中</span>
 
 
-				<%-- 入力要素の項目 --%>
+				<%-- 入学年度のセレクトボックス --%>
 				<span class="input-1">
-					<%-- 入学年度のセレクトボックス --%>
 					<select name = "entYear">
 						<option value = "0" selected>-------</option>
 						<c:forEach var="y" items="${ year }">
@@ -40,8 +37,8 @@
 					</select>
 				</span>
 
+				<%-- クラスのセレクトボックス --%>
 				<span class="input-2">
-					<%-- クラスのセレクトボックス --%>
 					<select name = "classNum">
 						<option value = "000" selected>-------</option>
 						<c:forEach var="c" items="${ cList }">
@@ -64,7 +61,7 @@
 				</span>
 
 				<%-- 絞込みボタン --%>
-				<span class="grid-item input-submit">
+				<span class="input-submit">
 					<input type = "submit" value = "絞込み">
 				</span>
 			</div>

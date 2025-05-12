@@ -1,6 +1,6 @@
 <%@page contentType = "text/html; charset=UTF-8" %>
 <%@include file = "../tool/header.jsp" %>
-<style>
+<!-- <style>
 
 /* このページ固有のmain-contentスタイル（デフォルト画面幅用） */
 .menu-main-content {
@@ -94,7 +94,7 @@
 	font-size: 1.1em;
 	/* フォントサイズを少し大きく */
 }
-</style>
+</style>-->
 
 <div>
   <%@include file = "../tool/sidebar.jsp" %>

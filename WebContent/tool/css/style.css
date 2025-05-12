@@ -9,37 +9,28 @@ header {
 	background-color: #94c9c9;
 	align-items: center;
 	position: fixed;
-	/*画面にヘッダー部分の固定化*/
 	top: 0;
 	left: 0;
 	z-index: 100;
 	padding: 0 20px;
-	/* 上下のpadding */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	justify-content: space-between;
 }
 
 header>h2 {
-	/* タイトル要素を直接指定 */
 	padding-left: 10px;
 	font-size: 1.6em;
 	margin-right: auto;
-	/* タイトルを左端に寄せる */
 }
 
 .header-right {
-	/* 右側の要素をまとめる */
 	text-align: right;
-	/* 必要に応じてテキストを右寄せ */
 	margin-right: 50px;
-	/* ← 右側のスペースを追加 (値は調整可能) */
 }
 
 .header-right a {
 	margin-left: 10px;
-	/* ログアウトへのリンクに左マージンを追加 */
 }
-
 
 /*-------------------------------------------------------------*/
 /*フッターの処理（共通）*/
@@ -62,15 +53,14 @@ footer {
 }
 
 body {
-	background: #FFAA76;
 	background: #ffffff;
 	margin: 0;
 	padding-top: 80px;
 	padding-bottom: 40px;
 	display: flex;
 	flex-direction: column;
+	min-height: 100vh;
 }
-
 
 /*-------------------------------------------------------------*/
 /* ナビゲーションメニューのデザイン */
@@ -79,10 +69,14 @@ nav {
 	top: 80px;
 	left: 10px;
 	width: 20%;
-	/* 幅を固定 */
 	margin: 20px 0;
 	word-spacing: -5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	/* height: calc(100vh - 80px - 40px); */
+	height: auto; /* コンテンツの高さに合わせる */
+	max-height: calc(100vh - 80px - 40px); /* 画面の高さ制限を超えたらスクロール可能にする */
+	overflow-y: auto; /* コンテンツが max-height を超えたらスクロールバーを表示 */
+	box-sizing: border-box;
 }
 
 nav ul {
@@ -113,16 +107,6 @@ nav li:hover {
 
 nav li:active {
 	background: rgba(255, 170, 118, .5);
-}
-
-nav li span {
-	float: right;
-	font-weight: bold;
-	display: none;
-}
-
-nav li:hover span {
-	display: block;
 }
 
 nav li:focus {
@@ -157,7 +141,6 @@ nav li:hover a::after {
 	opacity: 1;
 }
 
-
 /*-------------------------------------------------------------*/
 /* メインコンテンツのデザインCSS */
 .main-content {
@@ -168,11 +151,10 @@ nav li:hover a::after {
 	padding-bottom: calc(40px + 20px);
 	box-sizing: border-box;
 	display: flex;
-	flex-direction: column; /* ここはcolumnのまま */
+	flex-direction: column;
 	justify-content: flex-start;
-
-	/*align-items: center;*/
-	/*background-color: red;*/
+	/* height: calc(100vh - 80px - 40px); */
+	overflow-y: auto;
 }
 
 .main-content .header {
@@ -180,177 +162,64 @@ nav li:hover a::after {
     display: flex;
     align-items: center;
     background-color: #c6e1ea;
-    /* width: 100%; /* この行を削除またはコメントアウト */
+    /* width: 100%; */
     position: fixed;
     top: 100px;
-    left: calc(20% + 20px); /* メインコンテンツの開始位置に合わせる */
-    right: 0; /* ビューポートの右端まで伸ばす */
-    z-index: 100;
+    left: calc(20% + 20px);
+    right: 0;
+    z-index: 99;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
     box-sizing: border-box;
+    flex-shrink: 0;
+    margin-bottom: 10px;
 }
 
 .main-content .header h2 {
-
 	text-align: left;
 	line-height: 60px;
 	margin: 0;
+    flex-grow: 1;
 }
 
 .main-content .header a {
-    margin-left: auto; /* 左側のマージンを自動にして要素を右端に寄せる */
-    margin-right: 20; /* 明示的に右マージンを0にする */
-
-    /* 必要に応じて、新規追加リンクの他のスタイルもここに記述できます */
-    /* margin-top: 0; */
-    /* margin-bottom: 0; */
+    margin-left: auto;
 }
 
 /* 左寄せにするためのクラス */
 .align-left {
 	text-align: left !important;
-	/* !important で優先度を高める */
 	width: 100%;
-	/* 親要素の幅いっぱいに広げることで左寄せを効果的にする */
 	box-sizing: border-box;
-	/* paddingやborderを含めて幅を計算 */
 }
 
 /* テーブル(一覧など)のデザイン */
 .main-content table {
 	width: 100%;
-	/* margin: 5px auto 0 auto; 上マージン10px、左右マージンautoで中央寄せ、下マージン0 */
 	border-collapse: collapse;
-	max-width: 800px;
-
+	max-width: none;
 }
 
 .main-content th,
 .main-content td {
-	border-left: none; /* 左側の縦線を削除 */
+	border-left: none;
 	border-right: none;
-	/* 右側の縦線を削除 */
 	border-top: 1px solid #ccc;
-	/* 上側の横線 */
 	border-bottom: 1px solid #ccc;
-	/* 下側の横線 */
 	padding: 8px;
 	text-align: center;
 }
 
-/* ヘッダー部分の上側の線は不要な場合があるので削除 */
 .main-content th {
 	border-top: none;
 }
 
-/* テーブルの一番下の線を追加 */
 .main-content tr:last-child td {
 	border-bottom: 1px solid #ccc;
 }
 
-
-
 /*-------------------------------------------------------------*/
-/* 拡大画面の時の比率を調整 */
-@media screen and (min-width: 769px) {
-
-	.main-content {
-		justify-content: flex-start;
-		align-items: flex-start;
-		flex-wrap: wrap;
-	}
-
-	.button-group {
-		width: calc(30% - 40px);
-		margin-right: 15px;
-		margin-bottom: 0;
-		padding: 15px;
-	}
-
-	.main-button-container {
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: flex-start;
-		width: 100%;
-		padding: 0 40px;
-		/* 左右のパディングを少し狭める */
-	}
-
-	.grade-buttons-container {
-		flex-direction: row;
-		justify-content: center;
-		margin-bottom: 0;
-	}
-
-	.grade-buttons-container .btn-circle-border-simple {
-		margin-right: 30px;
-		/* ボタン間の右マージンを広げる */
-		margin-bottom: 0;
-		width: 140px;	/* ボタンの幅 */
-		height: 140px;	/* ボタンの高さ*/
-		line-height: 140px;	/* 行の高さ */
-		font-size: 1.1em;/* フォントサイズ */
-	}
-
-	.filter-group {
-		/* 拡大画面でのスタイル調整 */
-		width: calc(100% - 30px);
-		max-width: 800px; /* 例：最大幅を設定 */
-	}
-
-    /* テーブルの幅を指定 */
-    .main-content table {
-        width: 100%;
-        /*margin: 10px auto 0 auto;  上マージン10px、左右マージンautoで中央寄せ、下マージン0 */
-
-    }
-     /* 検索結果件数divの幅を指定 */
-    .filter-group + div {
-        width: 100%;
-    }
-
-}
-
-/*-------------------------------------------------------------*/
-/* 縮小画面の時の比率を調整 */
-@media screen and (max-width: 768px) {
-	.main-content {
-		flex-direction: column;
-		/*align-items: center;*/
-	}
-
-	.button-group {
-		margin-right: 0;
-		margin-bottom: 20px;
-		align-items: center;
-		/* グループ間の下マージンを少し狭める */
-		align-items: center;
-		width: 90%;	/* 幅 */
-		padding: 25px;	/* グループ内の余白を広げる */
-
-	}
-
-	.grade-buttons-container {
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 25px;
-		/* ボタン間の下マージンを広げる */
-	}
-
-	.grade-buttons-container .btn-circle-border-simple {
-		margin-right: 0;
-		margin-bottom: 20px;	/* ボタン間の下マージン */
-		width: 140px;	/* ボタンの幅 */
-		height: 140px;	/* ボタンの高さ */
-		line-height: 140px;	/* 行の高さを調整 中央揃え */
-		font-size: 1.1em;	/* フォントサイズ */
-	}
-
-}
-
-/*-------------------------------------------------------------*/
-/*エラーメッセージ(赤文字として表示)*/
+/* エラーメッセージ(赤文字として表示)*/
 .main-content .error-message {
 	color: red;
 	margin-bottom: 10px;
@@ -365,16 +234,16 @@ nav li:hover a::after {
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	text-decoration: underline;	/* 下線 */
+	text-decoration: underline;
 }
 
 .link-button:hover {
-	text-decoration: none;	/* ホバー時の下線削除 */
+	text-decoration: none;
 }
 
 .link-button:focus {
 	outline: none;
-	text-decoration: none;	/* フォーカス時のデフォルトの枠線を削除 */
+	text-decoration: none;
 }
 
 th,
@@ -383,79 +252,126 @@ td {
 }
 
 /*-------------------------------------------------------------*/
-/* 学生管理の検索ボタンのグループ */
+/* 検索ボックスの位置調整 */
 
-.filter-group {
-	/* inline-block から block に変更 */
-	display: block;
-	padding: 15px;	/* 内側の余白 */
-	border: 1px solid #ccc;	/* 枠線（色や太さの調整可能） */
-
-	border-radius: 10px;	/* 角の丸み具合（数値が大きいほど丸くなる） */
-	background-color: #f9f9f9;	/* 背景色 */
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);	/* 影（必要に応じて） */
-
-	/* 固定ヘッダーの下に配置するための上マージンを追加 */
-	margin-top: calc(10px) ;/* 任意の間隔 */
-	width: calc(100% - 30px); /* パディングを考慮した幅 */
-	box-sizing: border-box;
+/* For all search box containers */
+.student-serach-box,
+.test-input-serach-box,
+.subject-serach-box {
+    display: grid;
+    gap: 0.5em 1em;
+    align-items: center;
+    /* ここから新しい枠組みデザインの追加 */
+    border: 1px solid #ddd; /* 薄いグレーの枠線 */
+    border-radius: 8px; /* 角丸 */
+    background-color: #fbfbfb; /* ややオフホワイトの背景色 */
+    padding: 20px; /* 枠内の余白 */
+    margin-bottom: 20px; /* 検索ボックス下部の余白 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 控えめな影 */
+    /* ここまで新しい枠組みデザインの追加 */
 }
 
-.filter-group p {
-	margin-bottom: 0;	/* p要素の下マージンをリセット */
+/* Specific grid definitions */
+.student-serach-box {
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
-/* フィルターグループと検索結果件数の間にマージンを追加 */
-.filter-group + div { /* .filter-group の直後にある div 要素を選択 */
-    margin-top: 10px; /* 必要に応じて調整 */
+.test-input-serach-box {
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
+.subject-serach-box {
+    grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
 
+/* General styles for all search box spans (labels, inputs, submit) */
+.student-serach-box > span,
+.test-input-serach-box > span,
+.subject-serach-box > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Grid area assignments for test-input-serach-box */
+.test-input-serach-box .label-1{ grid-area: 1 / 1; }
+.test-input-serach-box .label-2{ grid-area: 1 / 2; }
+.test-input-serach-box .label-3{ grid-area: 1 / 3; }
+.test-input-serach-box .label-4{ grid-area: 1 / 4; }
+.test-input-serach-box .input-1{ grid-area: 2 / 1; }
+.test-input-serach-box .input-2{ grid-area: 2 / 2; }
+.test-input-serach-box .input-3{ grid-area: 2 / 3; }
+.test-input-serach-box .input-4{ grid-area: 2 / 4; }
+.test-input-serach-box .input-submit{ grid-area: 2 / 5; }
+
+/* Grid area assignments for student-serach-box */
+.student-serach-box .label-1{ grid-area: 1 / 1; }
+.student-serach-box .label-2{ grid-area: 1 / 2; }
+.student-serach-box .label-3{ grid-area: 1 / 3; justify-self: center; }
+.student-serach-box .input-1{ grid-area: 2 / 1; }
+.student-serach-box .input-2{ grid-area: 2 / 2; }
+.student-serach-box .input-3{ grid-area: 2 / 3; display: flex; justify-content: center; align-items: center; }
+.student-serach-box .input-submit{ grid-area: 2 / 4; }
+
+
+/* Grid area assignments for subject-serach-box */
+.subject-serach-box .label-1{ grid-area: 1 / 1; }
+.subject-serach-box .label-2{ grid-area: 1 / 2; }
+.subject-serach-box .label-3{ grid-area: 1 / 3; }
+.subject-serach-box .label-4{ grid-area: 1 / 4; }
+.subject-serach-box .input-1{ grid-area: 2 / 1; }
+.subject-serach-box .input-2{ grid-area: 2 / 2; }
+.subject-serach-box .input-3{ grid-area: 2 / 3; }
+.subject-serach-box .input-4{ grid-area: 2 / 4; }
+.subject-serach-box .input-submit{ grid-area: 2 / 5; }
+
+
+/* General styles for select and input elements within spans */
+/* 検索ボックス内のセレクトボックスとテキスト入力欄のデザイン */
+.student-serach-box select,
+.student-serach-box input[type="text"],
+.subject-serach-box select,
+.subject-serach-box input[type="text"],
+.test-input-serach-box select,
+.test-input-serach-box input[type="text"]{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* 検索ボタンのデザイン */
+.student-serach-box input[type="submit"],
+.subject-serach-box input[type="submit"],
+.test-input-serach-box input[type="submit"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #adadad;
+    border-radius: 4px;
+    background-color: #e6e6e6;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* 検索ボタンのホバー時のスタイル */
+.student-serach-box input[type="submit"]:hover,
+.subject-serach-box input[type="submit"]:hover,
+.test-input-serach-box input[type="submit"]:hover {
+    background-color: #d4d4d4;
+}
 
 /*-------------------------------------------------------------*/
-/* ログイン画面のデザインCSS */
-.login-content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 80px - 60px);
-	/* background-color: #f0f0f0; */
-	width: 100%;
-}
-
-.login-content form {
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	text-align: center;
-}
-
-.login-content h1 {
-	margin-bottom: 20px;
-}
-
-.login-content input[type="text"],
-.login-content input[type="password"],
-.login-content input[type="submit"] {
-	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	width: 250px;
-	box-sizing: border-box;
-}
-
-.login-content .error-message {
-	color: red;
-	margin-bottom: 10px;
-}
-
-/*-------------------------------------------------------------*/
-/* ボタンのデザイン */
-/*https://saruwakakun.com/html-css/reference/buttons*/
-
+/* ボタンのデザイン (共通) */
 .btn-circle-border-simple {
 	display: inline-block;
 	text-decoration: none;
@@ -504,131 +420,154 @@ td {
 	background: #f5c6cb;
 }
 
+
 /*-------------------------------------------------------------*/
-/* 検索ボックスの位置調整 */
+/* 拡大画面の時の比率を調整 */
+@media screen and (min-width: 769px) {
 
-/* 学生一覧での検索ボックス配置 */
-.student-serach-box {
-    display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5em 1em;
-    align-items: start;
-    /*margin-bottom: 0em;*/
+    /* 既存のfilter-group, table, filter-group + div のスタイルは維持 */
+    .filter-group {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main-content table {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .filter-group + div {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-/* 成績登録での検索ボックス配置 */
-.test-input-serach-box {
-	display: grid;
-    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5em 1em;
-    /*margin-bottom: 1em;*/
+/*-------------------------------------------------------------*/
+/* 縮小画面の時の比率を調整 */
+@media screen and (max-width: 768px) {
+	/* 小さい画面の場合、要素の配置を変更 */
+    nav {
+        position: static;
+        width: 100%;
+        height: auto;
+        top: auto;
+        left: auto;
+        margin: 0;
+        overflow-y: visible;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+    nav li {
+        flex: 1 1 auto;
+        min-width: 120px;
+        text-align: center;
+        padding: 15px 10px;
+        margin: 5px;
+        background: white;
+        box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+    }
+
+    /* Set order for menu items to achieve specific wrapping */
+    nav li:nth-child(1) { /* 想定: 'メニュー' */
+        order: 1;
+        flex-basis: auto;
+    }
+    nav li:nth-child(2) { /* 想定: '学生管理' */
+        order: 2;
+        flex-basis: auto;
+    }
+    nav li:nth-child(5) { /* 想定: '科目管理' (元の4番目が5番目になる) */
+        order: 3;
+        flex-basis: auto;
+    }
+    nav li:nth-child(3) { /* 想定: '成績登録' (元の2番目が3番目になる) */
+        order: 5;
+        flex-basis: auto;
+    }
+    nav li:nth-child(4) { /* 想定: '成績参照' (元の3番目が4番目になる) */
+        order: 6;
+        flex-basis: auto;
+    }
+
+    /* Pseudo-element to force a line break after '科目管理' (order 3) */
+    nav ul::before {
+        content: "";
+        display: block;
+        flex-basis: 100%;
+        order: 4;
+    }
+
+    nav li:hover {
+        box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.1);
+        background: white;
+    }
+    nav li:active {
+        background: rgba(255, 170, 118, .5);
+    }
+    nav li span, nav li a::after {
+        display: none;
+    }
+    nav li a {
+        font-size: 1.0em;
+    }
+
+	.main-content {
+		flex-direction: column;
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        padding: 10px;
+	}
+	.main-content .header {
+        position: static;
+        top: auto;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+
+	.button-group {
+		margin-right: 0;
+		margin-bottom: 20px;
+		align-items: center;
+		align-items: center;
+		width: 90%;
+		padding: 25px;
+	}
+
+	.grade-buttons-container {
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 25px;
+	}
+
+	.grade-buttons-container .btn-circle-border-simple {
+		margin-right: 0;
+		margin-bottom: 20px;
+		width: 140px;
+		height: 140px;
+		line-height: 140px;
+		font-size: 1.1em;
+	}
+
+    /* 他の要素も正しくフローするように調整 */
+    .filter-group, .filter-group + div, .main-content table {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: none;
+    }
+
 }
-
-/* 成績参照での検索ボックス配置 */
-.subject-serach-box {
-	display: grid;
-    grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5em 1em;
-    /*align-items: start;*/
-    /*margin-bottom: 1em;*/
-}
-
-/* 行/列 */
-.student-serach-box .label-1,
-.test-input-serach-box .label-1{
-    grid-area: 1 / 1;
-}
-
-.subject-serach-box .label-1 {
-	grid-area: 1 / 1 / 3 / 2;
-	align-self: center;
-	text-align: center;
-}
-
-.student-serach-box .label-2,
-.subject-serach-box .label-2,
-.test-input-serach-box .label-2{
-    grid-area: 1 / 2;
-}
-
-
-.student-serach-box .label-3{
-    grid-area: 1 / 3;
-    justify-self: center;
-    align-self: center;
-}
-
-
-.subject-serach-box .label-3,
-.test-input-serach-box .label-3{
-	grid-area: 1 / 3;
-
-}
-
-.subject-serach-box .label-4,
-.test-input-serach-box .label-4{
-	grid-area: 1 / 4;
-}
-
-
-.student-serach-box .input-1,
-.test-input-serach-box .input-1{
-    grid-area: 2 / 1;
-}
-
-.subject-serach-box .input-1{
-	grid-area: 2 / 1; /* 2行目、1列目 */
-}
-
-.student-serach-box .input-2,
-.subject-serach-box .input-2,
-.test-input-serach-box .input-2{
-    grid-area: 2 / 2;
-}
-
-.student-serach-box .input-3 {
-    grid-area: 2 / 3;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.subject-serach-box .input-3,
-.test-input-serach-box .input-3{
-	grid-area: 2 / 3;
-}
-
-.subject-serach-box .input-4,
-.test-input-serach-box .input-4{
-	grid-area: 2 / 4;
-}
-
-
-.student-serach-box .input-submit{
-    grid-area: 2 / 4;
-}
-
-.subject-serach-box .input-submit,
-.test-input-serach-box .input-submit{
-	grid-area: 2 / 5;
-}
-
-
-.student-serach-box select,
-.student-serach-box input[type="submit"],
-.student-serach-box input[type="text"],
-.subject-serach-box select,
-.subject-serach-box input[type="submit"],
-.subject-serach-box input[type="text"],
-.test-input-serach-box select,
-.test-input-serach-box input[type="submit"],
-.test-input-serach-box input[type="text"]{
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
-
-
