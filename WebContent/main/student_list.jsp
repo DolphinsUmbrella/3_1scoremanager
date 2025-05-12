@@ -13,7 +13,6 @@
 		<a href = "StudentCreate.action">新規追加</a>
 	</div>
 	<div class="filter-group">
-
 		<form action = "StudentList.action">
 			<%-- フィルタリングコントロール全体を囲むGridコンテナ --%>
 			<div class="student-serach-box">
