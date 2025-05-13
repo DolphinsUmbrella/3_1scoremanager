@@ -11,6 +11,7 @@ import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -35,6 +36,15 @@ public class TestListAction extends Action{
 		//5/1小柿：動作確認のため一時的にコメントアウトしてます、こっちのが正しいです
 		List<Subject> subList = subDao.filter(school);
 
+		//入学年度取得
+		StudentDao stuDao = new StudentDao();
+		List<Integer> year = stuDao.selectInt_Year();
+
+		//入学年度は最大10年分
+		if (year.size() > 10){
+			year = year.subList(year.size()-11, year.size()-1);
+		}
+
 		//ここから入学年度選択用までの間のやつは後で消してください
 		/*
 		List<Subject> subList = new ArrayList<>();
@@ -49,9 +59,9 @@ public class TestListAction extends Action{
 		subList.add(s3);
 		*/
 
-
 		request.setAttribute("cList", cList);
 		request.setAttribute("subList", subList);
+		request.setAttribute("year", year);
 
 		return "test_list.jsp";
 	}
