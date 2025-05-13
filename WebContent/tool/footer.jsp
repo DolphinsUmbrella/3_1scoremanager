@@ -3,6 +3,6 @@
 	</body>
 
 	<footer>
-		<p>3_1　得点管理</p>
+		<small>3_1　得点管理</small>
 	</footer>
 </html>
