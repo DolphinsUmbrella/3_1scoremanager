@@ -9,7 +9,7 @@
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class="header">
-		<h2>成績参照</h2>
+		<h2>${ testListHeader }</h2>
 	</div>
 	<%-- 科目別検索フォーム --%>
 	<div class="filter-group">
@@ -68,10 +68,10 @@
 					<c:forEach var="s" items="${ subList }">
 						<c:choose>
 							<c:when test="${ s.getCd() == subjectCd }">
-								<option value = "${ s.getCd() }" selected>s.getName()</option>
+								<option value = "${ s.getCd() }" selected>${ s.getName() }</option>
 							</c:when>
 							<c:otherwise>
-								<option value = "${ s.getCd() }">s.getName()</option>
+								<option value = "${ s.getCd() }">${ s.getName() }</option>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -80,6 +80,7 @@
 
 			</div>
 		</form>
+
 	</div>
 
 	<%-- 学生別検索フォーム --%>
@@ -99,6 +100,14 @@
 			</div>
 		</form>
 	</div>
+
+	<c:if test="${ testListSubjectFlag }">
+		<%@include file = "test_list_subject.jsp" %>
+	</c:if>
+
+	<c:if test="${ testListStudentFlag }">
+		<%@include file = "test_list_student.jsp" %>
+	</c:if>
 </div>
 
 
