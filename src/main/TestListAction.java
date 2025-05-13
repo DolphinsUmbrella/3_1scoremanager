@@ -26,6 +26,8 @@ public class TestListAction extends Action{
 			return "null";
 		}
 
+		//リストの情報がセッションに残っていた場合削除します
+
 		School school = user.getSchool();
 
 		ClassNumDao cDao = new ClassNumDao();
@@ -59,9 +61,12 @@ public class TestListAction extends Action{
 		subList.add(s3);
 		*/
 
-		request.setAttribute("cList", cList);
-		request.setAttribute("subList", subList);
-		request.setAttribute("year", year);
+		session.setAttribute("cList", cList);
+		session.setAttribute("subList", subList);
+		session.setAttribute("year", year);
+
+		//header用
+		request.setAttribute("testListHeader", "成績参照");
 
 		return "test_list.jsp";
 	}
