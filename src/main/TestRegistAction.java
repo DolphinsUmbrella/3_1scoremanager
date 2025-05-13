@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import bean.Subject;
 import bean.Teacher;
+import bean.Test;
 import dao.ClassNumDao;
 import dao.SubjectDao;
+import dao.TestDao;
 import tool.Action;
 
 public class TestRegistAction extends Action{
@@ -25,6 +27,11 @@ public class TestRegistAction extends Action{
 		}
 
 
+	    String entYear = request.getParameter("entYear");
+		String classNum = request.getParameter("class_num");
+		String subjectdata = request.getParameter("subject");
+		String num = request.getParameter("count");
+
 
 		//フィルター処理もやる
 
@@ -36,8 +43,16 @@ public class TestRegistAction extends Action{
 		SubjectDao subDao = new SubjectDao();
 		List<Subject> subList = subDao.filter(user.getSchool());
 
+		//入力された入学年度、クラス、科目、回数のデータを取得
+		Test t = new Test();
+		Subject sub = new Subject();
+		sub.setCd(subjectdata);
+		TestDao tDao = new TestDao();
+		List<Test> tList = tDao.filter(Integer.parseInt(entYear),classNum,t.getSubject(),Integer.parseInt(num),user.getSchool());
+
 		request.setAttribute("cList", cList);
 		request.setAttribute("subList", subList);
+		request.setAttribute("tList", tList);
 		return "test_regist.jsp";
 	}
 }
