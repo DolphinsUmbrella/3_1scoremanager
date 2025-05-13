@@ -56,6 +56,6 @@ public class TestListStudentExecuteAction extends Action{
 		//検索結果表示フラグ
 		request.setAttribute("testListStudentFlag", true);
 
-		return "test_list_student.jsp";
+		return "test_list.jsp";
 	}
 }
