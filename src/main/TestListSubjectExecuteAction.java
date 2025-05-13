@@ -55,10 +55,16 @@ public class TestListSubjectExecuteAction extends Action{
 		//科目名
 		request.setAttribute("subjectName", subject.getName());
 
-		session.setAttribute("entYear", entYear);
-		session.setAttribute("classNum", classNum);
-		session.setAttribute("subjectCd", subject.getCd());
+		request.setAttribute("entYear", entYear);
+		request.setAttribute("classNum", classNum);
+		request.setAttribute("subjectCd", subject.getCd());
 
-		return "test_list_subject.jsp";
+		//ヘッダー用
+		request.setAttribute("testListHeader", "成績参照（科目別検索結果）");
+
+		//検索結果表示フラグ
+		request.setAttribute("testListSubjectFlag", true);
+
+		return "test_list.jsp";
 	}
 }

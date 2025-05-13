@@ -47,7 +47,14 @@ public class TestListStudentExecuteAction extends Action{
 		request.setAttribute("tstuList", list);
 		request.setAttribute("student", stu);
 
+		//sessionの理由忘れた、あとで変えるかも
 		session.setAttribute("studentNo", no);
+
+		//ヘッダー用
+		request.setAttribute("testListHeader", "成績参照（学生別検索結果）");
+
+		//検索結果表示フラグ
+		request.setAttribute("testListStudentFlag", true);
 
 		return "test_list_student.jsp";
 	}
