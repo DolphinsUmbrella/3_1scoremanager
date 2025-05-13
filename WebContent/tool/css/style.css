@@ -36,9 +36,9 @@ header>h2 {
 /*フッターの処理（共通）*/
 footer {
 	width: 100%;
-	height: 40px;
+	height: 20px;
 	text-align: center;
-	padding: 10px 0;
+	padding: 5px 0;
 	background-color: #c0c0c0;
 	position: fixed;
 	bottom: 0;
@@ -265,8 +265,8 @@ td {
     border: 1px solid #ddd; /* 薄いグレーの枠線 */
     border-radius: 8px; /* 角丸 */
     background-color: #fbfbfb; /* ややオフホワイトの背景色 */
-    padding: 20px; /* 枠内の余白 */
-    margin-bottom: 20px; /* 検索ボックス下部の余白 */
+    padding-bottom: 10px; /* 枠内の余白 */
+    margin-bottom: 10px; /* 検索ボックス下部の余白 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 控えめな影 */
     /* ここまで新しい枠組みデザインの追加 */
 }
