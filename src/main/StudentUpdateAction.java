@@ -1,5 +1,6 @@
 package main;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
@@ -36,11 +38,15 @@ public class StudentUpdateAction extends Action{
 		StudentDao sDao = new StudentDao();
 		Student student = sDao.get(no);
 
+		//クラス一覧を取得
+		ClassNumDao cDao = new ClassNumDao();
+		List<String> cList = cDao.filter(user.getSchool());
 
-
+		request.setAttribute("cList", cList);
 
 		//遷移してもデータを保持できるようにする
-		request.setAttribute("student", student);
+		//5/14小柿：sessionにいるならrequestの分は不要では？一度コメントアウトしています
+		//request.setAttribute("student", student);
 		session.setAttribute("student", student);
 
 
