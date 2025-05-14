@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
@@ -25,6 +26,7 @@ public class StudentListAction extends Action{
 		}
 
 		StudentDao sDao = new StudentDao();
+		ClassNumDao cDao = new ClassNumDao();
 
 		//値の格納
 
@@ -72,7 +74,7 @@ public class StudentListAction extends Action{
 
 
 		//クラス選択用
-		List<String> cList = sDao.selectClass_Num();
+		List<String> cList = cDao.filter(user.getSchool());
 
 
 		request.setAttribute("sList", sList);
