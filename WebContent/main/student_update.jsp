@@ -12,14 +12,14 @@
 		<h2>学生情報変更</h2>
 	</div>
 	<div class="align-left">
-	<form action = "StudentUpdateExecute.action">
+	<form action = "StudentUpdateExecute.action" method = "post">
 
 		<p>入学年度：${ student.getEntYear() }</p>
 
 		<p>学生番号：${ student.getNo() }</p>
 
 		<p>　　氏名：
-			<input type = "text" name = "name" placeholder="変更前：${ student.getName() }" value="${ student.getName() }">
+			<input type = "text" name = "name" value="${ student.getName() }" required="required">
 		</p>
 		<c:if test="${ not empty errorMessage }">
 			<p style="color:red;">　　　　　[${ errorMessage }]</p>
@@ -28,13 +28,27 @@
 		<p>　クラス：
 			<select name = "classNum">
 				<c:forEach var="c" items="${ cList }">
-					<option value = "${ c }">${ c }</option>
+					<c:choose>
+						<c:when test="${ c == student.getClassNum() }">
+							<option value = "${ c }" selected>${ c }</option>
+						</c:when>
+						<c:otherwise>
+							<option value = "${ c }">${ c }</option>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</select>
 		</p>
 
 		<p><label for = "isAttend">　在学中：</label>
-			<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
+			<c:choose>
+				<c:when test="${ student.getIsAttend() }">
+					<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
+				</c:when>
+				<c:otherwise>
+					<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true">
+				</c:otherwise>
+			</c:choose>
 			<input type = "hidden" value = "false" name = "isAttend">
 		</p>
 
