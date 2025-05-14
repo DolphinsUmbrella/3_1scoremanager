@@ -12,13 +12,13 @@
 		<div class="error-message">
 			<c:if test="${ message != null}">
 
-				<p>${ message }</p>
+				<small>${ message }</small>
 			</c:if>
 		</div>
 
 
-		<p><input type = "text" name = "teacher_id" placeholder="ID" value="${teacher_id}"><br>
-		<input type = "password" name = "password" placeholder="Password"></p>
+		<p><input type = "text" name = "teacher_id" placeholder="ID" value="${teacher_id}" required="required"><br>
+		<input type = "password" name = "password" placeholder="Password" required="required"></p>
 		<p><input type = "submit" value = "ログイン"></p>
 	</form>
 </div>
