@@ -31,11 +31,6 @@ public class StudentUpdateExecuteAction extends Action{
 		String isAttendStr = request.getParameter("isAttend");
 		boolean isAttend = "true".equals(isAttendStr);
 
-		// 名前が空欄の場合、エラーメッセージを設定して student_update.jsp に戻る
-		if (name == null || name.isEmpty()) {
-			request.setAttribute("errorMessage", "名前を入力してください。");
-			return "student_update.jsp";
-		}
 		//Student型で保存したデータを呼び出す
 		Student student = (Student)session.getAttribute("student");
 
@@ -45,7 +40,7 @@ public class StudentUpdateExecuteAction extends Action{
 		System.out.println("クラス番号："+classNum);
 		System.out.println("在学フラグ："+isAttend);
 
-		if (student != null){
+		if (Objects.nonNull(student)){
 			// 入学年度と学生番号はそのまま保持
 			String no = student.getNo();
 			int entYear = student.getEntYear();
@@ -68,6 +63,8 @@ public class StudentUpdateExecuteAction extends Action{
 			//updateStudentメソッドを呼び出し
 			StudentDao dao =new StudentDao();
 			int update = dao.updateStudent(s);
+
+			session.removeAttribute("student");
 
 			if (update > 0){
 				Student newStudent = dao.get(no);
