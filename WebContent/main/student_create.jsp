@@ -13,27 +13,85 @@
 		</div>
 
 		<div class="align-left">
-	<form action = "StudentCreateExecute.action">
+	<form action = "StudentCreateExecute.action" method = "post">
 
-		<p>入学年度：<input type = "text" name = "entYear" placeholder="入学年度を入力"></p>
+		<p>
+			入学年度：
+			<select name = "entYear">
+				<option value = "0">----</option>
+				<c:forEach var="y" items="${ year }">
+					<c:choose>
+						<c:when test="${ y == entYear }">
+							<option value = "${ y }" selected>${ y }
+						</c:when>
+						<c:otherwise>
+							<option value = "${ y }">${ y }
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>
+		</p>
 
-		<p>学生番号：<input type = "text" name = "classNum" placeholder="学生番号を入力"></p>
+		<small class = "error-message">${ entYearMessage }</small>
 
-		<p>　　氏名：<input type = "text" name = "name" placeholder="氏名を入力">
+		<p>
+			学生番号：
+			<input type = "text"
+				   name = "no"
+				   value = "${ no }"
+				   placeholder="学生番号を入力"
+				   required="required">
+		</p>
+
+		<small class = "error-message">${ studentNoMessage }</small>
+
+		<p>
+			　　氏名：
+			<input type = "text"
+				   name = "name"
+				   value = "${ name }"
+				   placeholder="氏名を入力"
+				   required="required">
 		</p>
 
 		<p>　クラス：
 			<select name = "classNum">
-				<option value = "none">----</option>
 				<c:forEach var="c" items="${ cList }">
-					<option value = "${ c }">${ c }</option>
+					<c:choose>
+						<c:when test="${ c == classNum }">
+							<option value = "${ c }" selected>${ c }</option>
+						</c:when>
+						<c:otherwise>
+							<option value = "${ c }">${ c }</option>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</select>
 		</p>
 
 		<p><label for = "isAttend">　在学中：</label>
-			<input type = "checkbox" id = "isAttend" name = "isAttend" value = "true" checked>
-			<input type = "hidden" value = "false" name = "isAttend">
+			<c:choose>
+				<c:when test="${ isAttend }">
+					<input type = "checkbox"
+						   id = "isAttend"
+						   name = "isAttend"
+						   value = "true"
+						   checked>
+				</c:when>
+				<c:when test="${ isAttend == false }">
+					<input type = "checkbox"
+						   id = "isAttend"
+						   name = "isAttend"
+						   value = "true">
+				</c:when>
+				<c:otherwise>
+					<input type = "checkbox"
+						   id = "isAttend"
+						   name = "isAttend"
+						   value = "true"
+						   checked>
+				</c:otherwise>
+			</c:choose>
 		</p>
 
 		<p><input type = "submit" value = "登録"></p>
