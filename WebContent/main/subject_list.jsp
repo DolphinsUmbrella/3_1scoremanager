@@ -22,7 +22,9 @@
 	</div>
 --%>
 
-<%@include file = "../tool/sidebar.jsp" %>
+<div style = "display:flex;">
+	<%@include file = "../tool/sidebar.jsp" %>
+</div>
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class="header">
