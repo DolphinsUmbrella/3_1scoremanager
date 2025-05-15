@@ -69,8 +69,6 @@ public class StudentCreateAction extends Action{
 
 		//学生登録画面を表示
 
-		//遷移先がちょっと違います  え?
-
 		return "student_create.jsp";
 	}
 }
