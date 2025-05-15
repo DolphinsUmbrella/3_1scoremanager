@@ -39,6 +39,15 @@ public class StudentCreateExecuteAction extends Action{
 		//クラス
 		String classNum = request.getParameter("classNum");
 
+		String isAttendStr = request.getParameter("isAttend");
+		boolean isAttend;
+		if (Objects.isNull(isAttendStr)){
+			isAttend = false;
+		}
+		else{
+			isAttend = true;
+		}
+
 
 		//登録処理
 		Student s = new Student();
@@ -46,6 +55,7 @@ public class StudentCreateExecuteAction extends Action{
 		s.setName(name);
 		s.setEntYear(Integer.parseInt(entYearStr));
 		s.setClassNum(classNum);
+		s.setIsAttend(isAttend);
 		s.setSchool(user.getSchool());
 
 		StudentDao sDao = new StudentDao(); //学生Dao
@@ -53,15 +63,16 @@ public class StudentCreateExecuteAction extends Action{
 		//入力値をチェック エラーメッセージを表示
 
 		//入力年度が選択されてない場合
-		if(entYearStr.equals("none")){
+		if(entYearStr.equals("0")){
 
 			//訂正
 			request.setAttribute("no",no);
 			request.setAttribute("name", name);
 			request.setAttribute("classNum", classNum);
+			request.setAttribute("isAttend", isAttend);
 
 			//messageはOKです！setAttributeはよく使うので引数の形を頭に叩き込んでください。
-			request.setAttribute("message","入学年度を選択してください");
+			request.setAttribute("entYearMessage","入学年度を選択してください");
 
 			//シーケンス図情報
 			//ーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -77,7 +88,7 @@ public class StudentCreateExecuteAction extends Action{
 		}
 
 		//入力された学生番号が重複してる場合
-		if(Objects.nonNull(sDao.get(no))){
+		if(Objects.nonNull(sDao.get(no).getNo())){
 
 			//ここは入学年度もセットしてください
 			//ここに遷移するなら必ず入学年度は正しく入力されています
@@ -87,13 +98,19 @@ public class StudentCreateExecuteAction extends Action{
 			request.setAttribute("no",no);
 			request.setAttribute("name", name);
 			request.setAttribute("classNum", classNum);
-			request.setAttribute("message", "学生番号が重複しています");
+			request.setAttribute("isAttend", isAttend);
+			request.setAttribute("studentNoMessage", "学生番号が重複しています");
 
 			//修正
+
 			return "student_create.jsp";
 		}
 
+		//確認出力
+		System.out.println(s.getNo()+"："+s.getName()+":");
+
 		boolean result = sDao.save(s);//学生登録
+		System.out.println(result);
 
 		//変数resultを有効活用してあげるとなお良しです。
 		//具体的には、「DB更新に失敗した場合はエラーページに遷移する」です。
