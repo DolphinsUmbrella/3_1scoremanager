@@ -35,18 +35,21 @@ public class SubjectCreateExecuteAction extends Action{
 		//入力値チェック
 		//科目コードが3文字でない場合は科目コード、科目名をセットし
 		//メッセージを入力する
+		System.out.println("科目コード文字数：" + subjectCd.length());
 		if (subjectCd.length() != 3){
+			System.out.println("エラー：科目コードが3文字でない");
 			request.setAttribute("cd", subjectCd);
 			request.setAttribute("name", subjectName);
-			request.setAttribute("message", "科目コードは3文字で入力して下さい");
+			request.setAttribute("subjectCdMessage", "科目コードは3文字で入力して下さい");
 			return "subject_create.jsp";
 		}
 
 		//科目コードが重複
 		if (Objects.nonNull(subDao.get(subjectCd, user.getSchool()))){
+			System.out.println("エラー：科目名が重複している");
 			request.setAttribute("cd", subjectCd);
 			request.setAttribute("name", subjectName);
-			request.setAttribute("message", "科目コードが重複しています");
+			request.setAttribute("subjectNameMessage", "科目コードが重複しています");
 			return "subject_create.jsp";
 		}
 

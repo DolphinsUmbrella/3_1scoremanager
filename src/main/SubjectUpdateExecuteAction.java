@@ -25,13 +25,18 @@ public class SubjectUpdateExecuteAction extends Action{
 		String subjectCd = request.getParameter("cd");
 		String subjectName = request.getParameter("name");
 
+		//確認用出力
+		System.out.println("科目コード："+subjectCd);
+		System.out.println("科目名："+subjectName);
+
 		Subject sub = new Subject();
 		sub.setCd(subjectCd);
 		sub.setName(subjectName);
+		sub.setSchool(user.getSchool());
 
 		SubjectDao subDao = new SubjectDao();
 
-		boolean result = subDao.save(sub);
+		boolean result = subDao.update(sub);
 
 		if (result){
 			return "subject_update_done.jsp";
