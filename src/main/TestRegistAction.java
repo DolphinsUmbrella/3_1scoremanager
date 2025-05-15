@@ -27,22 +27,27 @@ public class TestRegistAction extends Action{
 		}
 
 
-	    String entYear = request.getParameter("entYear");
+		String entYear = request.getParameter("entYear");
 		String classNum = request.getParameter("class_num");
 		String subjectdata = request.getParameter("subject");
 		String num = request.getParameter("count");
 
+		if (Objects.isNull(entYear) && Objects.isNull(classNum) && Objects.isNull(subjectdata)&&Objects.isNull(num)){
+			//何も値が入っていない(初回遷移時)
 
-		//フィルター処理もやる
+			//userの所属する学校のクラス情報を取得
+			ClassNumDao cDao = new ClassNumDao();
+			List<String> cList = cDao.filter(user.getSchool());
 
-		//userの所属する学校のクラス情報を取得
-		ClassNumDao cDao = new ClassNumDao();
-		List<String> cList = cDao.filter(user.getSchool());
+			//userの所属する学校の科目情報を取得
+			SubjectDao subDao = new SubjectDao();
+			List<Subject> subList = subDao.filter(user.getSchool());
 
-		//userの所属する学校の科目情報を取得
-		SubjectDao subDao = new SubjectDao();
-		List<Subject> subList = subDao.filter(user.getSchool());
 
+			request.setAttribute("cList", cList);
+			request.setAttribute("subList", subList);
+			return "test_regist.jsp";
+		}
 		//入力された入学年度、クラス、科目、回数のデータを取得
 		Test t = new Test();
 		Subject sub = new Subject();
@@ -50,9 +55,7 @@ public class TestRegistAction extends Action{
 		TestDao tDao = new TestDao();
 		List<Test> tList = tDao.filter(Integer.parseInt(entYear),classNum,t.getSubject(),Integer.parseInt(num),user.getSchool());
 
-		request.setAttribute("cList", cList);
-		request.setAttribute("subList", subList);
 		request.setAttribute("tList", tList);
-		return "test_regist.jsp";
-	}
+		    return "test_regist.jsp";
+		}
 }

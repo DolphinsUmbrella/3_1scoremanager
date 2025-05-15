@@ -102,21 +102,5 @@ public class ClassNumDao extends Dao{
 		}
 	}
 
-	//クラス情報削除,使用想定なし
-	public int deleteClass(School school, String class_num) throws Exception{
-		Connection con = getConnection();
-
-		PreparedStatement st = con.prepareStatement(
-			"delete from class_num where school_cd = ?, class_num = ?");
-		st.setString(1, school.getCd());
-		st.setString(2, class_num);
-		int line = st.executeUpdate();
-
-		st.close();
-		con.close();
-
-		return line;
-	}
-
 
 }
