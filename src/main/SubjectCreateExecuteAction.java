@@ -45,7 +45,7 @@ public class SubjectCreateExecuteAction extends Action{
 		}
 
 		//科目コードが重複
-		if (Objects.nonNull(subDao.get(subjectCd, user.getSchool()))){
+		if (Objects.nonNull(subDao.get(subjectCd, user.getSchool()).getCd())){
 			System.out.println("エラー：科目名が重複している");
 			request.setAttribute("cd", subjectCd);
 			request.setAttribute("name", subjectName);
@@ -53,14 +53,18 @@ public class SubjectCreateExecuteAction extends Action{
 			return "subject_create.jsp";
 		}
 
-		boolean result = subDao.save(sub);
+		try{
+			boolean result = subDao.save(sub);
 
-		if (result){
-			return "subject_create_done.jsp";
-		}
-		else{
-			//エラーページへの遷移がしたいです　これは仮
-			return "subject_create_done.jsp";
+			if (result){
+				return "subject_create_done.jsp";
+			}
+			else{
+				//エラーページへの遷移がしたいです　これは仮
+				return "subject_create_done.jsp";
+			}
+		}catch (Exception e) {
+			return "../error.jsp";
 		}
 
 
