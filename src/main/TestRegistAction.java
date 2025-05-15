@@ -11,6 +11,7 @@ import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -43,9 +44,12 @@ public class TestRegistAction extends Action{
 			SubjectDao subDao = new SubjectDao();
 			List<Subject> subList = subDao.filter(user.getSchool());
 
+			StudentDao stuDao = new StudentDao();
+			List<Integer> year = stuDao.selectInt_Year();
 
 			request.setAttribute("cList", cList);
 			request.setAttribute("subList", subList);
+			request.setAttribute("year", year);
 			return "test_regist.jsp";
 		}
 		//入力された入学年度、クラス、科目、回数のデータを取得
