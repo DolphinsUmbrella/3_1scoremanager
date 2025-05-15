@@ -56,7 +56,11 @@ public class StudentCreateAction extends Action{
 
 
 		//クラス選択用
-		List<String> cList = sDao.selectClass_Num();
+
+		//流れは合ってます
+		//使うメソッドが違うのでそれだけ修正してください
+		//ClassNumDaoのfilterを使います。引数に注意してください
+		List<String> cList = cDao.filter(user.getSchool());
 
 		request.setAttribute("sList", sList);
 		request.setAttribute("cList", cList);
