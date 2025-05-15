@@ -60,7 +60,7 @@ public class StudentCreateAction extends Action{
 		//流れは合ってます
 		//使うメソッドが違うのでそれだけ修正してください
 		//ClassNumDaoのfilterを使います。引数に注意してください
-		List<String> cList = sDao.selectClass_Num();
+		List<String> cList = cDao.filter(user.getSchool());
 
 		request.setAttribute("sList", sList);
 		request.setAttribute("cList", cList);
@@ -69,7 +69,7 @@ public class StudentCreateAction extends Action{
 
 		//学生登録画面を表示
 
-		//遷移先がちょっと違います
+		//遷移先がちょっと違います  え?
 
 		return "student_create.jsp";
 	}
