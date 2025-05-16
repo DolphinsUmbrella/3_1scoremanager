@@ -72,7 +72,6 @@ nav {
 	margin: 20px 0;
 	word-spacing: -5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	/* height: calc(100vh - 80px - 40px); */
 	height: auto; /* コンテンツの高さに合わせる */
 	max-height: calc(100vh - 80px - 40px); /* 画面の高さ制限を超えたらスクロール可能にする */
 	overflow-y: auto; /* コンテンツが max-height を超えたらスクロールバーを表示 */
@@ -154,6 +153,7 @@ nav li:hover a::after {
 	flex-direction: column;
 	justify-content: flex-start;
 	overflow-y: auto;
+	background-color: #fff;
 }
 
 .main-content .header {
@@ -255,7 +255,7 @@ td {
 }
 
 /*-------------------------------------------------------------*/
-/* 検索ボックスの位置調整 */
+/* 検索ボックスの色合いや、位置の調整 */
 
 /* For all search box containers */
 .student-serach-box,
@@ -272,7 +272,7 @@ td {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 控えめな影 */
 }
 
-/* Specific grid definitions */
+/* 検索ボックスの配置割合 */
 .student-serach-box {
     grid-template-columns: 2fr 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -288,7 +288,7 @@ td {
     grid-template-rows: 1fr 1fr;
 }
 
-/* General styles for all search box spans (labels, inputs, submit) */
+
 .student-serach-box > span,
 .test-input-serach-box > span,
 .subject-serach-box > span {
@@ -300,7 +300,7 @@ td {
     box-sizing: border-box;
 }
 
-/* Grid area assignments for test-input-serach-box */
+/* test-input-serach-box */
 .test-input-serach-box .label-1{ grid-area: 1 / 1; }
 .test-input-serach-box .label-2{ grid-area: 1 / 2; }
 .test-input-serach-box .label-3{ grid-area: 1 / 3; }
@@ -311,7 +311,7 @@ td {
 .test-input-serach-box .input-4{ grid-area: 2 / 4; }
 .test-input-serach-box .input-submit{ grid-area: 2 / 5; }
 
-/* Grid area assignments for student-serach-box */
+/* student-serach-box */
 .student-serach-box .label-1{ grid-area: 1 / 1; }
 .student-serach-box .label-2{ grid-area: 1 / 2; }
 .student-serach-box .label-3{ grid-area: 1 / 3; justify-self: center; }
@@ -333,7 +333,6 @@ td {
 .subject-serach-box .input-submit{ grid-area: 2 / 5; }
 
 
-/* General styles for select and input elements within spans */
 /* 検索ボックス内のセレクトボックスとテキスト入力欄のデザイン */
 .student-serach-box select,
 .student-serach-box input[type="text"],
@@ -465,15 +464,6 @@ td {
 /* 拡大画面の時の比率を調整 */
 @media screen and (min-width: 769px) {
 
-	.main-content .header h2 {
-    flex-grow: 5;
-
-}
-
-.main-content .header a {
-	flex-grow: 2;
-}
-
     /* 既存のfilter-group, table, filter-group + div のスタイルは維持 */
     .filter-group {
         width: 100%;
@@ -481,12 +471,22 @@ td {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .main-content .header h2 {
+		flex-grow: 5;
+	}
+
+	.main-content .header a {
+		flex-grow: 2;
+	}
+
     .main-content table {
         width: 100%;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
     }
+
     .filter-group + div {
         width: 100%;
         max-width: 800px;
@@ -509,6 +509,8 @@ td {
         overflow-y: visible;
         padding: 10px; /* パディングを維持 */
         box-sizing: border-box;
+        background-color: #C3E7E7;
+
     }
     nav ul {
         margin: 0;
@@ -530,28 +532,27 @@ td {
     }
 
     /* Set order for menu items to achieve specific wrapping */
-    nav li:nth-child(1) { /* 想定: 'メニュー' */
+    nav li:nth-child(1) { /* 'メニュー' */
         order: 1;
         flex-basis: auto;
     }
-    nav li:nth-child(2) { /* 想定: '学生管理' */
+    nav li:nth-child(2) { /* '学生管理' */
         order: 2;
         flex-basis: auto;
     }
-    nav li:nth-child(5) { /* 想定: '科目管理' (元の4番目が5番目になる) */
+    nav li:nth-child(5) { /* '科目管理' (元の4番目が5番目になる) */
         order: 3;
         flex-basis: auto;
     }
-    nav li:nth-child(3) { /* 想定: '成績登録' (元の2番目が3番目になる) */
+    nav li:nth-child(3) { /* '成績登録' (元の2番目が3番目になる) */
         order: 5;
         flex-basis: auto;
     }
-    nav li:nth-child(4) { /* 想定: '成績参照' (元の3番目が4番目になる) */
+    nav li:nth-child(4) { /* '成績参照' (元の3番目が4番目になる) */
         order: 6;
         flex-basis: auto;
     }
 
-    /* Pseudo-element to force a line break after '科目管理' (order 3) */
     nav ul::before {
         content: "";
         display: block;
@@ -579,7 +580,7 @@ td {
         align-items: center;
         height: auto;
         overflow-y: visible;
-        padding: 10px;
+        padding: 0px;
         margin-bottom: 20px
 	}
 	.main-content .header {
@@ -612,7 +613,6 @@ td {
 		font-size: 1.1em;
 	}
 
-    /* 他の要素も正しくフローするように調整 */
     .filter-group, .filter-group + div, .main-content table {
         width: 100%;
         margin-left: 0;

@@ -8,13 +8,11 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">科目情報変更</h2>
-		<p>変更が完了しました
-
-		<div id = "menu">
-
+		<div class="header">
+			<h2>科目情報変更</h2>
 		</div>
 
+		<p>変更が完了しました</p>
 		<a href = "SubjectList.action">科目一覧</a>
 
 	</div>
