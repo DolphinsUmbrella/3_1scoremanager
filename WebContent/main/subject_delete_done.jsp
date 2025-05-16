@@ -8,13 +8,11 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">科目情報削除</h2>
-		<p>削除が完了しました</p>
-
-		<div id = "menu">
-
+		<div class="header">
+			<h2>科目情報削除</h2>
 		</div>
 
+		<p>削除が完了しました</p>
 		<a href = "SubjectList.action">科目一覧</a>
 
 	</div>
