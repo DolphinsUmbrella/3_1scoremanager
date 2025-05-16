@@ -19,14 +19,15 @@ public class TestDao extends Dao{
 
 		//STUDENT_NO  	SUBJECT_CD  	SCHOOL_CD  	NO  	POINT  	CLASS_NUM
 		PreparedStatement st = con.prepareStatement(
-			"select s.ent_year,t.class_num,t.subject_cd,t.no from test as t"+
-			"inner join student as s"+
-			"on s.no=t.student_no"+
-			"where ent_year = ?"+
-			"and t.class_num = ?"+
-			"and t.subject_cd = ?"+
-			"and t.school_cd = '?'"+
+			"select s.ent_year,t.class_num,t.subject_cd,t.no from test as t "+
+			"inner join student as s "+
+			"on s.no=t.student_no "+
+			"where ent_year = ? "+
+			"and t.class_num = ? "+
+			"and t.subject_cd = ? "+
+			"and t.school_cd = ? "+
 			"and t.no = 1");
+
 		st.setInt   (1, student.getEntYear());
 		st.setString(2, student.getClassNum());
 		st.setString(3, subject.getCd());
@@ -131,20 +132,22 @@ public class TestDao extends Dao{
 			and b.no = 1
 		 */
 		PreparedStatement st = con.prepareStatement(
-			"select a.ent_year, a.class_num, a.no as student_no, a.name, b.point "+
+			"select a.ent_year, a.class_num, a.no as student_no, a.name, b.no as count, b.point "+
 			"from student as a "+
-			"join test as b "+
+			"left join test as b "+
 			"on a.no = b.student_no "+
-			"where a.ent_year = ? "+
-			"and b.subject_cd = ? "+
-			"and b.class_num = ? "+
-			"and b.school_cd = ? "+
-			"and b.no = ?");
-		st.setInt(1, entYear);
+			"where (b.no = ? or b.no is null) "+
+			"and (b.subject_cd = ? or b.subject_cd is null) "+
+			"and a.ent_year = ? "+
+			"and a.class_num = ? "+
+			"and a.school_cd = ? "+
+			"order by a.no");
+
+		st.setInt(3, entYear);
 		st.setString(2, subject.getCd());
-		st.setString(3, classNum);
-		st.setString(4, school.getCd());
-		st.setInt(5, num);
+		st.setString(4, classNum);
+		st.setString(5, school.getCd());
+		st.setInt(1, num);
 
 		ResultSet rs = st.executeQuery();
 
@@ -160,7 +163,39 @@ public class TestDao extends Dao{
 			t.setStudent(s);
 
 			t.setSchool(school);
-			t.setPoint(rs.getInt("point"));
+
+			//nullの場合0が入るらしい  余計なことするな
+			int point = rs.getInt("point");
+
+			if (point == 0){
+				//入ってきた値が0の場合追加で検索、testテーブルに存在すれば0、無ければ-1を格納
+				st = con.prepareStatement(
+					"select * from test "+
+					"where student_no = ? "+
+					"and subject_cd = ? "+
+					"and school_cd = ? "+
+						"and no = ?");
+				st.setString(1, s.getNo());
+				st.setString(2, subject.getCd());
+				st.setString(3, school.getCd());
+				st.setInt(4, num);
+
+				ResultSet rsPoint = st.executeQuery();
+
+				System.out.println("検索結果："+rsPoint.getRow());
+
+				//検索結果が存在しない場合は-1を格納
+				if (rsPoint.getRow() == 0){
+					t.setPoint(-1);
+				}else{
+					t.setPoint(point);
+				}
+
+			}else{
+				t.setPoint(point);
+			}
+
+			System.out.println("点数："+t.getPoint());
 
 			list.add(t);
 		}
