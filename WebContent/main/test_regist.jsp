@@ -28,8 +28,10 @@
 				<span class="label-4">回数</span>
 
 				<span class="input-1">
+
+					<!-- 入学年度をJavaに送信する時の変数 -->
 					<select name = "ent_year">
-						<!-- <select name = "entYear"> -->
+
 						<option value = "0" >-------</option>
 						<c:forEach var="y" items="${ year }">
 							<c:choose>
@@ -46,7 +48,10 @@
 
 
 				<span class="input-2">
+
+					<!-- クラス番号をJavaに送信する時の変数 -->
 					<select name = "class_num">
+
 					<!-- <select name = "classNum">? -->
 						<option value = "000" selected>-------</option>
 						<c:forEach var="c" items="${ cList }">
@@ -63,7 +68,10 @@
 				</span>
 
 				<span class="input-3">
+
+					<!-- 科目をJavaに送信する時の変数 -->
 					<select name = "subject">
+
 						<option value = "000">----</option>
 						<c:forEach var="s" items="${ subList }">
 							<c:choose>
