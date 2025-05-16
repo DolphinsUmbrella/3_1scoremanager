@@ -9,7 +9,7 @@
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class="header">
-		<h2>学生情報変更</h2>
+		<h2>科目情報変更</h2>
 	</div>
 	<div class="align-left">
 	<form action = "SubjectUpdateExecute.action" method = "post">
@@ -25,7 +25,7 @@
 		</p>
 
 		<p><input type = "submit" value = "変更"></p>
-		<p><a href = "StudentList.action">戻る</a></p>
+		<p><a href = "SubjectList.action">戻る</a></p>
 	</form>
 	</div>
 
