@@ -8,8 +8,8 @@
 
 	<div class = "main-content">
 		<%-- 見出し --%>
-		<h2 id = "headline">科目情報変更</h2>
-		<p>変更が完了しました
+		<h2 id = "headline">科目情報削除</h2>
+		<p>削除が完了しました</p>
 
 		<div id = "menu">
 
