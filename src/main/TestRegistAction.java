@@ -28,7 +28,7 @@ public class TestRegistAction extends Action{
 		}
 
 
-		String entYear = request.getParameter("entYear");
+		String entYear = request.getParameter("ent_year");
 		String classNum = request.getParameter("class_num");
 		String subjectdata = request.getParameter("subject");
 		String num = request.getParameter("count");
@@ -57,7 +57,8 @@ public class TestRegistAction extends Action{
 		Subject sub = new Subject();
 		sub.setCd(subjectdata);
 		TestDao tDao = new TestDao();
-		List<Test> tList = tDao.filter(Integer.parseInt(entYear),classNum,t.getSubject(),Integer.parseInt(num),user.getSchool());
+		List<Test> tList = tDao.filter(Integer.parseInt(entYear),classNum,t.getSubject(),Integer.parseInt(num),
+										user.getSchool());
 
 		request.setAttribute("tList", tList);
 		    return "test_regist.jsp";

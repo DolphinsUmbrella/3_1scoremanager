@@ -19,7 +19,12 @@ public class LoginExecuteAction extends Action{
 		String password = request.getParameter("password");
 		TeacherDao tDao = new TeacherDao();
 
-		Teacher t = tDao.get(id);
+		Teacher t = new Teacher();
+		try{
+			t = tDao.get(id);
+		}catch (Exception e) {
+			return "error.jsp";
+		}
 
 		//idとパスワードがどちらも存在しない場合
 		if (Objects.isNull(id) || id.isEmpty() && (Objects.isNull(password) || password.isEmpty())){
