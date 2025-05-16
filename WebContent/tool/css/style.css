@@ -147,19 +147,19 @@ nav li:hover a::after {
 	flex-grow: 1;
 	padding: 20px;
 	margin-left: calc(20% + 20px);
-	padding-top: 80px;
+	padding-top: 100px;
 	padding-bottom: calc(40px + 20px);
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	/* height: calc(100vh - 80px - 40px); */
 	overflow-y: auto;
 }
 
 .main-content .header {
     height: 60px;
     display: flex;
+	width: 100%;
     align-items: center;
     background-color: #c6e1ea;
     /* width: 100%; */
@@ -167,16 +167,17 @@ nav li:hover a::after {
     top: 100px;
     left: calc(20% + 20px);
     right: 0;
-    z-index: 100;
+    z-index: 99;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
     box-sizing: border-box;
     flex-shrink: 0;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .main-content .header h2 {
-	text-align: left;
+	margin-right: auto;
+
 	line-height: 60px;
 	margin: 0;
     flex-grow: 1;
@@ -184,6 +185,8 @@ nav li:hover a::after {
 
 .main-content .header a {
     margin-left: auto;
+	margin: 0;
+
 }
 
 /* 左寄せにするためのクラス */
@@ -462,6 +465,15 @@ td {
 /* 拡大画面の時の比率を調整 */
 @media screen and (min-width: 769px) {
 
+	.main-content .header h2 {
+    flex-grow: 5;
+
+}
+
+.main-content .header a {
+	flex-grow: 2;
+}
+
     /* 既存のfilter-group, table, filter-group + div のスタイルは維持 */
     .filter-group {
         width: 100%;
@@ -564,22 +576,22 @@ td {
 	.main-content {
 		flex-direction: column;
         margin-left: 0;
-        width: 100%;
+        align-items: center;
         height: auto;
         overflow-y: visible;
-        padding: 10px; /* パディングを維持 */
+        padding: 10px;
+        margin-bottom: 20px
 	}
 	.main-content .header {
         position: static;
         top: auto;
-        margin-bottom: 10px; /* マージンを維持 */
-        padding: 0 10px; /* パディングを維持 */
+        margin-bottom: 10px;
+        padding: 0 10px;
     }
 
 	.button-group {
 		margin-right: 0;
 		margin-bottom: 20px;
-		align-items: center;
 		align-items: center;
 		width: 90%;
 		padding: 25px;

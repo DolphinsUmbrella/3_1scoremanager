@@ -1,19 +1,12 @@
 <%@page contentType = "text/html; charset=UTF-8" %>
 <%@include file = "../tool/header.jsp" %>
-<!-- <style>
-
-/* このページ固有のmain-contentスタイル（デフォルト画面幅用） */
-.menu-main-content {
-	align-items: center; /* 縦積みの子要素（ボタングループ）を水平方向の中央に配置 */
-}
-
+<style>
 /* 画面幅が769px以上のときに適用するスタイル */
 @media screen and (min-width: 769px) {
 
     /* main-content内の直接の子要素（.button-group）を横並びに配置 */
     .main-content {
         display: flex;
-
         flex-direction: row;
         gap: 15px;
     }
@@ -94,13 +87,12 @@
 	font-size: 1.1em;
 	/* フォントサイズを少し大きく */
 }
-</style>-->
+</style>
 
-<div>
-  <%@include file = "../tool/sidebar.jsp" %>
-</div>
+<%@include file = "../tool/sidebar.jsp" %>
 
-<div class="main-content menu-main-content">
+
+<div class="main-content">
 	<div class="header">
 		<h2>メニュー</h2>
 	</div>
