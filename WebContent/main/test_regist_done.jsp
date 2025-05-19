@@ -7,13 +7,12 @@
 </div>
 
 	<div class = "main-content">
+		<div class= "header">
 		<%-- 見出し --%>
-		<h2 id = "headline">成績登録</h2>
-		<p>登録が完了しました
-
-		<div id = "menu">
-
+		<h2>成績登録</h2>
 		</div>
+
+		<p>登録が完了しました</p>
 
 		<a href = "TestRegist.action">戻る</a>
 		<a href = "TestList.action">成績参照</a>
