@@ -3,6 +3,7 @@
 /*-------------------------------------------------------------*/
 /*ヘッダーの処理（共通）*/
 header {
+	color: #2A3540;
 	display: flex;
 	width: 100%;
 	height: 80px;
@@ -176,6 +177,8 @@ nav li:hover a::after {
 }
 
 .main-content .header h2 {
+	color: #2A2D40;
+
 	margin-right: auto;
 
 	line-height: 60px;
@@ -232,7 +235,7 @@ nav li:hover a::after {
 
 .link-button {
 	background: none;
-	color: blue;
+	color: #81A5D4;
 	border: none;
 	padding: 0;
 	font: inherit;
@@ -241,10 +244,54 @@ nav li:hover a::after {
 }
 
 .link-button:hover {
+	color: #5E70A1;
 	text-decoration: none;
 }
 
 .link-button:focus {
+	color: #8A7CB5;
+	outline: none;
+	text-decoration: none;
+}
+
+.link-button-header {
+	background: none;
+	color: #4A6B91;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.link-button-header:hover {
+	color: #374269;
+	text-decoration: none;
+}
+
+.link-button-header:focus {
+	color: #5D477D;
+	outline: none;
+	text-decoration: none;
+}
+
+.link-button-headline {
+	background: none;
+	color: #3D4969;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.link-button-headline:hover {
+	color: #2B2C4A;
+	text-decoration: none;
+}
+
+.link-button-headline:focus {
+	color: #463963;
 	outline: none;
 	text-decoration: none;
 }
