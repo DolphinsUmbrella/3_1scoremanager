@@ -16,6 +16,7 @@
     .button-group {
         flex: 1; /* 利用可能なスペースを均等に分配し、幅を統一する */
         min-width: 0;
+        max-height: 300px;
         display: flex;
         flex-direction: column;
         align-items: center;

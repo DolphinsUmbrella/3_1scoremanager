@@ -40,7 +40,7 @@ footer {
 	text-align: center;
 	padding: 10px 0;
 	background-color: #c0c0c0;
-	position: fixed;
+	/*position: fixed;*/
 	bottom: 0;
 	left: 0;
 	z-index: 100;
@@ -56,7 +56,7 @@ body {
 	background: #ffffff;
 	margin: 0;
 	padding-top: 80px; /* 固定ヘッダーのために必要 */
-	padding-bottom: 40px;
+	/*padding-bottom: 40px;*/
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -147,7 +147,6 @@ nav li:hover a::after {
 	padding: 20px;
 	margin-left: calc(20% + 20px);
 	padding-top: 100px;
-	padding-bottom: calc(40px + 20px);
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
