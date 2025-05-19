@@ -3,6 +3,6 @@
 	</body>
 
 	<footer>
-		<small>3_1　得点管理</small>
+		<small>©2025 TIC_大原学園</small>
 	</footer>
 </html>
