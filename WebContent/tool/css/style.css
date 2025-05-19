@@ -205,6 +205,35 @@ nav li:hover a::after {
 	max-width: none;
 }
 
+/* テーブルを含むフォームのスタイルを追加 */
+.main-content .table-form {
+    /* デフォルトのフォームの余白をリセットし、幅の制限をなくす */
+    margin: 0;
+    padding: 0;
+    width: 100%; /* 親要素の幅いっぱいに広がるようにする */
+    max-width: none; /* 小さい画面では max-width の制限をなくす */
+    display: block; /* ブロック要素として表示 */
+}
+
+/* ボタンを含む div のスタイル（大きい画面用：フレックスボックスで右寄せ） */
+.main-content .table-form > div {
+	width: 100%; /* フレックスコンテナとして幅を確保 */
+	margin-top: 10px; /* テーブルとの間に余白を追加 */
+
+	/* Flexbox を使って内容（ボタン）を右寄せ */
+	display: flex;
+	justify-content: flex-end; /* アイテムを右端に寄せる */
+	align-items: center; /* 必要に応じて垂直方向の中央寄せ */
+
+	padding-right: 20px;  /* 必要に応じてここにパディングを追加して位置を調整 */
+
+	max-width: 800px; /* 親フォームの max-width に合わせる */
+	margin-left: auto; /* 中央寄せ */
+	margin-right: auto; /* 中央寄せ */
+
+	text-align: right;
+}
+
 .main-content th,
 .main-content td {
 	border-left: none;
@@ -526,7 +555,8 @@ td {
 		flex-grow: 2;
 	}
 
-    .main-content table {
+	.main-content table,
+    .main-content table-form {
         width: 100%;
         max-width: 800px;
         margin-left: auto;
@@ -539,6 +569,12 @@ td {
         margin-left: auto;
         margin-right: auto;
     }
+
+
+	.main-content .table-form > div input[type="submit"] {
+    	padding: 10px 20px;
+    	font-size: 1em;
+	}
 }
 
 /*-------------------------------------------------------------*/
@@ -629,12 +665,19 @@ td {
         padding: 0px;
         margin-bottom: 20px
 	}
+
 	.main-content .header {
         position: static;
         top: auto;
         margin-bottom: 10px;
         padding: 0 10px;
     }
+
+    .main-content .table-form > div input[type="submit"] {
+    	padding: 8px 10px;
+    	font-size: 0.8em;
+
+	}
 
 	.button-group {
 		margin-right: 0;

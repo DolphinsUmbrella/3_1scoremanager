@@ -110,8 +110,7 @@
 			<small>科目：${ subject.getName() }(${ count }回)</small>
 		</div>
 
-		<form action = "TestRegistExecute.action" method = "post">
-
+		<form action = "TestRegistExecute.action" method = "post" class="table-form">
 		<table>
 			<tr>
 				<th>入学年度</th>
@@ -142,7 +141,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-			<p><input type = "submit" value="登録して終了"></p>
+			<div><input type = "submit" value="登録して終了"></div>
 		</form>
 	</div>
 
