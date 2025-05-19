@@ -31,7 +31,7 @@
 		<h2>科目管理</h2>
 
 		<%-- 新規追加リンク --%>
-		<a href = "SubjectCreate.action">新規追加</a>
+		<a href = "SubjectCreate.action" class = "link-button-headline">新規追加</a>
 	</div>
 
 	<table>

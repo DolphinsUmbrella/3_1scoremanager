@@ -74,7 +74,7 @@
 						<option value = "000">----</option>
 						<c:forEach var="s" items="${ subList }">
 							<c:choose>
-								<c:when test="${ s == subject.getCd() }">
+								<c:when test="${ s.getCd() == subject.getCd() }">
 									<option value = "${ s.getCd() }" selected>${ s.getName() }</option>
 								</c:when>
 								<c:otherwise>
@@ -88,14 +88,57 @@
 				<span class="input-4">
 					<select name = "count">
 						<option value = "0">----</option>
-						<option value = "1">1</option>
-						<option value = "2">2</option>
+						<c:forEach var="i" begin="1" end="2">
+							<c:choose>
+								<c:when test="${ i == count }">
+									<option value = "${ i }" selected>${ i }</option>
+								</c:when>
+								<c:otherwise>
+									<option value = "${ i }">${ i }</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</select>
 				</span>
 
 			</div>
 		</form>
 	</div>
+
+	<%-- 検索結果がある場合は表示 --%>
+		<div>
+			<small>科目：${ subject.getName() }(${ count }回)</small>
+		</div>
+		<table>
+			<tr>
+				<th>入学年度</th>
+				<th>クラス</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>点数</th>
+			</tr>
+			<c:forEach var="t" items="${ tList }">
+				<tr>
+					<td>${ t.getStudent().getEntYear() }</td>
+					<td>${ t.getStudent().getClassNum() }</td>
+					<td>${ t.getStudent().getNo() }</td>
+					<td>${ t.getStudent().getName() }</td>
+					<td>
+						<c:choose>
+							<c:when test="${ t.getPoint() > 0 }">
+								<input type = "text"
+									   name = "point_${ t.getStudent().getNo() }"
+									   value = "${ t.getPoint() }">
+							</c:when>
+							<c:otherwise>
+								<input type = "text"
+									   name = "point_${ t.getStudent().getNo() }">
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 
 
 		<!-- <div>

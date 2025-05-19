@@ -10,7 +10,7 @@
 		<h2>学生管理</h2>
 
 		<%-- 新規追加リンク --%>
-		<a href = "StudentCreate.action">新規追加</a>
+		<a href = "StudentCreate.action"class = "link-button-headline">新規追加</a>
 	</div>
 	<div class="filter-group">
 		<form action = "StudentList.action">
@@ -93,9 +93,12 @@
 						<td>○</td>
 					</c:otherwise>
 				</c:choose>
-					<td>
+				<td>
 					<form action = "StudentUpdate.action" method = "post">
-						<input type = "submit" class = "link-button" name="" value = "変更">
+						<input type = "submit"
+							   class = "link-button"
+							   name = ""
+							   value = "変更">
 						<input type = "hidden" name = "no" value = "${ s.getNo() }">
 					</form>
 				</td>

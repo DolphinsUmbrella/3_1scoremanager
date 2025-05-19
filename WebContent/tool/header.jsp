@@ -17,9 +17,9 @@
 			<div class="header-right">
 				<c:if test="${user != null}">
 					<p>${ user.getName() }様
-           			<a href = "Logout.action">ログアウト</a>
-           			</p>
-       			</c:if>
-   			</div>
+					<a href = "Logout.action" class = "link-button-header">ログアウト</a>
+					</p>
+				</c:if>
+			</div>
 
 		</header>
