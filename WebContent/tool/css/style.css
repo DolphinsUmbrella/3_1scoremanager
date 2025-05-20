@@ -439,6 +439,29 @@ td {
     background-color: #d4d4d4;
 }
 
+/* チェックボックスの大きさを調整 */
+.student-serach-box .input-3 input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    /* 必要に応じてマージンを調整し、完璧に揃うようにします */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.student-serach-box .input-3 {
+    /* チェックボックスのコンテナが中央揃えになるようにします */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* オプション: チェックボックスのラベルテキストを大きくしたい場合 */
+.student-serach-box .label-3 {
+    /* 他のラベルのフォントサイズに合わせて調整します */
+    font-size: 1em; /* または他のラベルのフォントサイズ */
+}
+
 /*-------------------------------------------------------------*/
 /* ボタンのデザイン (共通) */
 .btn-circle-border-simple {
@@ -711,7 +734,7 @@ td {
 
 .popup-message {
     position: fixed;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
