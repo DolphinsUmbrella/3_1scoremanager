@@ -42,38 +42,4 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.remove(); // DOMからポップアップを削除する
         }, 3000); // 3000ミリ秒 = 3秒
     }
-
-    // --- ここから新しいHTML5フォームバリデーションのカスタマイズ処理を追加 ---
-
-    // パスワード入力フィールドのバリデーションメッセージをカスタマイズ
-    const passwordInput = document.querySelector('input[name="password"]');
-
-    if (passwordInput) {
-        passwordInput.addEventListener('invalid', function(event) {
-            // デフォルトのバリデーションメッセージ表示をキャンセル
-            event.preventDefault();
-            // カスタムメッセージを設定
-            passwordInput.setCustomValidity('30文字以内の半角英数字でご入力ください。');
-        });
-
-        // ユーザーが入力するたびにカスタムバリデーションメッセージをリセット
-        passwordInput.addEventListener('input', function(event) {
-            passwordInput.setCustomValidity('');
-        });
-    }
-
-    // 教員ID入力フィールドのバリデーションメッセージをカスタマイズ
-    const teacherIdInput = document.querySelector('input[name="teacher_id"]');
-    if (teacherIdInput) {
-        teacherIdInput.addEventListener('invalid', function(event) {
-            event.preventDefault();
-            // 教員IDに合わせたメッセージを設定
-            teacherIdInput.setCustomValidity('半角でご入力ください。');
-        });
-        teacherIdInput.addEventListener('input', function(event) {
-            teacherIdInput.setCustomValidity('');
-        });
-    }
-
-    // --- ここまで新しいHTML5フォームバリデーションのカスタマイズ処理 ---
 });

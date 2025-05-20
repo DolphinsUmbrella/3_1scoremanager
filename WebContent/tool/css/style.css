@@ -547,11 +547,6 @@ td {
 	box-sizing: border-box;
 }
 
-.login-content .error-message {
-	color: red;
-	margin-bottom: 10px;
-}
-
 /*-------------------------------------------------------------*/
 /* 拡大画面の時の比率を調整 */
 @media screen and (min-width: 769px) {
@@ -618,6 +613,7 @@ td {
         flex-wrap: wrap;
         justify-content: center;
     }
+
     nav li {
         flex: 1 1 auto;
         min-width: 120px;
@@ -635,18 +631,22 @@ td {
         order: 1;
         flex-basis: auto;
     }
+
     nav li:nth-child(2) { /* '学生管理' */
         order: 2;
         flex-basis: auto;
     }
+
     nav li:nth-child(5) { /* '科目管理' (元の4番目が5番目になる) */
         order: 3;
         flex-basis: auto;
     }
+
     nav li:nth-child(3) { /* '成績登録' (元の2番目が3番目になる) */
         order: 5;
         flex-basis: auto;
     }
+
     nav li:nth-child(4) { /* '成績参照' (元の3番目が4番目になる) */
         order: 6;
         flex-basis: auto;
@@ -689,13 +689,11 @@ td {
         z-index: 98;
         margin-bottom: 10px;
         padding: 0 10px;
-
     }
 
     .main-content .table-form > div input[type="submit"] {
     	padding: 8px 10px;
     	font-size: 0.8em;
-
 	}
 
 	.button-group {
@@ -729,7 +727,7 @@ td {
 
 }
 
-
+/*-------------------------------------------------------------*/
 /*ポップアップメッセージ*/
 
 .popup-message {
