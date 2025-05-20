@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000); // 3000ミリ秒 = 3秒
     }
 
-});
-
-window.addEventListener('DOMContentLoaded', function(){
     const passwordField = document.getElementById('password');
     const toggleCheckbox = document.getElementById('toggleCheckbox');
 
@@ -56,4 +53,5 @@ window.addEventListener('DOMContentLoaded', function(){
         passwordField.type = 'password';
       }
     	});
-    });
+
+});
