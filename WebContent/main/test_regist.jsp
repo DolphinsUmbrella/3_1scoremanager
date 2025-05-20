@@ -106,44 +106,45 @@
 	</div>
 
 	<%-- 検索結果がある場合は表示 --%>
-	<div>
-		<small>科目：${ subject.getName() }(${ count }回)</small>
-	</div>
+	<c:if test="${ tList != null }">
+		<div>
+			<small>科目：${ subject.getName() }(${ count }回)</small>
+		</div>
 
-	<form action = "TestRegistExecute.action" method = "post" class="table-form">
-		<table>
-			<tr>
-				<th>入学年度</th>
-				<th>クラス</th>
-				<th>学生番号</th>
-				<th>氏名</th>
-				<th>点数</th>
-			</tr>
-			<c:forEach var="t" items="${ tList }">
+		<form action = "TestRegistExecute.action" method = "post" class="table-form">
+			<table>
 				<tr>
-					<td>${ t.getStudent().getEntYear() }</td>
-					<td>${ t.getStudent().getClassNum() }</td>
-					<td>${ t.getStudent().getNo() }</td>
-					<td>${ t.getStudent().getName() }</td>
-					<td>
-						<c:choose>
-							<c:when test="${ t.getPoint() > 0 }">
-								<input type = "text"
-									   name = "point_${ t.getStudent().getNo() }"
-									   value = "${ t.getPoint() }">
-							</c:when>
-							<c:otherwise>
-								<input type = "text"
-									   name = "point_${ t.getStudent().getNo() }">
-							</c:otherwise>
-						</c:choose>
-					</td>
+					<th>入学年度</th>
+				<th>クラス</th>
+					<th>学生番号</th>
+					<th>氏名</th>
+					<th>点数</th>
 				</tr>
-			</c:forEach>
-		</table>
-			<div><input type = "submit" value="登録して終了"></div>
-		</form>
-	</div>
-
+				<c:forEach var="t" items="${ tList }">
+					<tr>
+						<td>${ t.getStudent().getEntYear() }</td>
+						<td>${ t.getStudent().getClassNum() }</td>
+						<td>${ t.getStudent().getNo() }</td>
+						<td>${ t.getStudent().getName() }</td>
+						<td>
+							<c:choose>
+								<c:when test="${ t.getPoint() > 0 }">
+									<input type = "text"
+										   name = "point_${ t.getStudent().getNo() }"
+										   value = "${ t.getPoint() }">
+								</c:when>
+								<c:otherwise>
+									<input type = "text"
+										   name = "point_${ t.getStudent().getNo() }">
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+				<div><input type = "submit" value="登録して終了"></div>
+			</form>
+		</div>
+	</c:if>
 
 <%@include file = "../tool/footer.jsp" %>

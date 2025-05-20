@@ -93,23 +93,44 @@ public class TestDao extends Dao{
 
 	//おそらく1行ずつinsertするためのもの
 	private boolean save(Test t, Connection con) throws Exception{
-		PreparedStatement st = con.prepareStatement(
-			"insert into test values(?, ?, ?, ?, ?, ?)");
-		st.setString(1, t.getStudent().getNo());
-		st.setString(2, t.getSubject().getCd());
-		st.setString(3, t.getSchool().getCd());
-		st.setInt(4, t.getNo());
-		st.setInt(5, t.getPoint());
-		st.setString(6, t.getClassNum());
+		if(t.getPoint()== -1){
+			PreparedStatement st = con.prepareStatement(
+					"insert into test student_no ,subject_cd ,school_cd ,no ,point ,class_num "+
+					"values ?,?,?,?,? ");
+				st.setString(1, t.getStudent().getNo());
+				st.setString(2, t.getSubject().getCd());
+				st.setString(3,t.getSchool().getCd());
+				st.setInt(4,t.getNo());
+				st.setString(5,t.getClassNum());
 
-		int line = st.executeUpdate();
+				int line = st.executeUpdate();
 
-		st.close();
+				st.close();
 
-		if (line > 0){
-			return true;
-		}else{
-			return false;
+				if (line > 0){
+					return true;
+				}else{
+					return false;
+				}
+		}
+		else{
+			PreparedStatement st = con.prepareStatement(
+					"update test as t. ");
+				st.setInt(1, t.getPoint());
+				st.setInt(2, t.getStudent().getEntYear());
+				st.setString(3,t.getClassNum());
+				st.setString(4,t.getSubject().getCd());
+				st.setInt(5,t.getNo());
+
+				int line = st.executeUpdate();
+
+				st.close();
+
+				if (line > 0){
+					return true;
+				}else{
+					return false;
+				}
 		}
 	}
 
@@ -122,14 +143,16 @@ public class TestDao extends Dao{
 		Connection con = getConnection();
 
 		/*
-			select a.ent_year, a.class_num, a.no as student_no, a.name, b.point
+			select a.ent_year, a.class_num, a.no as student_no, a.name, b.no as count, b.point
 			from student as a
-			join test as b
+			left join test as b
 			on a.no = b.student_no
-			where a.ent_year = 2024
-			and b.subject_cd = '101'
-			and b.school_cd = 'tes'
-			and b.no = 1
+			where (b.no = 1 or b.no is null)
+			and (b.subject_cd = '101' or b.subject_cd is null)
+			and a.ent_year = '2025'
+			and a.class_num =  '101'
+			and a.school_cd = 'tes'
+			order by a.no
 		 */
 		PreparedStatement st = con.prepareStatement(
 			"select a.ent_year, a.class_num, a.no as student_no, a.name, b.no as count, b.point "+
@@ -204,34 +227,4 @@ public class TestDao extends Dao{
 
 		return list;
 	}
-
-	// 成績更新 (StudentUpdateExecuteAction.javaで利用)
-		public int updateTest(Test t) throws Exception {
-		    Connection con = null;
-		    PreparedStatement st = null;
-		    int line = 0;
-
-		    try {
-		        con = getConnection();
-
-		        // 正しいSQLクエリ：testテーブルの更新
-		        String sql = "UPDATE test SET subject_cd = ?, point = ?,no =? " +
-		                     "WHERE student_no = ?";
-		        st = con.prepareStatement(sql);
-
-		        // パラメータ設定
-		        st.setString(1, t.getSubject().getCd());      // 科目コード
-		        st.setInt(2, t.getPoint());                    // 点数
-		        st.setInt(3, t.getNo());                       // test回数
-		        st.setString(4, t.getStudent().getNo());        // 学生番号
-		        line = st.executeUpdate();
-		    } catch (Exception e) {
-		        throw new Exception("成績更新中にエラーが発生しました", e);
-		    } finally {
-		        if (st != null) st.close();
-		        if (con != null) con.close();
-		    }
-
-		    return line;
-		}
 }
