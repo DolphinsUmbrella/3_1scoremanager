@@ -42,4 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.remove(); // DOMからポップアップを削除する
         }, 3000); // 3000ミリ秒 = 3秒
     }
+
 });
+
+window.addEventListener('DOMContentLoaded', function(){
+    const passwordField = document.getElementById('password');
+    const toggleCheckbox = document.getElementById('toggleCheckbox');
+
+    toggleCheckbox.addEventListener('change', function () {
+      if (toggleCheckbox.checked) {
+        passwordField.type = 'text';
+      } else {
+        passwordField.type = 'password';
+      }
+    	});
+    });
