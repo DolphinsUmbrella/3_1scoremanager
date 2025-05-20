@@ -91,7 +91,7 @@ public class TestRegistAction extends Action{
 
 		System.out.println("件数："+tList.size());
 
-		request.setAttribute("tList", tList);
+		session.setAttribute("tList", tList);
 		request.setAttribute("count", num);
 		request.setAttribute("subject", sub);
 		request.setAttribute("searchTestList", true);

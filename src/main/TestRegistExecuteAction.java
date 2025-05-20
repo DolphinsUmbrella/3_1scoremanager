@@ -1,5 +1,6 @@
 package main;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,62 +13,76 @@ import dao.TestDao;
 import tool.Action;
 
 public class TestRegistExecuteAction extends Action {
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        Teacher user = (Teacher) session.getAttribute("user");
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		Teacher user = (Teacher) session.getAttribute("user");
 
-        if (Objects.isNull(user)) {
-            response.sendRedirect("../Login.action");
-            return null;
-        }
-        int point;
-        try {
-            // リクエストパラメータから値を取得
-            String pointStr = request.getParameter("point");  // 点数を文字列で取得
+		if (Objects.isNull(user)) {
+			response.sendRedirect("../Login.action");
+			return null;
+		}
 
-            // 点数が空白かどうかチェック
-            if (pointStr == null || pointStr.isEmpty()) {
-                request.setAttribute("error", "点数が空白です。正しい値を入力してください。");
-                return "test_regist.jsp";  // 元のページに戻る
+		List<Test> tList = (List<Test>)session.getAttribute("tList");
+		session.removeAttribute("tList");
+		boolean errorFlag = false;
+
+		try {
+			//点数取得、値のチェックとtListに格納
+			for (Test t : tList){
+				// リクエストパラメータから点数を取得
+				String pointStr = request.getParameter("point_"+t.getStudent().getNo());
+
+				System.out.println("点数："+pointStr);
+
+				//点数なしの場合-1を格納
+				//Daoでは点数が-1の場合削除へ、
+				//JSPに戻る場合は-1は空白として扱われる
+				if (Objects.isNull(pointStr)){
+					t.setPoint(-1);
+					continue;
+				}
+
+				//int型へ変換
+				int point = Integer.parseInt(pointStr);
+
+				//点数がちゃんとしてない場合は-2を格納
+				//JSPにて、-2が格納されている場合は
+				//エラーメッセージを出力する処理をします
+				if (point < 0 || point > 100) {
+					t.setPoint(-2);
+					errorFlag = true;
+					continue;
+				}
+
+				//点数をリストに格納
+				t.setPoint(point);
             }
 
-            try {
-                // 点数を数値に変換
-                point = Integer.parseInt(pointStr);
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "点数の値が数値ではありません。");
-                return "test_regist.jsp";  // 元のページに戻る
-            }
+			System.out.println("格納した点数：");
+			for (Test t : tList){
+				System.out.println(t.getPoint());
+			}
 
-            // 点数の範囲チェック (0〜100)
-            if (point < 0 || point > 100) {
-                request.setAttribute("error", "点数は0から100の範囲で入力してください。");
-                return "test_regist.jsp";  // 元のページに戻る
-            }
+			//点数が0～100でない箇所があった場合、
+			//test_regist.jspに戻します
+			if (errorFlag){
+				session.setAttribute("tList", tList);
+				return "test_regist.jsp";
+			}
 
-            // Testオブジェクトの生成と値設定
-            Test test = new Test();
-            test.setPoint(point);
+			//入力値がすべて正常であるためDBへ書き込み
+			TestDao tDao = new TestDao();
+			boolean result = tDao.save(tList);
 
-            // TestDaoを使って成績を更新
-            TestDao dao = new TestDao();
-            int result = dao.updateTes(test);
-
-            if (result > 0) {
-                // 更新成功時
-                request.setAttribute("message", "成績の更新が完了しました。");
-                return "test_regist_done.jsp";
-            } else {
-                // 更新失敗時
-                request.setAttribute("error", "成績の更新に失敗しました。");
-                return "error.jsp";
-            }
+			if (result){
+				return "test_regist_done.jsp";
+			}else{
+				return "../error.jsp";
+			}
 
         } catch (Exception e) {
-            // エラーハンドリング
-            e.printStackTrace();
-            request.setAttribute("error", "成績更新中にエラーが発生しました: " + e.getMessage());
-            return "error.jsp";
+        	System.out.println(e);
+            return "../error.jsp";
         }
     }
 }
