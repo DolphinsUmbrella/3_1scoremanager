@@ -106,11 +106,11 @@
 	</div>
 
 	<%-- 検索結果がある場合は表示 --%>
-		<div>
-			<small>科目：${ subject.getName() }(${ count }回)</small>
-		</div>
+	<div>
+		<small>科目：${ subject.getName() }(${ count }回)</small>
+	</div>
 
-		<form action = "TestRegistExecute.action" method = "post" class="table-form">
+	<form action = "TestRegistExecute.action" method = "post" class="table-form">
 		<table>
 			<tr>
 				<th>入学年度</th>

@@ -14,8 +14,9 @@
 
 		<p>登録が完了しました</p>
 
-		<a href = "TestRegist.action">戻る</a>
-		<a href = "TestList.action">成績参照</a>
+		<h4>成績登録へ → <a href = "TestRegist.action">戻る</a></h4>
+
+		<h4>成績参照へ → <a href = "TestList.action">移動</a></h4>
 
 	</div>
 
