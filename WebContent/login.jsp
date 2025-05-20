@@ -15,8 +15,14 @@
 			</c:if>
 		</div>
 
+<<<<<<< HEAD
 		<p><input type = "text" name = "teacher_id" placeholder="半角でご入力ください" value="${teacher_id}" required="required"><br>
 		<input type = "password" name = "password" placeholder="30文字以内の半角英数字でご入力ください" required="required"></p>
+=======
+
+		<p><input type = "text" name = "teacher_id" placeholder="ID" value="${teacher_id}" required="required"><br>
+		<input type = "password" name = "password" placeholder="password" required="required"></p>
+>>>>>>> branch 'master' of https://github.com/DolphinsUmbrella/3_1scoremanager.git
 		<p><input type = "submit" value = "ログイン"></p>
 
 	</form>
