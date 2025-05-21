@@ -142,9 +142,9 @@
 					</tr>
 				</c:forEach>
 			</table>
-				<div><input type = "submit" value="登録して終了"></div>
-			</form>
-		</div>
+			<div><input type = "submit" value="登録して終了"></div>
+		</form>
 	</c:if>
+</div>
 
 <%@include file = "../tool/footer.jsp" %>
