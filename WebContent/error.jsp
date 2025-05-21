@@ -5,7 +5,7 @@
 <div class = "login-content">
 		<p>エラーが発生しました。</p>
 
-		<p><a href = "Login.action">戻る</a></p>
+		<!-- <p><a href = "Login.action">戻る</a></p>-->
 
 </div>
 <%@include file = "../tool/footer.jsp" %>

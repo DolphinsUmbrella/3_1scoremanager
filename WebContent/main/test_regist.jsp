@@ -115,10 +115,11 @@
 			<table>
 				<tr>
 					<th>入学年度</th>
-				<th>クラス</th>
+					<th>クラス</th>
 					<th>学生番号</th>
 					<th>氏名</th>
 					<th>点数</th>
+					<!-- <th>削除</th> -->
 				</tr>
 				<c:forEach var="t" items="${ tList }">
 					<tr>
@@ -129,16 +130,22 @@
 						<td>
 							<c:choose>
 								<c:when test="${ t.getPoint() > 0 }">
-									<input type = "text"
+									<input type = "number" min="0" max="100"
 										   name = "point_${ t.getStudent().getNo() }"
 										   value = "${ t.getPoint() }">
 								</c:when>
 								<c:otherwise>
-									<input type = "text"
+									<input type = "number" min="0" max="100"
 										   name = "point_${ t.getStudent().getNo() }">
 								</c:otherwise>
 							</c:choose>
 						</td>
+						<!-- 仮の削除ボタンの作成
+						<td>
+							<input type = "checkbox" id = "test_delete" name = "test_delete" value = "true" checked>
+							<input type = "hidden" value = "false" name = "test_delete">
+						</td>
+						-->
 					</tr>
 				</c:forEach>
 			</table>
