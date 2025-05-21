@@ -45,6 +45,13 @@ public class TestListSubjectExecuteAction extends Action{
 		System.out.println("クラス番号："+classNum);
 		System.out.println("科目コード："+subject.getCd());
 
+		//フィルターの入力が不十分
+		if (entYear == 0 ||
+			classNum.equals("000") ||
+			Objects.isNull(subject.getCd())){
+			request.setAttribute("shortageFilterMessage", "入学年度、クラス、科目を選択してください");
+		}
+
 		TestListSubjectDao tsubDao = new TestListSubjectDao();
 		//入学年度、クラス番号、学生番号、氏名、点数を取得
 		List<TestListSubject> tsubList = tsubDao.filter(entYear, classNum, subject, user.getSchool());
@@ -61,6 +68,11 @@ public class TestListSubjectExecuteAction extends Action{
 
 		//ヘッダー用
 		request.setAttribute("testListHeader", "成績参照（科目別検索結果）");
+
+		//検索結果が１件もない
+		if (tsubList.size() <= 0){
+			request.setAttribute("noTestMessage", "該当の成績が存在しません");
+		}
 
 		//検索結果表示フラグ
 		request.setAttribute("testListSubjectFlag", true);

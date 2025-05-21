@@ -29,6 +29,11 @@ public class SubjectListAction extends Action{
 
 		request.setAttribute("subList", subList);
 
+		//科目がない
+		if (subList.size() <= 0){
+			request.setAttribute("noSubMessage", "科目がありません");
+		}
+
 		return "subject_list.jsp";
 	}
 }

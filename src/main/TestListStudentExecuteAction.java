@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,26 +30,51 @@ public class TestListStudentExecuteAction extends Action{
 		//	どんな名前で値が入ってくるかわからないため仮
 		String no = request.getParameter("no");
 
-		StudentDao sDao = new StudentDao();
+		System.out.print("成績検索(学生)：");
+		System.out.println(no);
 
-		Student stu = new Student();
-		stu.setNo(no);
-		stu.setName(sDao.get(no).getName());
+		//学生番号が入力されていない
+		if (no.isEmpty()){
+			request.setAttribute("shortageFilterMessage", "学生番号を入力して下さい");
 
-		//4/25小柿：この辺もDao待ち
-		TestListStudentDao tstuDao = new TestListStudentDao();
-		List<TestListStudent> list = tstuDao.filter(stu);
+			//エラー回避のため空のlistを作成
+			List<TestListStudent> list = new ArrayList<>();
+			request.setAttribute("tstuList", list);
+		}
+		else{
+			StudentDao sDao = new StudentDao();
 
-		//確認用出力
-		for (TestListStudent s : list){
-			System.out.println(s.getSubjectName()+"："+s.getNum()+"："+s.getPoint());
+			Student stu = new Student();
+			stu.setNo(no);
+			stu.setName(sDao.get(no).getName());
+
+			//4/25小柿：この辺もDao待ち
+			TestListStudentDao tstuDao = new TestListStudentDao();
+			List<TestListStudent> list = tstuDao.filter(stu);
+
+			//確認用出力
+			for (TestListStudent s : list){
+				System.out.println(s.getSubjectName()+"："+s.getNum()+"："+s.getPoint());
+			}
+
+			request.setAttribute("tstuList", list);
+			request.setAttribute("student", stu);
+
+			//検索結果が無い場合のメッセージ
+			if (list.size() <= 0){
+				//そもそも存在しない学生番号だった
+				if (Objects.isNull(stu.getName())){
+					request.setAttribute("noTestMessage", "学生番号"+no+"の生徒が存在しません");
+				}
+				//シンプル成績が無かった
+				else{
+					request.setAttribute("noTestMessage", "学生番号"+no+"の生徒は成績が登録されていません");
+				}
+			}
 		}
 
-		request.setAttribute("tstuList", list);
-		request.setAttribute("student", stu);
-
 		//sessionの理由忘れた、あとで変えるかも
-		session.setAttribute("studentNo", no);
+		request.setAttribute("studentNo", no);
 
 		//ヘッダー用
 		request.setAttribute("testListHeader", "成績参照（学生別検索結果）");
