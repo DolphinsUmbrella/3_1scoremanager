@@ -8,7 +8,7 @@
 <div class = "main-content">
 	<%-- 見出し --%>
 	<div class = "header">
-		<h2>成績登録</h2>
+		<h2>成績管理</h2>
 	</div>
 
 	<%-- 成績検索フォーム --%>
@@ -105,8 +105,13 @@
 		</form>
 	</div>
 
+	<div>
+		<p style = "color:red;">${ nullParameterMessage }</p>
+		<p style = "color:red;">${ noTestMessage }</p>
+	</div>
+
 	<%-- 検索結果がある場合は表示 --%>
-	<c:if test="${ tList != null }">
+	<c:if test="${ tList.size() > 0 }">
 		<div>
 			<small>科目：${ subject.getName() }(${ count }回)</small>
 		</div>

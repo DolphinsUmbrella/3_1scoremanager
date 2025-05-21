@@ -13,7 +13,7 @@
 		<a href = "StudentCreate.action"class = "link-button-headline">新規追加</a>
 	</div>
 	<div class="filter-group">
-		<form action = "StudentList.action">
+		<form action = "StudentList.action" method = "post">
 			<div class="student-serach-box">
 				<span class="label-1">入学年度</span>
 				<span class="label-2">クラス</span>
@@ -68,43 +68,49 @@
 		</form>
 	</div>
 
-	<div>
-		<small>検索結果：${ sList.size() }件</small>
-	</div>
-	<table>
-		<tr>
-			<th>入学年度</th>
-			<th>学生番号</th>
-			<th>氏名</th>
-			<th>クラス</th>
-			<th>在学中</th>
-		</tr>
-		<c:forEach var="s" items="${ sList }">
+	<c:if test="${ sList.size() <= 0 }">
+		<p>該当の学生が存在しません</p>
+	</c:if>
+
+	<c:if test="${ sList.size() > 0 }">
+		<div>
+			<small>検索結果：${ sList.size() }件</small>
+		</div>
+		<table>
 			<tr>
-				<td>${ s.getEntYear() }</td>
-				<td>${ s.getNo() }</td>
-				<td>${ s.getName() }</td>
-				<td>${ s.getClassNum() }</td>
-				<c:choose>
-					<c:when test="${ s.getIsAttend() != true}">
-						<td>✕</td>
-					</c:when>
-					<c:otherwise>
-						<td>○</td>
-					</c:otherwise>
-				</c:choose>
-				<td>
-					<form action = "StudentUpdate.action" method = "post">
-						<input type = "submit"
-							   class = "link-button"
-							   name = ""
-							   value = "変更">
-						<input type = "hidden" name = "no" value = "${ s.getNo() }">
-					</form>
-				</td>
+				<th>入学年度</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>クラス</th>
+				<th>在学中</th>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach var="s" items="${ sList }">
+				<tr>
+					<td>${ s.getEntYear() }</td>
+					<td>${ s.getNo() }</td>
+					<td>${ s.getName() }</td>
+					<td>${ s.getClassNum() }</td>
+					<c:choose>
+						<c:when test="${ s.getIsAttend() != true}">
+							<td>✕</td>
+						</c:when>
+						<c:otherwise>
+							<td>○</td>
+						</c:otherwise>
+					</c:choose>
+					<td>
+						<form action = "StudentUpdate.action" method = "post">
+							<input type = "submit"
+								   class = "link-button"
+								   name = ""
+								   value = "変更">
+							<input type = "hidden" name = "no" value = "${ s.getNo() }">
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 </div>
 
 <%@include file = "../tool/footer.jsp" %>

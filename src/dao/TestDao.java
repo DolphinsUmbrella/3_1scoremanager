@@ -112,8 +112,14 @@ public class TestDao extends Dao{
 	private boolean save(Test t, Connection con) throws Exception{
 		System.out.print("点数："+t.getPoint());
 
+		Test sample = this.get(t);
+
 		//点数が-1の場合は成績削除
 		if (t.getPoint() == -1){
+			//成績が存在しない場合は何もする必要が無い
+			if (Objects.isNull(sample.getStudent())){
+				return true;
+			}
 			System.out.println("...削除");
 			PreparedStatement st = con.prepareStatement(
 				"delete from test "+
@@ -133,7 +139,6 @@ public class TestDao extends Dao{
 			return line>0;
 		}
 
-		Test sample = this.get(t);
 		System.out.print("...データ：");
 		System.out.print(sample.getStudent());
 
