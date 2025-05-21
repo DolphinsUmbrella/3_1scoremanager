@@ -9,7 +9,7 @@
 	<div class = "main-content">
 		<div class= "header">
 		<%-- 見出し --%>
-		<h2>成績登録</h2>
+		<h2>成績管理</h2>
 		</div>
 
 		<p>登録が完了しました</p>
