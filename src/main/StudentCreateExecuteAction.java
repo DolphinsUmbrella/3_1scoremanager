@@ -89,15 +89,24 @@ public class StudentCreateExecuteAction extends Action{
 
 		//入力された学生番号が重複してる場合
 		if(Objects.nonNull(sDao.get(no).getNo())){
+			// 入学年度と学生番号はそのまま保持
+			Student stu =  new Student();
+			String stu_no = stu.getNo();
+			int entYear = stu.getEntYear();
+			String Class = stu.getClassNum();
+
+			System.out.println("保持された値");
+			System.out.println("入学年度："+ entYear);
+			System.out.println("学生番号："+ no);
 
 			//ここは入学年度もセットしてください
 			//ここに遷移するなら必ず入学年度は正しく入力されています
 
 			//訂正
-			request.setAttribute("entYear", entYearStr);
-			request.setAttribute("no",no);
+			request.setAttribute("entYear", entYear);
+			request.setAttribute("no",stu_no);
 			request.setAttribute("name", name);
-			request.setAttribute("classNum", classNum);
+			request.setAttribute("classNum", Class);
 			request.setAttribute("isAttend", isAttend);
 			request.setAttribute("studentNoMessage", "学生番号が重複しています");
 
