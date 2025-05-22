@@ -28,7 +28,7 @@ public class LoginExecuteAction extends Action{
 
 		//idとパスワードがどちらも存在しない場合
 		if (Objects.isNull(id) || id.isEmpty() && (Objects.isNull(password) || password.isEmpty())){
-		    String message = "IDとパスワードを入力してください。";
+		    String message = "IDまたはパスワードを入力してください。";
 		    request.setAttribute("message", message);
 
 		    //エラーメッセージを送る時はフォワードのほうがいいっぽい
@@ -40,7 +40,7 @@ public class LoginExecuteAction extends Action{
 
 		//idが存在しない
 		if (Objects.isNull(t.getId())){
-			String message = "ログインに失敗しました。存在しないIDです。";
+			String message = "IDまたは、パスワードが違います。";
 			request.setAttribute("teacher_id", id);
 			request.setAttribute("message", message);
 			System.out.println(message);
@@ -51,7 +51,7 @@ public class LoginExecuteAction extends Action{
 
 		//パスワードが違う
 		if (!t.getPassword().equals(password)){
-			String message = "ログインに失敗しました。パスワードが正しくありません。";
+			String message = "IDまたは、パスワードが違います。";
 			request.setAttribute("teacher_id", id);
 			request.setAttribute("password", password);
 			request.setAttribute("message", message);
