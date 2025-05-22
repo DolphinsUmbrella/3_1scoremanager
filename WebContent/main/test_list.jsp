@@ -95,7 +95,7 @@
 				<span class="label-1"><b>学生</b></span>
 				<span class="label-2">学生番号</span>
 				<span class="input-2">
-					<input type = "text" name = "no">
+					<input type = "text" name = "no" value = "${ studentNo }">
 				</span>
 			</div>
 		</form>

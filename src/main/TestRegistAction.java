@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,12 +28,14 @@ public class TestRegistAction extends Action{
 			return "null";
 		}
 
+		session.removeAttribute("tList");
 
 		String entYear = request.getParameter("ent_year");
 		String classNum = request.getParameter("class_num");
 		String subjectCd = request.getParameter("subject");
 		String num = request.getParameter("count");
 
+		System.out.println("入力されたフィルター");
 		System.out.println("入学年度："+entYear);
 		System.out.println("クラス番号："+classNum);
 		System.out.println("科目コード："+subjectCd);
@@ -54,31 +57,37 @@ public class TestRegistAction extends Action{
 		request.setAttribute("subList", subList);
 		request.setAttribute("year", year);
 
-		if (Objects.isNull(entYear)||
-			Objects.isNull(classNum) ||
-			Objects.isNull(subjectCd)||
+		//何も値が入っていない(初回遷移時)
+		if (Objects.isNull(entYear)&&
+			Objects.isNull(classNum) &&
+			Objects.isNull(subjectCd)&&
 			Objects.isNull(num)){
+			System.out.println("初回遷移です");
 
-			//何も値が入っていない(初回遷移時)
-			if (Objects.isNull(entYear)&&
-				Objects.isNull(classNum) &&
-				Objects.isNull(subjectCd)&&
-				Objects.isNull(num)){
-				System.out.println("初回遷移です");
-				return "test_regist.jsp";
-			}
-			//何か値が入ってる
-			else{
-				System.out.println("入力値が不足しています");
-				request.setAttribute("entYear", entYear);
-				request.setAttribute("classNum", classNum);
-				request.setAttribute("subject", subjectCd);
-				request.setAttribute("count", num);
-				//エラーメッセージ
-				request.setAttribute("nullParameterMessage",
-									 "入学年度とクラスと科目と回数を入力して下さい");
-				return "test_regist.jsp";
-			}
+			//エラー回避のため空のtListを作成
+			List<Test> tList = new ArrayList<>();
+			request.setAttribute("tList", tList);
+
+			return "test_regist.jsp";
+		}
+
+		if (entYear.equals("0") ||
+			classNum.equals("000") ||
+			subjectCd.equals("000") ||
+			num.equals("0")){
+
+			Subject sub = new Subject();
+			sub.setCd(subjectCd);
+
+			System.out.println("入力値が不足しています");
+			request.setAttribute("entYear", entYear);
+			request.setAttribute("classNum", classNum);
+			request.setAttribute("subject", sub);
+			request.setAttribute("count", num);
+			//エラーメッセージ
+			request.setAttribute("nullParameterMessage",
+								 "入学年度とクラスと科目と回数を入力して下さい");
+			return "test_regist.jsp";
 		}
 		//入力された入学年度、クラス、科目、回数のデータを取得
 		System.out.println("検索を実行します");
@@ -99,6 +108,11 @@ public class TestRegistAction extends Action{
 		//初期値セット用
 		request.setAttribute("entYear", entYear);
 		request.setAttribute("classNum", classNum);
+
+		//1人も学生がいなかった場合
+		if (tList.size() <= 0){
+			request.setAttribute("noTestMessage", "該当の学生が存在しません");
+		}
 
 		return "test_regist.jsp";
 		}

@@ -37,7 +37,7 @@ public class TestRegistExecuteAction extends Action {
 				//点数なしの場合-1を格納
 				//Daoでは点数が-1の場合削除へ、
 				//JSPに戻る場合は-1は空白として扱われる
-				if (Objects.isNull(pointStr)){
+				if (Objects.isNull(pointStr) || pointStr.isEmpty()){
 					t.setPoint(-1);
 					continue;
 				}
