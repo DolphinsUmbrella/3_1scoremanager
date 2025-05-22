@@ -200,6 +200,7 @@ nav li:hover a::after {
 	text-align: left !important;
 	width: 100%;
 	box-sizing: border-box;
+	padding-left: 30px;
 }
 
 /* テーブル(一覧など)のデザイン */

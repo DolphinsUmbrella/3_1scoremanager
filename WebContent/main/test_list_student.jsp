@@ -2,16 +2,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
+
 	<c:if test="${ student.getName() != null }">
-		<small>氏名：${ student.getName() }(${ student.getNo() })</small>
+		<div><small>氏名：${ student.getName() }(${ student.getNo() })</small></div>
 	</c:if>
+
 
 	<p style = "color:red;">${ noTestMessage }</p>
 	<p style = "color:red;">${ shortageFilterMessage }</p>
 
 </div>
 
-<c:if test="${ tstuList.size() > 0 }">
+
+	<c:if test="${ tstuList.size() > 0 }">
+
 	<table>
 		<tr>
 			<th>科目名</th>
