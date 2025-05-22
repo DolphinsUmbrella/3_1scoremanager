@@ -46,6 +46,7 @@ footer {
 	left: 0;
 	z-index: 100;
 	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* bodyのflex-direction: column; と組み合わせてフッターを下に固定 */
 }
 
 .footer-text {
@@ -56,25 +57,27 @@ footer {
 body {
 	background: #ffffff;
 	margin: 0;
-	padding-top: 80px;
-	/*padding-bottom: 40px;*/
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	padding-top: 80px;
+	overflow: hidden;
+	box-sizing: border-box;
+
 }
 
 /*-------------------------------------------------------------*/
 /* ナビゲーションメニューのデザイン */
 nav {
 	position: fixed;
-	top: 80px;
+	top: 80px; /* ヘッダーの高さ分 */
 	left: 10px;
 	width: 20%;
-	margin: 20px 0;
+	margin: 0; /* bodyのpadding-topを削除したためmargin-topも0に */
 	word-spacing: -5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	height: auto;
-	max-height: calc(100vh - 80px - 40px);
+	max-height: calc(100vh - 80px - 40px - 20px); /* ヘッダー高、フッター高、フッター上の余白 */
 	overflow-y: auto;
 	box-sizing: border-box;
 }
@@ -144,51 +147,52 @@ nav li:hover a::after {
 /*-------------------------------------------------------------*/
 /* メインコンテンツのデザインCSS */
 .main-content {
-	flex-grow: 1;
-	padding: 20px;
+	flex-grow: 1; /* 残りの高さを埋める */
 	margin-left: calc(20% + 20px);
-	padding-top: 100px;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	overflow-y: auto;
 	background-color: #fff;
+	border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-right: 20px;
+    padding: 0;
+    margin-top: calc(80px + 20px);
+    margin-bottom: 20px; /* フッターとの隙間 */
 }
 
 .main-content .header {
     height: 60px;
     display: flex;
-	width: 100%;
+    width: 100%;
     align-items: center;
     background-color: #c6e1ea;
-    /* width: 100%; */
-    position: fixed;
-    top: 100px;
-    left: calc(20% + 20px);
-    right: 0;
+    position: sticky;
+    top: 0px;
     z-index: 99;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
     box-sizing: border-box;
     flex-shrink: 0;
-    margin-bottom: 20px;
+}
+
+.main-content .header + * {
+    margin-top: 20px;
 }
 
 .main-content .header h2 {
 	color: #2A2D40;
-
 	margin-right: auto;
-
 	line-height: 60px;
 	margin: 0;
     flex-grow: 1;
 }
 
 .main-content .header a {
-    margin-left: auto;
+    margin-left: auto;
 	margin: 0;
-
 }
 
 /* 左寄せにするためのクラス */
@@ -203,6 +207,7 @@ nav li:hover a::after {
 	width: 100%;
 	border-collapse: collapse;
 	max-width: none;
+	margin-bottom: 20px;
 }
 
 /* テーブルを含むフォームのスタイルを追加 */
@@ -467,15 +472,16 @@ td {
 .btn-circle-border-simple {
 	display: inline-block;
 	text-decoration: none;
-	width: 120px;
-	height: 120px;
-	line-height: 120px;
+	width: 120px; /* ここを120pxに統一 */
+	height: 120px; /* ここを120pxに統一 */
+	line-height: 120px; /* ここを120pxに統一 */
 	border-radius: 50%;
 	border: solid 2px;
 	text-align: center;
 	overflow: hidden;
 	font-weight: bold;
 	transition: .4s;
+    font-size: 1.0em; /* テキストの大きさを調整 (必要に応じて) */
 }
 
 .btn-circle-border-simple:hover {
@@ -518,8 +524,8 @@ td {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: calc(100vh - 80px - 60px);
-	/* background-color: #f0f0f0; */
+	min-height: calc(100vh - 80px - 60px); /* ヘッダーの高さ(80px)とフッターの高さ(40px)を引く */
+	background-color: #f0f0f0;
 	width: 100%;
 }
 
@@ -533,7 +539,8 @@ td {
 }
 
 .login-content h1 {
-	margin-bottom: 20px;
+	margin-top: 0;
+	margin-bottom: 10px;
 }
 
 .login-content input[type="text"],
@@ -551,24 +558,85 @@ td {
 /* 拡大画面の時の比率を調整 */
 @media screen and (min-width: 769px) {
 
-    /* 既存のfilter-group, table, filter-group + div のスタイルは維持 */
-    .filter-group {
+    .main-content {
+        flex-direction: column;
+        max-width: calc(100% - 20% - 20px - 20px); /* ナビゲーションと左右のマージンを引いた幅 */
+        min-height: calc(100vh - 80px - 20px - 60px - 20px); /* ヘッダー高 + 隙間 + フッター高 + main-contentの上下margin */
+        height: calc(100vh - 80px - 20px - 60px - 20px);
+        overflow-y: auto;
+        margin-left: calc(20% + 20px);
+        margin-right: 20px;
+        margin-top: calc(0px + 20px); /* ヘッダーの高さ + 隙間20px */
+        margin-bottom: 20px;
+        padding: 0px;
+    }
+
+    /* ナビゲーションメニューの高さも調整 */
+    nav {
+        max-height: calc(100vh - 80px - 20px - 40px - 20px); /* main-contentのmin-heightと合わせる */
+        top: 80px; /* ヘッダーの高さ分 */
+        margin-top: 20px; /* ヘッダー下の隙間20px */
+    }
+
+    /* 新しく追加した .menu-button-area のスタイル */
+    .menu-button-area {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 20px; /* メインコンテンツ内のヘッダーの下とボタンエリアの間のパディング */
+        box-sizing: border-box;
+        margin-top: 0;
+    }
+
+    /* 各ボタンのグループ (.button-group) のスタイル */
+    .button-group {
+        flex: 1;
+        min-width: 0;
+        max-width: 300px;
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+        padding: 25px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-sizing: border-box;
+    }
+
+
+    /* 成績管理のボタンを横並びにするための内側のdivのスタイル */
+    .grade-buttons-container {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    /* main-content内のheaderのh2とaのflex-growは維持 */
+    .main-content .header h2 {
+		flex-grow: 1;
+	}
+
+	.main-content .header a {
+		flex-grow: 0;
+	}
+
+	/* その他のテーブルやフォーム関連のスタイルは維持 */
+	.main-content table,
+    .main-content table-form {
         width: 100%;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .main-content .header h2 {
-		flex-grow: 5;
-	}
-
-	.main-content .header a {
-		flex-grow: 2;
-	}
-
-	.main-content table,
-    .main-content table-form {
+    .filter-group {
         width: 100%;
         max-width: 800px;
         margin-left: auto;
@@ -582,7 +650,6 @@ td {
         margin-right: auto;
     }
 
-
 	.main-content .table-form > div input[type="submit"] {
     	padding: 10px 20px;
     	font-size: 1em;
@@ -592,6 +659,12 @@ td {
 /*-------------------------------------------------------------*/
 /* 縮小画面の時の比率を調整 */
 @media screen and (max-width: 768px) {
+
+	body{
+		padding-top: 0px;
+		overflow: auto;
+	}
+
 	/* 小さい画面の場合、要素の配置を変更 */
     nav {
         position: static;
@@ -599,12 +672,12 @@ td {
         height: auto;
         top: auto;
         left: auto;
-        margin: 0; /* マージンを削除 */
+        margin-top: 80px; /* ヘッダーの高さ分、下にずらす */
+        margin-bottom: 0; /* ナビゲーションメニューの下の隙間をなくす */
         overflow-y: visible;
-        padding: 10px; /* パディングを維持 */
+        padding: 10px;
         box-sizing: border-box;
         background-color: #CBCBCB;
-
     }
     nav ul {
         margin: 0;
@@ -621,36 +694,16 @@ td {
         padding: 15px 10px;
         margin: 5px;
         background: white;
-        box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2); /* 影 */
-        border: 1px solid rgba(0, 0, 0, 0.1); /* 枠線 */
-        border-radius: 0; /* 角丸 */
+        box-shadow: inset -50px 0 175px -50px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0;
     }
 
-    /* Set order for menu items to achieve specific wrapping */
-    nav li:nth-child(1) { /* 'メニュー' */
-        order: 1;
-        flex-basis: auto;
-    }
-
-    nav li:nth-child(2) { /* '学生管理' */
-        order: 2;
-        flex-basis: auto;
-    }
-
-    nav li:nth-child(5) { /* '科目管理' (元の4番目が5番目になる) */
-        order: 3;
-        flex-basis: auto;
-    }
-
-    nav li:nth-child(3) { /* '成績登録' (元の2番目が3番目になる) */
-        order: 5;
-        flex-basis: auto;
-    }
-
-    nav li:nth-child(4) { /* '成績参照' (元の3番目が4番目になる) */
-        order: 6;
-        flex-basis: auto;
-    }
+    nav li:nth-child(1) { order: 1; flex-basis: auto; }
+    nav li:nth-child(2) { order: 2; flex-basis: auto; }
+    nav li:nth-child(5) { order: 3; flex-basis: auto; } /* 科目管理の順番を調整 */
+    nav li:nth-child(3) { order: 5; flex-basis: auto; } /* 成績登録の順番を調整 */
+    nav li:nth-child(4) { order: 6; flex-basis: auto; } /* 成績参照の順番を調整 */
 
     nav ul::before {
         content: "";
@@ -675,47 +728,68 @@ td {
 
 	.main-content {
 		flex-direction: column;
-        margin-left: 0;
-        align-items: center;
-        height: auto;
-        overflow-y: visible;
-        padding: 0px;
-        margin-bottom: 20px
+		margin-left: 0;
+		align-items: center;
+		height: auto;
+		overflow-y: visible;
+		padding: 0px;
+		margin-bottom: 20px;
+		border: none;
+		box-shadow: none;
+		margin-top: 0;
+		width: 100%;
+		box-sizing: border-box;
 	}
 
-	.main-content .header {
-        position: sticky;
-        top: 80px;
-        z-index: 98;
-        margin-bottom: 10px;
-        padding: 0 10px;
+    /* メニュー画面で使う .menu-button-area のスタイル (縮小画面では縦並びにする) */
+    .menu-button-area {
+        display: flex;
+        flex-direction: column; /* 縮小画面では縦並び */
+        gap: 20px; /* グループ間の間隔 */
+        width: 100%;
+        padding: 20px; /* .main-contentのpaddingをここに移動 */
+        box-sizing: border-box;
     }
 
-    .main-content .table-form > div input[type="submit"] {
-    	padding: 8px 10px;
-    	font-size: 0.8em;
-	}
-
+    /* 各ボタンのグループ (.button-group) のスタイル */
 	.button-group {
+        width: 100%; /* 縮小画面では幅100% */
 		margin-right: 0;
-		margin-bottom: 20px;
+		margin-bottom: 0; /* 親のgapで管理されるため */
 		align-items: center;
 		padding: 25px;
 	}
 
+    /* 成績管理のボタンを横並びにするコンテナ */
 	.grade-buttons-container {
-		flex-direction: column;
+		flex-direction: column; /* 縮小画面では縦並び */
 		align-items: center;
-		margin-bottom: 25px;
+		margin-bottom: 0; /* 親のgapで管理されるため */
+        gap: 15px; /* ボタン間の縦方向の間隔 */
 	}
 
 	.grade-buttons-container .btn-circle-border-simple {
 		margin-right: 0;
-		margin-bottom: 20px;
-		width: 140px;
-		height: 140px;
-		line-height: 140px;
-		font-size: 1.1em;
+		margin-bottom: 0; /* 親のgapで管理されるため */
+		width: 120px; /* ここを120pxに統一 */
+		height: 120px; /* ここを120pxに統一 */
+		line-height: 120px; /* ここを120pxに統一 */
+		font-size: 1.0em; /* テキストの大きさを調整 (必要に応じて) */
+	}
+
+	.main-content .header {
+        position: sticky;
+        top: 0; /* main-content内のヘッダーは親要素の最上部に固定 */
+        z-index: 98;
+        margin-bottom: 10px;
+        padding: 0 10px;
+        width: 100%;
+        left: 0;
+	}
+
+    .main-content .table-form > div input[type="submit"] {
+    	padding: 8px 10px;
+    	font-size: 0.8em;
 	}
 
     .filter-group, .filter-group + div, .main-content table {
@@ -725,9 +799,66 @@ td {
         max-width: none;
     }
 
+    .login-content {
+
+		min-height: calc(100vh - 60px); /* ヘッダーの高さ(80px)とフッターの高さ(40px)を引く */
+
+}
+
 }
 
 /*-------------------------------------------------------------*/
+/* ボタンのグループ (共通) */
+/* このブロックは縮小画面と拡大画面で重複するため、
+   @media queryの外に移動し、必要に応じて@media query内で上書きします。
+*/
+.button-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px; /* デフォルトの下マージン */
+	padding: 25px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	background-color: #f9f9f9;
+	width: 80%; /* デフォルトの幅 */
+	box-sizing: border-box;
+}
+
+.button-group h3 {
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+/* 学生管理、成績管理、科目管理のボタンコンテナ (おそらく不要) */
+/* .main-button-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+	padding: 0 20px;
+	box-sizing: border-box;
+} */
+
+/* 成績管理のボタンを横並びにするコンテナ (共通) */
+/* このブロックも@media queryの外に移動 */
+.grade-buttons-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px; /* デフォルトの下マージン */
+	gap: 15px; /* ボタン間の横マージンをgapで管理 */
+}
+
+.grade-buttons-container .btn-circle-border-simple {
+	/* margin-right: 25px; /* gapで管理されるため削除 */
+	margin-bottom: 15px; /* デフォルトの下マージン */
+	width: 120px; /* ここを120pxに統一 */
+	height: 120px; /* ここを120pxに統一 */
+	line-height: 120px; /* ここを120pxに統一 */
+	font-size: 1.0em; /* テキストの大きさを調整 (必要に応じて) */
+}
+
+
 /*ポップアップメッセージ*/
 
 .popup-message {
@@ -740,7 +871,7 @@ td {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    display: none; /* 最初は非表示 */
+    display: none;
     text-align: center;
     border-radius: 8px;
 }
